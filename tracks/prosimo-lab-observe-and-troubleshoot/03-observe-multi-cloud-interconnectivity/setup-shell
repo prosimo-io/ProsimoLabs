@@ -8,15 +8,8 @@
 
 echo "This is the setup script"
 
+set-workdir /root/prosimo-aws
 
-# Pull Python script for impairment
-
-curl https://igor-prosimo.s3.eu-west-1.amazonaws.com/SG_Change.py -o SG_Change.py
-## Move this to local assets/ folder (or maybe include it in bash instead of using this python script)
-# cp /root/ProsimoLabs/tracks/prosimo-lab-observer-and-troubleshoot/assets/scripts/SG_Change.py /root/prosimo-aws/
-
-mv /root/SG_Change /root/prosimo-aws/
-cd /root/prosimo-aws/
-python3 SG_Change.py
+python3 /root/prosimo-aws/scripts/SG_Change.py
 
 exit 0

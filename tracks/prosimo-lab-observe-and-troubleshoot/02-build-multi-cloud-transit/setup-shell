@@ -8,4 +8,6 @@
 
 echo "This is the setup script"
 
+set-workdir /root/prosimo-aws
+
 exit 0
