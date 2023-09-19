@@ -2,6 +2,7 @@ import json
 import requests
 import os
 
+
 class ResourceCreator:
     def __init__(self, api_token):
         """
@@ -10,6 +11,9 @@ class ResourceCreator:
         Parameters:
         - api_token (str): The API token for authentication.
         """
+        if api_token is None:
+            raise EnvironmentError("The TEST environment variable is not set. Please configure the API token.")
+
         self.headers = {
             "Prosimo-ApiToken": api_token,
             "Content-Type": "application/json"
@@ -42,12 +46,14 @@ class ResourceCreator:
                 'details': response.json()
             }
 
+
 if __name__ == "__main__":
     # Initialize the ResourceCreator class with the API token
-    api_token = "cNxkno6pGS2RFQlqjtv1abqQvH-xffxn6ZjvFqIgxvI="  # Replace with your actual API token
+    api_token = os.environ.get('TF_VAR_prosimo_token')  # Retrieve API token from environment variable
     resource_creator = ResourceCreator(api_token)
     team_name = os.environ.get('INSTRUQT_PARTICIPANT_ID')
     username = f"igor+{team_name}@prosimo.io"
+
     # Define the API endpoint and payload
     api_endpoint = "https://learning.admin.prosimo.io/api/msp/team"  # Replace with your actual API endpoint
     payload = {

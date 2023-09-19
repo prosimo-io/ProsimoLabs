@@ -9,7 +9,7 @@ https://play.instruqt.com/manage/prosimo/
 Challenges:
 * Review Architecture and Discover Networks
 * Build Multi-Coud Transit
-* Observer Multi-Cloud Interconnectivity
+* Observe Multi-Cloud Interconnectivity
 * Troubleshoot Multi-Cloud Networking
 
 

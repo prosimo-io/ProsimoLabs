@@ -99,7 +99,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Initialize the UserCreator class with the API token
-    api_token = 'cNxkno6pGS2RFQlqjtv1abqQvH-xffxn6ZjvFqIgxvI='  # Replace 'default_token' with a fallback token if needed
+    api_token = os.environ.get('TF_VAR_prosimo_token')  # Retrieve API token from environment variable
     user_creator = UserCreator(api_token)
 
     # Extract the tenant from the environment variable
