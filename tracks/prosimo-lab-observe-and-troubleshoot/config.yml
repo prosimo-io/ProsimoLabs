@@ -1,0 +1,19 @@
+version: "3"
+containers:
+- name: shell
+  image: gcr.io/instruqt/cloud-client
+  shell: /bin/bash
+  ports:
+  - 80
+  environment:
+    TF_VAR_prosimo_teamName: dev-student15
+    TF_VAR_prosimo_token: cNxkno6pGS2RFQlqjtv1abqQvH-xffxn6ZjvFqIgxvI=
+  memory: 2048
+aws_accounts:
+- name: prosimo-demo
+  managed_policies:
+  - arn:aws:iam::aws:policy/AdministratorAccess
+azure_subscriptions:
+- name: prosimo-tenant
+  roles:
+  - Owner
