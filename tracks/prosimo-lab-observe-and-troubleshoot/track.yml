@@ -1,0 +1,18 @@
+slug: prosimo-lab-observe-and-troubleshoot
+id: m2bwgkxkyndg
+title: Prosimo Lab - Observe and Troubleshoot
+teaser: Learn to Observe and Troubleshoot Multi-Cloud Networking.
+description: |-
+  A long description of the track.
+
+  You can use any GitHub flavoured markdown.
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+tags: []
+owner: prosimo
+developers:
+- nathan@prosimo.io
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+checksum: "4825704459214657416"
