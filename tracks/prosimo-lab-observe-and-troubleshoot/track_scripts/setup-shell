@@ -32,7 +32,6 @@ sleep 10
 # cp /root/ProsimoLabs/tracks/prosimo-lab-observer-and-troubleshoot/assets/scripts/* /root/prosimo-aws/
 
 
-
 # Set runtime variables
 
 agent variable set AWS_ID ${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_ACCOUNT_ID}
