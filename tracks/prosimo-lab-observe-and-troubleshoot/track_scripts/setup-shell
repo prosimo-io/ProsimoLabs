@@ -9,27 +9,15 @@ apt update -y
 apt install terraform -y
 pip3 install requests
 
-# Pull Lab terraform content
-#curl https://igor-prosimo.s3.eu-west-1.amazonaws.com/prosimo-aws.zip -o prosimo.zip
-#unzip prosimo.zip
-## Replace above with this:
+# Pull Lab assets (terraform & scripts) from github
+mkdir /root/prosimo-aws/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
-cp -r /root/ProsimoLabs/tracks/prosimo-lab-observer-and-troubleshoot/assets /root/prosimo-aws/
-#cp /root/ProsimoLabs/tracks/prosimo-lab-observer-and-troubleshoot/assets /root/prosimo-aws/
+cp -r /root/ProsimoLabs/tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-aws/
 
 # Pull Python scripts
-
-#curl https://igor-prosimo.s3.eu-west-1.amazonaws.com/tenant_deploy.py -o tenant_deploy.py
-#curl https://igor-prosimo.s3.eu-west-1.amazonaws.com/admin_create.py -o admin_create.py
-#curl https://igor-prosimo.s3.eu-west-1.amazonaws.com/azure-user-data.sh -o azure-user-data.sh
-# mv /root/tenant_deploy.py /root/prosimo-aws/
-# mv /root/admin_create.py /root/prosimo-aws/
-# mv /root/azure-user-data.sh /root/prosimo-aws/
 cd /root/prosimo-aws/
-python3 scripts/tenant_deploy.py
+python3 assets/scripts/tenant_deploy.py
 sleep 10
-## Replace above with this:
-# cp /root/ProsimoLabs/tracks/prosimo-lab-observer-and-troubleshoot/assets/scripts/* /root/prosimo-aws/
 
 
 # Set runtime variables
@@ -62,7 +50,7 @@ source /root/.bashrc
 
 # Run terraform to prepare CSPs env and spin up Prosimo resources
 
-cd /root/prosimo-aws/terraform
+cd /root/prosimo-aws/assets/terraform
 terraform init 
 sleep 10
 terraform apply --auto-approve -target=prosimo_cloud_creds.aws -var Access_Key_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var Access_Secret_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var subscription=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var client=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var clientsecret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var tenantazure=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
@@ -74,7 +62,5 @@ sleep 10
 terraform apply -auto-approve -target=module.prosimo_resource_azure -var Access_Key_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var Access_Secret_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var subscription=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var client=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var clientsecret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var tenantazure=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} 
 
 
-
 # Set AWS creds
 cp ~/.aws/credentials /root/prosimo-aws/
-
