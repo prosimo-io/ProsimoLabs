@@ -25,3 +25,5 @@ azure_subscriptions:
 - name: prosimo-tenant
   roles:
   - Owner
+secrets:
+- name: TF_VAR_prosimo_token
