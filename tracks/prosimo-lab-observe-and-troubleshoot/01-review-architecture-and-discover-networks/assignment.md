@@ -12,6 +12,18 @@ tabs:
   type: terminal
   hostname: shell
   workdir: /root/prosimo-aws
+- title: AWS Console
+  type: browser
+  hostname: aws
+- title: Azure Console
+  type: browser
+  hostname: azure
+- title: Prosimo Dashboard
+  type: browser
+  hostname: prosimo-tenant
+- title: Lab Diagram
+  type: browser
+  hostname: lab-diagram
 difficulty: basic
 timelimit: 600
 ---
@@ -69,7 +81,7 @@ Deploy AWS resources in EU
 Apply the resources:
 
 ```
-terraform apply  --auto-approve  -target=module.aws__instances_eu
+terraform apply  --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
 ```
 
 Deploy AWS resources in the US

@@ -5,10 +5,16 @@ containers:
   shell: /bin/bash
   ports:
   - 80
-  environment:
-    TF_VAR_prosimo_teamName: dev-student15
-    TF_VAR_prosimo_token: cNxkno6pGS2RFQlqjtv1abqQvH-xffxn6ZjvFqIgxvI=
   memory: 2048
+virtualbrowsers:
+- name: lab-diagram
+  url: https://igor-prosimo.s3.eu-west-1.amazonaws.com/Prosimo+-+ImmersionDay+Lab++-+Page+1+(2).png
+- name: aws
+  url: https://signin.aws.amazon.com/console
+- name: prosimo-tenant
+  url: https://${_SANDBOX_ID}.admin.prosimo.io/
+- name: azure
+  url: https://azure.microsoft.com/en-us/get-started/azure-portal
 aws_accounts:
 - name: prosimo-demo
   managed_policies:
@@ -17,3 +23,5 @@ azure_subscriptions:
 - name: prosimo-tenant
   roles:
   - Owner
+secrets:
+- name: TF_VAR_prosimo_token
