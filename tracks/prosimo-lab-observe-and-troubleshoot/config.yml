@@ -5,8 +5,6 @@ containers:
   shell: /bin/bash
   ports:
   - 80
-  environment:
-    TF_VAR_prosimo_teamName: dev-student15
   memory: 2048
 virtualbrowsers:
 - name: lab-diagram
