@@ -7,7 +7,6 @@ containers:
   - 80
   environment:
     TF_VAR_prosimo_teamName: dev-student15
-    TF_VAR_prosimo_token: cNxkno6pGS2RFQlqjtv1abqQvH-xffxn6ZjvFqIgxvI=
   memory: 2048
 virtualbrowsers:
 - name: lab-diagram
