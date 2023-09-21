@@ -98,7 +98,7 @@ Apply the resources:
 
 ```
 cd ~/prosimo-aws/assets/terraform
-terraform apply  --auto-approve  -target=module.aws__instances_eu
+terraform apply  --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
 ```
 
 ### Deploy AWS resources in the US
