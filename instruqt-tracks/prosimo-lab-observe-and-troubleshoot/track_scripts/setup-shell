@@ -10,12 +10,12 @@ apt install terraform -y
 pip3 install requests
 
 # Pull Lab assets (terraform & scripts) from github
-mkdir /root/prosimo-aws/
+mkdir /root/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
-cp -r /root/ProsimoLabs/tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-aws/
+cp -r /root/ProsimoLabs/tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
 
-# Pull Python scripts
-cd /root/prosimo-aws/
+# Run Python scripts
+cd /root/prosimo-lab/
 python3 assets/scripts/tenant_deploy.py
 sleep 10
 
@@ -51,7 +51,7 @@ source /root/.bashrc
 
 # Run terraform to prepare CSPs env and spin up Prosimo resources
 
-cd /root/prosimo-aws/assets/terraform
+cd /root/prosimo-lab/assets/terraform
 terraform init 
 sleep 10
 terraform apply --auto-approve -target=prosimo_cloud_creds.aws -var Access_Key_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var Access_Secret_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var subscription=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var client=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var clientsecret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var tenantazure=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
@@ -62,6 +62,5 @@ terraform apply -auto-approve -target=module.prosimo_resource_aws -var Access_Ke
 sleep 10
 terraform apply -auto-approve -target=module.prosimo_resource_azure -var Access_Key_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var Access_Secret_AWS=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var subscription=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var client=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var clientsecret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var tenantazure=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} 
 
-
 # Set AWS creds
-cp ~/.aws/credentials /root/prosimo-aws/assets/terraform
+cp ~/.aws/credentials /root/prosimo-lab/assets/terraform

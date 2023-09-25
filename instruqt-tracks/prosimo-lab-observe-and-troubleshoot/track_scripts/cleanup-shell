@@ -1,6 +1,6 @@
 ##!/bin/bash
 
-cd /root/prosimo-aws/assets/terraform
+cd /root/prosimo-lab/assets/terraform
 terraform init 
 sleep 5
 terraform destroy --auto-approve -target=module.aws__instances_eu

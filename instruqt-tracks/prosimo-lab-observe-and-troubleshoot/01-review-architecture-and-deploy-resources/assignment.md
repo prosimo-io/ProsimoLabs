@@ -6,16 +6,17 @@ title: Review Architecture and Deploy Resources
 teaser: A short description of the challenge.
 notes:
 - type: text
-  contents: Welcome to this Prosimo Lab for Observability and Troubleshooting
+  contents: Welcome to this Prosimo Lab for Observability and Troubleshooting across
+    Multi-Cloud Networks
 tabs:
 - title: Shell
   type: terminal
   hostname: shell
-  workdir: /root/prosimo-aws
+  workdir: /root/prosimo-lab
 - title: Editor
   type: code
   hostname: shell
-  path: /root/prosimo-aws
+  path: /root/prosimo-lab
 - title: AWS Console
   type: browser
   hostname: aws
@@ -26,8 +27,8 @@ tabs:
   type: browser
   hostname: prosimo-tenant
 - title: Lab Diagram
-  type: browser
-  hostname: lab-diagram
+  type: website
+  url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/prosimo-io/ProsimoLabs/main/tracks/prosimo-lab-observe-and-troubleshoot/assets/images/Prosimo_Lab_Architecture.html
 difficulty: basic
 timelimit: 600
 ---
@@ -36,7 +37,7 @@ timelimit: 600
 
 In this section we will:
 1) Review the cloud architecture
-2) Login to your cloud account consoles
+2) Login to your cloud account console's
 3) Deploy resources onto your cloud regions
 4) Create your Prosimo Admin user
 
@@ -47,7 +48,7 @@ In this section we will:
 
 First lets review the cloud architecture that has been provision for your Prosimo Lab experience.
 
-Navigate to the *Architecture* tab above and review the diagram. This is what we're building today!
+Navigate to the *Lab Diagram* tab above and review the diagram. This is what we're building today!
 
 
 ## 2) Login to your cloud account consoles
@@ -59,33 +60,38 @@ Using the credentials below, login to the AWS and Azure Web Consoles in their re
 
 Select "IAM Account" and enter the **AWS ID**:
 ```
-[[ Instruqt-Var key="AWS_ID" hostname="shell" ]]
+[[ Instruqt-Var key="INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_ACCOUNT_ID" hostname="shell" ]]
 ```
 
 **AWS Username**
 ```
-[[ Instruqt-Var key="AWS_USER" hostname="shell" ]]
+[[ Instruqt-Var key="INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_USERNAME" hostname="shell" ]]
 ```
 
 **AWS Password**
 ```
-[[ Instruqt-Var key="AWS_PASS" hostname="shell" ]]
+[[ Instruqt-Var key="INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_PASSWORD" hostname="shell" ]]
 ```
+
 ---
 
 # AZURE Credentials ☁️
 
-Click "Sign In" and once redirected to the login page enter the following:
+**AZURE SUBSCRIPTION**
+```
+[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID" hostname="shell" ]]
+```
 
 **AZURE USERNAME**
 ```
-[[ Instruqt-Var key="AZURE_SUBSCRIPTION_USERNAME" hostname="shell" ]]
+[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_USERNAME" hostname="shell" ]]
 ```
 
 **AZURE PASSWORD**
 ```
-[[ Instruqt-Var key="AZURE_SUBSCRIPTION_PASSWORD" hostname="shell" ]]
+[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_PASSWORD" hostname="shell" ]]
 ```
+
 
 ## 3) Deploy resources onto your cloud regions
 ===
@@ -97,8 +103,8 @@ Now that you've logged into the cloud providers consoles its time to deploy reso
 Apply the resources:
 
 ```
-cd ~/prosimo-aws/assets/terraform
-terraform apply  --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
+cd ~/prosimo-lab/assets/terraform
+terraform apply --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
 ```
 
 ### Deploy AWS resources in the US
@@ -106,7 +112,7 @@ terraform apply  --auto-approve  -target=module.aws__instances_eu -target=aws_ec
 Apply the resources:
 
 ```
-terraform apply  --auto-approve -target=module.aws__instances_us
+terraform apply --auto-approve -target=module.aws__instances_us
 ```
 
 ### Deploy Azure resources in North Europe
@@ -114,7 +120,7 @@ terraform apply  --auto-approve -target=module.aws__instances_us
 Apply the resources:
 
 ```
-terraform apply  --auto-approve -target=module.azure_instances_eu
+terraform apply --auto-approve -target=module.azure_instances_eu
 ```
 
 ## 4) Create Admin User to your Prosimo Dashboard
@@ -125,7 +131,7 @@ Note: Use your Business Email for User Creation
 1. Execute the User Creation Script
 
 ```
-python3 ~/prosimo-aws/assets/scripts/admin_create.py -e <YourBusinessEmail>
+python3 ~/prosimo-lab/assets/scripts/admin_create.py -e <YourBusinessEmail>
 ```
 
 You should see something like:
@@ -145,7 +151,7 @@ python3 admin_create.py -e <YourBusinessEmail>
 }
 ```
 
-Please ignore the automated email with the subject "You are invited to join a new Prosimo team". We must create a password first!
+NOTE: You will receive an email with the subject "You are invited to join a new Prosimo team". Please ignore this email. We must create a password first!
 
 2. Create your password
 

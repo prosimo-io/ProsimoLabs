@@ -7,8 +7,6 @@ containers:
   - 80
   memory: 2048
 virtualbrowsers:
-- name: lab-diagram
-  url: https://igor-prosimo.s3.eu-west-1.amazonaws.com/Prosimo+-+ImmersionDay+Lab++-+Page+1+(2).png
 - name: aws
   url: https://signin.aws.amazon.com/console
 - name: prosimo-tenant
