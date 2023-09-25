@@ -98,7 +98,7 @@ Select "IAM Account" and enter the **AWS ID**:
 
 Now that you've logged into the cloud providers consoles its time to deploy resources for upcoming Instruqt Challenges:
 
-### Deploy AWS resources in EU
+### 1. Deploy AWS resources in EU
 
 Apply the resources:
 
@@ -107,7 +107,7 @@ cd ~/prosimo-lab/assets/terraform
 terraform apply --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
 ```
 
-### Deploy AWS resources in the US
+### 2. Deploy AWS resources in the US
 
 Apply the resources:
 
@@ -115,7 +115,7 @@ Apply the resources:
 terraform apply --auto-approve -target=module.aws__instances_us
 ```
 
-### Deploy Azure resources in North Europe
+### 3. Deploy Azure resources in North Europe
 
 Apply the resources:
 
@@ -155,17 +155,18 @@ NOTE: You will receive an email with the subject "You are invited to join a new 
 
 2. Create your password
 
-* In the 'Prosimo' tab above, click the 'Forgot Password' link.
-* *IMPORTANT:* Enter the same email address you provided in the `admin_create.py` script.
-* In your email, click the 'Reset password' button, after which you will be prompted to enter a new password twice.
-* You can now close this additonal 'password creation' browser window as we will return to the "Prosimo" tab in Instruqt.
+   1) In the 'Prosimo' tab above, click the 'Forgot Password' link.
+   2) *IMPORTANT:* Enter the same email address you provided in the `admin_create.py` script.
+   3) In your email, click the 'Reset password' button, after which you will be prompted to enter a new password twice.
+   4) You can now close this additonal 'password creation' browser window as we will return to the "Prosimo" tab in Instruqt.
 
 3. Login
 
-* Returning to the "Prosimo" tab, click the 'back' arrow in the top left corner (Careful not to click your web browsers back arrow and leave Instruqt).
-* Enter the Username (business email) and new password.
-* You will now be prompeted for the Multi-Factor Authentication code sent to your email address
-* Enter the six digit code into the MFA page and click "Verify"
+   1) Returning to the "Prosimo" tab, click the 'back' arrow in the top left corner (Careful not to click your web browsers back arrow and leave Instruqt).
+   2) Enter the Username (business email) and new password.
+   3) You will now be prompeted for the Multi-Factor Authentication code sent to your email address
+   4) Enter the six digit code into the MFA page and click "Verify"
+
 
 ---
 
