@@ -12,7 +12,8 @@ pip3 install requests
 # Pull Lab assets (terraform & scripts) from github
 mkdir /root/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
-cp -r /root/ProsimoLabs/tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
+cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
+#rm -r /root/ProsimoLabs
 
 # Run Python scripts
 cd /root/prosimo-lab/
