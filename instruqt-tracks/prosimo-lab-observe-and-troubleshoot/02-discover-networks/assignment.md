@@ -7,9 +7,6 @@ teaser: In this challenge we shall see how Prosimo interacts with existing envir
 notes:
 - type: text
   contents: In this challenge we shall see how Prosimo interacts with existing environments.
-    The Cloud On-boarding step shown in challenge 1 enables Prosimo to query provider
-    APIs and see precisely where networks, and network resources (routes, transit
-    gateway's, vWAN Hubs, etc) are.
 tabs:
 - title: Shell
   type: terminal
