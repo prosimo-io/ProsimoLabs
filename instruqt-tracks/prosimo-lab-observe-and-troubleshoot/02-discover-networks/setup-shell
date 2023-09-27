@@ -8,6 +8,10 @@
 
 echo "This is the setup script"
 
-set-workdir /root/prosimo-aws
+# Run Python scripts
+python3 /root/prosimo-lab/assets/scripts/auto_refresh.py
+sleep 10
+
+set-workdir /root/prosimo-lab
 
 exit 0
