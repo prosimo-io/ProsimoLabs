@@ -28,7 +28,7 @@ tabs:
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/prosimo-io/ProsimoLabs/main/tracks/prosimo-lab-observe-and-troubleshoot/assets/images/Prosimo_Lab_Architecture.html
 difficulty: basic
-timelimit: 600
+timelimit: 3600
 ---
 
 In this challenge we will on-board existing cloud network to Prosimo for management. We shall then create multi-cloud interconnectivity between these networks - across clouds, regions, and geographies.
@@ -37,8 +37,10 @@ In this challenge we will on-board existing cloud network to Prosimo for managem
 2) Build multi-region, multi-cloud transits
 3) Verify the transit connectivity
 
+Before we begin, here's a quick introduction to the concepts of Prosimo Transits and On-boarded Networks:
+![Transits & Networks](../assets/images/Prosimo_Lab_Transit_vs_Network.jpg)
 
-# 1) On-boarding Regional Networks
+# 1) Build Multi-Region/Cloud Transit
 ===
 
 First we shall on-board some local VPC and VNet networks for Prosimo to manage. Switch to the Prismo tab.
@@ -51,7 +53,7 @@ NOTE: you would be promted to select an on-boarded cloud account and deploy an E
 
 3) Select the Prosimo Edge already deployed in this region (the Prosimo logo at the top).
 4) Now click the AWS Transit Gateway (TGW). You should see an orange dashed line appear/
-5) Click "Save to Deploymen" at the bottom of the screen.
+5) Click "Save to Deployment" at the bottom of the screen.
 6) Next click "Add VPCs" - bottom right corner. You should see a list of discovered VPCs and Subnets for this region appear in the right-hand pane.
 7) Click the checkbox next to the account name (top of the list) to automatically select all VPCs.
 8) Now click on the "Add VPC's" button
@@ -75,7 +77,7 @@ You are now watching Prosimo's orchestration of cloud-native network resources, 
 * Creation and attacment of Route Tables for each VPC/Network to TGW.
 * Attachment of Transit Gateway to Prosimo's Secure Multi-Cloud Mesh
 
-NOTE: on-going management of routes and attachments, as networks are discovered, on-boarded, or removed, are orchestrated by Prosimo. Cloud Natvie resource managment is no longer inhibiting business objectives.
+NOTE: on-going management of routes and attachments, as networks are discovered, on-boarded, or removed, are orchestrated by Prosimo. Manual Cloud Natvie resource managment is no longer inhibiting business objectives.
 
 Verify change:
 1) in the left-hand pane, click "Management" then click the "Edges" tile.
