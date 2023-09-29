@@ -32,7 +32,7 @@ tabs:
   type: website
   url: https://prosimo.navattic.com/account-onboard-and-deploy-edge
 difficulty: basic
-timelimit: 600
+timelimit: 3600
 ---
 
 In this challenge we shall use Prosimo to discover existing networks.
@@ -105,9 +105,9 @@ Note there are no cloud network connections as we haven't on-boarded any network
 
 1) In the left-hand navgation pane, select "Transit 360"
 
-You are currently looking at 'Map View' which is showing you the three deployed Network Edges - 2 in EU, 1 in US.
+You are currently looking at 'Map View' which is showing you the three deployed Network Edges - 2 in EU, 1 in US - displayed geographically.
 
-2) In the top-right, click on 'Topology View'. You are now looking at all of the providers and their regions. The regions with Prosimo's Network Edges deployed are identifiable with a green circle.
+2) In the top-right of the map, click on 'Topology View'. You are now looking at all of the providers and their regions. The regions with Prosimo's Network Edges deployed are identifiable with a green circle.
 
 3) Click on `AWS-eu-west-1` (at the bottom), then click "View Edge Connections".
 

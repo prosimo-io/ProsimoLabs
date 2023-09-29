@@ -30,7 +30,7 @@ tabs:
   type: website
   url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/prosimo-io/ProsimoLabs/main/tracks/prosimo-lab-observe-and-troubleshoot/assets/images/Prosimo_Lab_Architecture.html
 difficulty: basic
-timelimit: 600
+timelimit: 3600
 ---
 
 **NOTE:** This environment is *real*! AWS and Azure Cloud Accounts have been created for each student. No bitcoin mining, please! :)
