@@ -69,7 +69,7 @@ variable cloud_type {
 
 }
 
-variable "Dev_East_VPCs" {
+variable "US_East_FrontEnd" {
   type = map(object({
     aws_vpc_name                = string
     igw_name                    = string
@@ -83,7 +83,7 @@ variable "Dev_East_VPCs" {
   }))
 }
 
-variable "Dev_West_VPCs" {
+variable "EU_West_FrontEnd" {
   type = map(object({
     aws_vpc_name                = string
     igw_name                    = string
@@ -97,7 +97,7 @@ variable "Dev_West_VPCs" {
   }))
 }
 
-variable "Dev_North_EU_VNets" {
+variable "North_EU_AppSvcs_VNets" {
   type = map(object({
     azure_resource_group        = string
     azure_location              = string

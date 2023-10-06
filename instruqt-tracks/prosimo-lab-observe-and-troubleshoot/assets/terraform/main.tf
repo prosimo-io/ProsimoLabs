@@ -7,7 +7,7 @@ module "aws__instances_eu" {
   providers         = {   
   aws = aws.eu-west-1
   }
-  for_each              = var.Dev_West_VPCs
+  for_each              = var.EU_West_FrontEnd
   aws_region            = var.aws_region[0]
   aws_vpc_name          = each.value["aws_vpc_name"]
   aws_subnet_name       = each.value["aws_subnet_name"]
@@ -26,7 +26,7 @@ module "aws__instances_us" {
   providers         = { 
   aws = aws.us-east-1
   }
-  for_each              = var.Dev_East_VPCs
+  for_each              = var.US_East_FrontEnd
   aws_region            = var.aws_region[1]
   aws_vpc_name          = each.value["aws_vpc_name"]
   aws_subnet_name       = each.value["aws_subnet_name"]
@@ -47,7 +47,7 @@ module "azure_instances_eu" {
   providers = {
   azurerm = azurerm.eun
   }
-  for_each             = var.Dev_North_EU_VNets
+  for_each             = var.North_EU_AppSvcs_VNets
   azure_resource_group = each.value["azure_resource_group"]
   azure_location       = "North Europe"
   azure_vnet_name      = each.value["azure_vnet_name"]
