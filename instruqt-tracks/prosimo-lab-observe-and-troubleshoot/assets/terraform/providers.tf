@@ -11,7 +11,7 @@ terraform {
     }
     prosimo = {
       source  = "prosimo-io/prosimo"
-      version = "3.1.2"
+      version = "~> 3.8.0"
     }
   }
 }
