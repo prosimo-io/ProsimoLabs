@@ -1,13 +1,3 @@
-// Create CSP account
-
-
-// Defining CIDRs as a prerequisite for Prosimo Fabric Deployment
-resource "prosimo_ip_addresses" "aws_ip_address" {
-  cidr        = var.prosimo_cidr
-  cloud_type  = var.cloud
-//  depends_on = [prosimo_edge.multiple]
-}
-
 // Creating Edge gateways across various Regions 
 resource "prosimo_edge" "multiple" {
   cloud_name       = var.cloud1
