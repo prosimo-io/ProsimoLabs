@@ -101,7 +101,7 @@ module "prosimo_resource_aws" {
   prosimo_cidr       = var.prosimo_cidr[count.index]
   cloud = "AWS"
   cloud1 = "Prosimo_AWS"
-  my_condition = "true"
+  apply_node_size_settings = "true"
   bandwidth = "<1 Gbps"
   instance_type = "t3.medium"
   multipleRegion = var.aws_region[count.index]
@@ -115,7 +115,7 @@ module "prosimo_resource_azure" {
   prosimo_token = var.prosimo_token
   prosimo_cidr       = "10.253.0.0/23"
   cloud = "AZURE"
-  my_condition = "false"
+  apply_node_size_settings = "false"
   cloud1 = "Prosimo_Azure"
   multipleRegion = "northeurope"
   wait = "false"
