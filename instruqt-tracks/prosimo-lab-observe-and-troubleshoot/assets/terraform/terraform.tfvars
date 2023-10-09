@@ -66,10 +66,10 @@ EU_West_FrontEnd = {
   },
 
   VPC2 = {
-    aws_vpc_name          = "WebSvcsDev"
-    igw_name              = "WebSvcsDev-IGW"
-    rt_name               = "WebSvcsDev-RT"
-    aws_subnet_name       = "WebSvcsDev-Subnet"
+    aws_vpc_name          = "WebSvcsDevEu"
+    igw_name              = "WebSvcsDevEu-IGW"
+    rt_name               = "WebSvcsDevEu-RT"
+    aws_subnet_name       = "WebSvcsDevEu-Subnet"
     private_ip            = "10.5.0.100"
     aws_ec2_name          = "WebServerDevEu1"
     aws_ec2_key_pair_name = "EU_WEST_WebSvcsDev"
