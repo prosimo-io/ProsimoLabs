@@ -185,8 +185,7 @@ resource "aws_instance" "ec2_linux" {
 
 #Create a Elastic IP
 resource "aws_eip" "eip" {
-  vpc = true
-
+  domain                    = "vpc"
   instance                  = aws_instance.ec2_linux.id
   associate_with_private_ip = var.private_ip
   depends_on                = [aws_internet_gateway.igw]
