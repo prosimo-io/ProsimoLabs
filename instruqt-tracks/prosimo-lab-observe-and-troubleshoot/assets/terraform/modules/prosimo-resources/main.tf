@@ -15,7 +15,7 @@ resource "prosimo_edge" "multiple" {
   wait_for_rollout = var.wait
   ip_range = var.prosimo_cidr
   dynamic "node_size_settings" {
-    for_each = var.my_condition ? [1] : []
+    for_each = var.apply_node_size_settings ? [1] : []
     content {
         bandwidth = var.bandwidth
         instance_type = var.instance_type
