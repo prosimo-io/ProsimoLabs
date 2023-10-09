@@ -3,11 +3,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
-    
+      version = "~> 5.20.0"
     }
     azurerm = {
       source = "hashicorp/azurerm"
+      version = "~> 3.71.0"
     }
     prosimo = {
       source  = "prosimo-io/prosimo"
@@ -56,5 +56,6 @@ provider "azurerm" {
   client_id       = var.client
   client_secret   = var.clientsecret
   tenant_id       = var.tenantazure
+  skip_provider_registration = "true"
 
 }
