@@ -8,12 +8,22 @@ resource "prosimo_ip_addresses" "aws_ip_address" {
 //  depends_on = [prosimo_edge.multiple]
 }
 
-// Creating Edge gateways across various Regions
+// Creating Edge gateways across various Regions 
 resource "prosimo_edge" "multiple" {
   cloud_name       = var.cloud1
   cloud_region     = var.multipleRegion
   wait_for_rollout = var.wait
-  depends_on       = [prosimo_ip_addresses.aws_ip_address]
+  ip_range = var.prosimo_cidr
+  dynamic "node_size_settings" {
+    for_each = var.my_condition ? [1] : []
+    content {
+        bandwidth = var.bandwidth
+        instance_type = var.instance_type
+
+    }
+  }
+  deploy_edge = true
+  decommission_edge = false
  }
 
 /*

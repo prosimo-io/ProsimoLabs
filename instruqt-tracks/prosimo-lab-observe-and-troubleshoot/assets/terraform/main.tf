@@ -70,7 +70,7 @@ resource "prosimo_cloud_creds" "aws" {
   nickname   = "Prosimo_AWS"
 
   aws {
-    preffered_auth = "AWSKEY"
+    preferred_auth = "AWSKEY"
 
     access_keys {
       access_key_id = var.Access_Key_AWS
@@ -78,6 +78,7 @@ resource "prosimo_cloud_creds" "aws" {
     }
   }
 }
+
 resource "prosimo_cloud_creds" "azure" {
   cloud_type = "AZURE"
   nickname   = "Prosimo_Azure"
@@ -100,6 +101,9 @@ module "prosimo_resource_aws" {
   prosimo_cidr       = var.prosimo_cidr[count.index]
   cloud = "AWS"
   cloud1 = "Prosimo_AWS"
+  my_condition = "true"
+  bandwidth = "<1 Gbps"
+  instance_type = "t3.medium"
   multipleRegion = var.aws_region[count.index]
   wait = "false"
   
@@ -111,6 +115,7 @@ module "prosimo_resource_azure" {
   prosimo_token = var.prosimo_token
   prosimo_cidr       = "10.253.0.0/23"
   cloud = "AZURE"
+  my_condition = "false"
   cloud1 = "Prosimo_Azure"
   multipleRegion = "northeurope"
   wait = "false"
