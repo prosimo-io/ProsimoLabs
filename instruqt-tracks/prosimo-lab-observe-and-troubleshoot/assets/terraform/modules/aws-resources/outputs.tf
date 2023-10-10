@@ -9,3 +9,7 @@ output "aws_eip_public_ip" {
 output "aws_vpc_id" {
   value = aws_vpc.vpc1.id
 }
+
+output "ssh_access" {
+  value = "ssh -i '~/prosimo-lab/assets/terraform/${var.aws_ec2_key_pair_name}.pem' ec2-user@${aws_eip.eip.public_ip}"
+}
