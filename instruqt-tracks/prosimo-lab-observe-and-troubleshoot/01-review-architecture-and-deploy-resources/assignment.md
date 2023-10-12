@@ -151,22 +151,11 @@ python3 admin_create.py -e <YourBusinessEmail>
 }
 ```
 
-NOTE: You will receive an email with the subject "You are invited to join a new Prosimo team". Please ignore this email. We must create a password first!
-
-2. Create your password
-
-   1) In the 'Prosimo' tab above, click the 'Forgot Password' link.
-   2) *IMPORTANT:* Enter the same email address you provided in the `admin_create.py` script.
-   3) In your email, click the 'Reset password' button, after which you will be prompted to enter a new password twice.
-   4) You can now close this additonal 'password creation' browser window as we will return to the "Prosimo" tab in Instruqt.
-
-3. Login
-
-   1) Returning to the "Prosimo" tab, click the 'back' arrow in the top left corner (Careful not to click your web browsers back arrow and leave Instruqt).
-   2) Enter the Username (business email) and new password.
-   3) You will now be prompeted for the Multi-Factor Authentication code sent to your email address
-   4) Enter the six digit code into the MFA page and click "Verify"
-
+2. You will receive an email with the subject "Password Setup Information". Open this email and click "Reset password"
+3. A new browser window/tab will be opened prompting you to enter a new password. Please do so.
+4. Close this new tab/window - we are going to login via the Instruqt tab labelled `Prosimo`.
+5. In th Instuqt tab, login using the credentials provided above.
+6. You will be prompted for a one-time passcode. This code has been emailed to you with the subject "Multi-Factor Authentication". Enter this code and click "Verify". You should now see the Prosimo Dashboard.
 
 ---
 
