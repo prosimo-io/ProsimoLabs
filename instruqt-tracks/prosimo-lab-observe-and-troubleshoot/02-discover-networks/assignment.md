@@ -51,7 +51,7 @@ Note that we've only associated our cloud accounts with the Prosimo dashboard th
 To save time, we have automated the on-boarding of the Cloud Accounts to Prosimo, and the deployment of the Prosimo Network Edges, which we will use in the following lab challenge.
 
 * Cloud Account on-boarding is fast and simple
-* Network Edge deployment is simple, but can take 20 - 30 minutes.
+* Network Edge deployment is simple, but can take 20 - 30 minutes, so we pre-deployed them for you.
 
 1) Click the "On-boarding Demo" tab to access the Navattic click-through demo.
 2) In the checklist (bottom right corner of screen), click on "Cloud Account On-boarding" to start the demonstration.
