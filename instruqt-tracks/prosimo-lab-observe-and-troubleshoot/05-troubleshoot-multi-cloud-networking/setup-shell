@@ -8,4 +8,8 @@
 
 echo "This is the setup script"
 
+set-workdir /root/prosimo-lab
+
+python3 /root/prosimo-lab/scripts/SG_Change.py
+
 exit 0
