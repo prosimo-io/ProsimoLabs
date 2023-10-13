@@ -1,11 +1,12 @@
 #! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-echo "<h1>Hello Prosimo MCN fans and Welcome</h1>" | sudo tee /var/www/html/index.html
+sudo yum update -y && ## << Fixes 'Yum lock error'
+sudo touch /home/ec2-user/USERDATA_EXECUTED
+yum install -y httpd.x86_64
+systemctl start httpd.service
+systemctl enable httpd.service
+echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
 
-cat <<"EOT" > /home/linuxuser/traffic.sh
+cat <<"EOT" > /home/ec2-user/traffic.sh
 #! /bin/bash
 if [[ $# -ne 2 ]]; then
     echo "Illegal number of parameters. Usage: traffic.sh <count> <url>"
@@ -31,5 +32,5 @@ fi
 
 EOT
 
-sudo chmod u+x /home/linuxuser/traffic.sh
-sudo chown linuxuser:linuxuser traffic.sh
+sudo chmod u+x /home/ec2-user/traffic.sh
+sudo chown ec2-user:ec2-user /home/ec2-user/traffic.sh

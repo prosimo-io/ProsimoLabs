@@ -158,6 +158,9 @@ resource "aws_key_pair" "demo_key_pair" {
   }
 }
 
+data "template_file" "user_data" {
+  template = file("/root/prosimo-lab/assets/scripts/aws-user-data.sh")
+}
 
 # Create EC2 Instance
 resource "aws_instance" "ec2_linux" {
@@ -172,15 +175,9 @@ resource "aws_instance" "ec2_linux" {
   tags = {
     "Name" = var.aws_ec2_name
   }
-  user_data              = <<EOF
-  	#! /bin/bash
-    sudo yum update -y
-  	sudo touch /home/ec2-user/USERDATA_EXECUTED
-    yum install -y httpd.x86_64
-    systemctl start httpd.service
-    systemctl enable httpd.service
-    echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
-  EOF
+
+  user_data              = "${data.template_file.user_data.rendered}"
+
 }
 
 #Create a Elastic IP

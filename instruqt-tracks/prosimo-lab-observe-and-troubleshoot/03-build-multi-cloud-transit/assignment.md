@@ -167,13 +167,14 @@ While it may not be neccessary in a production environment, to successfully comp
 
 Now we shall verify the connectivuty across these newly paved networks.
 
-First we must set safe permissions for the PEM format keys, using the following commands:
+1) First we must set safe permissions for the PEM format keys, using the following commands:
+
 ```sh
 cd assets/terraform/
 chmod 400 *.pem
 ```
 
-Now we need to get the External IP Addresses of our Lab Server, so that we can remote shell to them:
+2) Next we need to get the credentials for our Lab Servers, so that we can remote shell into them:
 
 ```sh
 terraform output
@@ -182,29 +183,88 @@ terraform output
 You should see something like this:
 
 ```
-aws_ec2_public_ip_eu = [
-  "52.30.57.126",
-  "52.211.75.24",
+ssh_access_aws_eu = [
+  "WebServerProdEu1 - 10.4.0.100 => ssh -i '~/prosimo-lab/assets/terraform/EU_WEST_WebSvcsProd.pem' ec2-user@52.211.200.131",
+  "WebServerDevEu1 - 10.5.0.100 => ssh -i '~/prosimo-lab/assets/terraform/EU_WEST_WebSvcsDev.pem' ec2-user@52.214.0.51",
 ]
-aws_ec2_public_ip_us = [
-  "18.211.128.236",
-  "44.219.179.223",
+ssh_access_aws_us = [
+  "WebServerProdUs1 - 10.2.0.100 => ssh -i '~/prosimo-lab/assets/terraform/US_EAST_WebSvcsProd.pem' ec2-user@54.162.135.145",
+  "WebServerDevUs1 - 10.3.0.100 => ssh -i '~/prosimo-lab/assets/terraform/US_EAST_WebSvcsDev.pem' ec2-user@107.21.232.146",
 ]
-azure_vm_public_ip_eu = [
-  "4.231.229.19",
-  "4.210.104.226",
+ssh_access_azure_eu = [
+  "AppSvcsProdEu - 10.0.0.100 =>  ssh -i '~/prosimo-lab/assets/terraform/Azure_Srv1.pem' linuxuser@98.71.85.11",
+  "AppSvcsDevEu - 10.1.0.100 =>  ssh -i '~/prosimo-lab/assets/terraform/Azure_Srv2.pem' linuxuser@98.71.84.253",
 ]
-prosimo_cloud_nickname = "Prosimo_AWS"
 ```
 
-Using these address, and the PEM keys, connect to the servers:
+*NOTE* the format of each entry:  <Virtual_Server_Name> - <private_ip_address> => <ssh_command>
+
+Verify that each `Server Name` and `Private IP Address` maps to those in the Lab Diagram.
+
+
+3) Lets verify communication between virtual servers via the remote shell session:
+
+    1) SSH into `WebServerProdEu1` using the ssh command provided.
+    2) Ensure you can send an ICMP packet from this server to xxxxxx with the following command:
+
+```
+ping -c 4 10.5.0.100
+```
+
+4) To make the following Observability & Troubleshooting exercises more interesting we will need to produce some network traffic. Copy and Paste the following script into the secure shell session:
 
 ```sh
-ssh -i  "$ssh_pem_file"  ec2-user@$Public_IP_Webserver
+cat <<EOT > /home/ec2-user/traffic.sh
+if [[ \$# -ne 2 ]]; then
+  echo "Illegal number of parameters. Usage: traffic.sh <count> <url>"
+  exit 2
+else
+  COUNTER=0
+  if [[ \$1 == "test" ]]; then
+    while [[  \$COUNTER -lt 2 ]]; do
+      let COUNTER=COUNTER+1
+      echo The counter is \$COUNTER of 2
+      curl \$2
+      sleep 2
+    done
+  else
+    while [[  \$COUNTER -lt \$1 ]]; do
+      let COUNTER=COUNTER+1
+      curl -s \$2 > /dev/null
+      sleep 5
+    done
+    exit 0
+  fi
+fi
+EOT
+chmod u+x /home/ec2-user/traffic.sh
 ```
 
-This concludes the Building Multi-Cloud Transit sesssion. You may now click the green 'Check' button located at the bottom-right of the screen.
+Test we have communication to another server with the following command:
 
+```sh
+/home/ec2-user/traffic.sh test http://10.1.0.100
+```
+
+You should see something like:
+```sh
+[ec2-user@ip-10-4-0-100 ~]$ /home/ec2-user/traffic.sh 2 http://10.5.0.100
+The counter is 1 of 2
+“Hello Prosimo MCN fans and Welcome”
+The counter is 2 of 2
+“Hello Prosimo MCN fans and Welcome”
+```
+
+Now lets set this script running in the background:
+
+```sh
+/home/ec2-user/traffic.sh 2000 http://10.5.0.100 &
+```
+
+NOTE: you will see no output from the command above. It is running silently as a background process.
+
+
+This concludes the Building Multi-Cloud Transit sesssion. You may now click the green 'Check' button located at the bottom-right of the screen.
 
 
 
