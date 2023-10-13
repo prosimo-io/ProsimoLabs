@@ -33,6 +33,20 @@ timelimit: 3600
 
 In this final Instruqt challenge we shall troubleshoot a problem.
 
+A configuration error has been applied to a Cloud Native network resource in a "Web Svcs Front End" VPC in `us-east-1`. We shall use Prosimo, an orchestrator/manager of cloud native resource, to identify and resolve the issue.
+
+You've been advised that servers in `WebSvcsProdUs` are failing to connect to `AppSvcsProd` resources.
+
+
+
+1) Navigate to Insights, then to Sessions Tab.
+2) In the search input type "WebScvsProdUs" and hit enter.
+3) Select the first entry in the list to exand it for more details.
+4) Click "Review Hops in Cloud Tracer"
+
+NOTE: the suggested entries will be "10.2.0.100 in default" and "10.0.0.100 in default". The 'in default' references the 'network namespace' in which to trace.
+
+
 
 
 
