@@ -264,10 +264,10 @@ Repeat the above steps verifying each of the "Web Front End" server can reach th
 
 | *Front End Web Svc* | *App Svc* |
 |-----------|------------|
-| `WebSvcsProdEu` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsProdUs` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsDevEu` > | `AppSvcsDevEu` - 10.1.0.100 |
-| `WebSvcsDevUs` > | `AppSvcsDevEu` - 10.1.0.100 |
+| `WebSvcsProdEu1` > | `AppSvcsProdEu` - 10.0.0.100 |
+| `WebSvcsProdUs1` > | `AppSvcsProdEu` - 10.0.0.100 |
+| `WebSvcsDevEu1` > | `AppSvcsDevEu` - 10.1.0.100 |
+| `WebSvcsDevUs1` > | `AppSvcsDevEu` - 10.1.0.100 |
 
 
 For the **Prod** Front End Servers, run:
