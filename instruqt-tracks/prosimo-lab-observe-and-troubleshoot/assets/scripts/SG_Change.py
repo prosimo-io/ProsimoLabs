@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 import boto3
 import logging
 from botocore.exceptions import ClientError
