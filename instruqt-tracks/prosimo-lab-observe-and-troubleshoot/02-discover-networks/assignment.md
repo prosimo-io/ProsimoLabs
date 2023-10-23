@@ -41,6 +41,7 @@ In this section we will:
 1) Review Cloud Account On-boarding & Edge Deployment
 2) Discover Network Resources
 3) Review Edge Deployment
+4) Review the Prosimo Managed Infrastructure
 
 Note that we've only associated our cloud accounts with the Prosimo dashboard thus far.
 
