@@ -109,6 +109,13 @@ Finally we shall now connect the `Azure/northerneurope` region to its Prosimo Ed
 
 ![Azure Peering](../assets/images/Prosimo_Lab_Transit_Azure_Peering.jpg)
 
+---
+
+NOTE: Before progressing to the next section ensure that the Transit onboarding has complete by monitoring the deployment tasks. To review the deployment:
+
+* Click the 'Tasks' button - top right corner.
+* Select the "In Progress" tasks at the top of the list and click the "View" button.
+
 Once you have completed attaching all three regions to their Prosimo Edges you may proceed to the next section: **On-boarding Networks**
 
 
