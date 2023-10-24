@@ -109,6 +109,13 @@ Finally we shall now connect the `Azure/northerneurope` region to its Prosimo Ed
 
 ![Azure Peering](../assets/images/Prosimo_Lab_Transit_Azure_Peering.jpg)
 
+---
+
+NOTE: Before progressing to the next section ensure that the Transit onboarding has complete by monitoring the deployment tasks. To review the deployment:
+
+* Click the 'Tasks' button - top right corner.
+* Select the "In Progress" tasks at the top of the list and click the "View" button.
+
 Once you have completed attaching all three regions to their Prosimo Edges you may proceed to the next section: **On-boarding Networks**
 
 
@@ -264,10 +271,10 @@ Repeat the above steps verifying each of the "Web Front End" server can reach th
 
 | *Front End Web Svc* | *App Svc* |
 |-----------|------------|
-| `WebSvcsProdEu` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsProdUs` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsDevEu` > | `AppSvcsDevEu` - 10.1.0.100 |
-| `WebSvcsDevUs` > | `AppSvcsDevEu` - 10.1.0.100 |
+| `WebSvcsProdEu1` > | `AppSvcsProdEu` - 10.0.0.100 |
+| `WebSvcsProdUs1` > | `AppSvcsProdEu` - 10.0.0.100 |
+| `WebSvcsDevEu1` > | `AppSvcsDevEu` - 10.1.0.100 |
+| `WebSvcsDevUs1` > | `AppSvcsDevEu` - 10.1.0.100 |
 
 
 For the **Prod** Front End Servers, run:

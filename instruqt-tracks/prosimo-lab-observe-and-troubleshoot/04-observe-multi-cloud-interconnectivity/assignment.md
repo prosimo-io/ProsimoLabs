@@ -98,21 +98,7 @@ Cost 360 provides insight into cloud network spend. Be sure to review the follow
 4) Shared Services
 
 
-### 1) Overview
-
-**NOTE:** Screen Capture Coming Soon
-
-### 2) Chargeback
-
-**NOTE:** Screen Capture Coming Soon
-
-### 3) Data Transfer
-
-**NOTE:** Screen Capture Coming Soon
-
-### 4) Shared Services
-
-**NOTE:** Screen Capture Coming Soon
+Ask your instructor for a click-thru demo!
 
 ---
 
