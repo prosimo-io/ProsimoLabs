@@ -34,7 +34,7 @@ class ResourceCreator:
         """
         response = self.session.post(api_endpoint, data=json.dumps(payload))
 
-        if response.status_code == 201:
+        if response.status_code == 200:
             return {
                 'status': 'success',
                 'data': response.json()
