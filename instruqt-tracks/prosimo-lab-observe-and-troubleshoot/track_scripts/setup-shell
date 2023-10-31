@@ -18,7 +18,7 @@ cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/ass
 # Run Python scripts
 cd /root/prosimo-lab/
 python3 assets/scripts/tenant_deploy.py
-sleep 10
+sleep 300
 
 
 # Set runtime variables
