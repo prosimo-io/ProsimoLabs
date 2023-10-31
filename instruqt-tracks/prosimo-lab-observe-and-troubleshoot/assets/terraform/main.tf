@@ -122,11 +122,11 @@ module "prosimo_resource_azure" {
   
 }
 
-resource "aws_ec2_transit_gateway" "dev" {
+resource "aws_ec2_transit_gateway" "eu_west_tgw" {
 provider = aws.eu-aws
-description = "DEV"
+description = "EU_WEST_TGW"
 tags = {
-    Name = "DEV"
+    Name = "TGW"
   }
 }
 

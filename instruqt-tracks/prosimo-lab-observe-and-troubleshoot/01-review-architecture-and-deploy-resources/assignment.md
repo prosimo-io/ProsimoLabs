@@ -104,7 +104,7 @@ Apply the resources:
 
 ```
 cd ~/prosimo-lab/assets/terraform
-terraform apply --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.dev
+terraform apply --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.eu_west_tgw
 ```
 
 ### 2. Deploy AWS resources in the US
@@ -139,13 +139,12 @@ You should see something like:
 ```
 python3 admin_create.py -e <YourBusinessEmail>
 {
-    "status": "failure",
-    "error": "HTTP 200: OK",
-    "details": {
+    "status": "success",
+    "data": {
         "statusCode": "E100000",
         "message": "Successful",
         "data": {
-            "id": "718146fd-95bf-4bb9-b0ec-0df5164fe39b"
+            "id": "c02200fc-01aa-4d73-84d2-0bd9637c3862"
         }
     }
 }

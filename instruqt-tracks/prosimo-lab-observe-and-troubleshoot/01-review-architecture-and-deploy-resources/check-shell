@@ -8,4 +8,17 @@
 
 echo "This is the check script"
 
+cd /root/prosimo-lab/assets/terraform/
+
+TF_COUNT=$(terraform output | wc -l)
+if [ "$TF_COUNT" -ne 12 ]
+then
+   echo "No Success"
+
+   fail_message="FAIL: Terraform deployments incomplete - not all resources have been deployed."
+else
+   echo "Success"
+   exit 0
+fi;
+
 exit 0
