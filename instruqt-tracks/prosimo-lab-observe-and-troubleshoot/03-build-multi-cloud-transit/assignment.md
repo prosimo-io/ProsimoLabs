@@ -59,14 +59,14 @@ Swith to the 'Prosimo' tab, and follow the steps below:
 ## Build Transit for an Existing TGW/Networks:
 
 1) In the left-hand navgation pane, in the "Onboard" section, select "Transit".
-2) Click the blue cirlce with the numder '2' in it to zoom into that region.
+2) Click the blue cirlce with the number '2' in it to zoom into that region.
 3) Select the "AWS eu-west-1" Edge icon, then click the blue button, located at the bottom of the screen, labelled "Let's start building transit".
 4) Select/Click the Prosimo Edge already deployed in this region (the Prosimo logo).
 5) Now click the AWS Transit Gateway (TGW). An orange dashed line should appear, representing the new connection.
 6) Next click "Add VPCs" - bottom right corner. You should see a list of discovered VPCs and Subnets for this region appear in the right-hand pane.
 7) Click the checkbox next to the account name (top of the list) to automatically select all VPCs.
 8) Now click on the "Add VPC's" button
-9) Click on the "Dev" TGW
+9) Click on the TGW
 10) Click on the "2 VPCs" icon - a dashed orange line should appear between then two.
 11) Click "Save to Deployment"
 12) Click "Preview Deployment" - bottom right.
@@ -156,7 +156,7 @@ Next we shall provide some parameters for this newly created Prosimo Network.
 
 10) For the prompt "Where do you want to run connectors?", select "Infra VPC".
 11) For "Bandwidth" select "< 1Gbps".
-12) For "Service Insertion Endpoint", select "None".
+12) In peering optiond, select the TGW.
 13) Click "Proceed".
 
 ![Prosimo Network Config](../assets/images/Prosimo_Lab_Network_Onboard_Config.jpg)
@@ -202,7 +202,7 @@ With all networks now onboarded you may proceed to the section below.
 
 Now we shall verify the connectivity across these newly paved networks.
 
-Review the `Lab Diagram`. We are now going to veriy connectivity from each of the 'Front End Web Services' virtual machines through to the 'App Services' virtual machines.
+Review the `Lab Diagram`. We are now going to verify connectivity from each of the 'Front End Web Services' virtual machines through to the 'App Services' virtual machines.
 
 1) First we must set safe permissions for the PEM format keys, using the following commands:
 
