@@ -6,31 +6,28 @@ systemctl start httpd.service
 systemctl enable httpd.service
 echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
 
-cat <<"EOT" > /home/ec2-user/traffic.sh
-#! /bin/bash
-if [[ $# -ne 2 ]]; then
-    echo "Illegal number of parameters. Usage: traffic.sh <count> <url>"
-    exit 2
-else
-    COUNTER=0
-    if [[ $1 == "test" ]]; then
-    while [[  $COUNTER -lt 2 ]]; do
-        let COUNTER=COUNTER+1
-        echo The counter is $COUNTER of 2
-        curl $2
-        sleep 2
-    done
-    else
-    while [[  $COUNTER -lt $1 ]]; do
-        let COUNTER=COUNTER+1
-        curl -s $2 > /dev/null
-        sleep 5
-    done
-    exit 0
-    fi
-fi
+sudo yum -y install iperf3
 
-EOT
+%{ for port in upstream_ports ~}
+sudo bash -c 'cat <<"EOT" > /etc/systemd/system/iperf-client-${port}.service
+[Unit]
+Description=iperf3 Client ${port}
+After=network.target
 
-sudo chmod u+x /home/ec2-user/traffic.sh
-sudo chown ec2-user:ec2-user /home/ec2-user/traffic.sh
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=1
+RemainAfterExit=yes
+User=ec2-user
+ExecStart=/usr/bin/iperf3 -c ${upstream_host} -p ${port} -t 14400
+
+[Install]
+WantedBy=multi-user.target
+EOT'
+%{ endfor ~}
+
+
+%{ for port in upstream_ports ~}
+sudo systemctl start iperf-client-${port}.service
+%{ endfor ~}

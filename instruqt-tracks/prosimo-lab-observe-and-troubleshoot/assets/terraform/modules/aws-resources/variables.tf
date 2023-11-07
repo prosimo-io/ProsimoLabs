@@ -33,6 +33,16 @@ variable "aws_ec2_name" {
   type        = string
 }
 
+variable "upstream_host" {
+  description = "upstream_host"
+  type        = string
+}
+
+variable "upstream_ports" {
+  description = "upstream_ports"
+  type        = list
+}
+
 variable "aws_ec2_instance_type" {
   description = "Instance Type of EC2"
   type        = string

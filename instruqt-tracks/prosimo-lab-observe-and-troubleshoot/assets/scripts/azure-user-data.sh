@@ -5,31 +5,28 @@ sudo systemctl start apache2
 sudo systemctl enable apache2
 echo "<h1>Hello Prosimo MCN fans and Welcome</h1>" | sudo tee /var/www/html/index.html
 
-cat <<"EOT" > /home/linuxuser/traffic.sh
-#! /bin/bash
-if [[ $# -ne 2 ]]; then
-    echo "Illegal number of parameters. Usage: traffic.sh <count> <url>"
-    exit 2
-else
-    COUNTER=0
-    if [[ $1 == "test" ]]; then
-    while [[  $COUNTER -lt 2 ]]; do
-        let COUNTER=COUNTER+1
-        echo The counter is $COUNTER of 2
-        curl $2
-        sleep 2
-    done
-    else
-    while [[  $COUNTER -lt $1 ]]; do
-        let COUNTER=COUNTER+1
-        curl -s $2 > /dev/null
-        sleep 5
-    done
-    exit 0
-    fi
-fi
+sudo apt install iperf3 -y
 
-EOT
+%{ for port in server_ports ~}
+sudo bash -c 'cat <<"EOT" > /etc/systemd/system/iperf-server-${port}.service
+[Unit]
+Description=iperf3 Server ${port}
+After=network.target
 
-sudo chmod u+x /home/linuxuser/traffic.sh
-sudo chown linuxuser:linuxuser traffic.sh
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=1
+RemainAfterExit=yes
+User=linuxuser
+ExecStart=/usr/bin/iperf3 -s -D -p ${port}
+
+[Install]
+WantedBy=multi-user.target
+EOT'
+%{ endfor ~}
+
+
+%{ for port in server_ports ~}
+sudo systemctl start iperf-server-${port}.service
+%{ endfor ~}
