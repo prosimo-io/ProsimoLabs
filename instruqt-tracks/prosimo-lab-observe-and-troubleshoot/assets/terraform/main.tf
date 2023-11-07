@@ -5,7 +5,7 @@
 module "aws__instances_eu" {
   source = "./modules/aws-resources"
   providers         = {   
-  aws = aws.eu-west-1
+    aws = aws.eu-west-1
   }
   for_each              = var.EU_West_FrontEnd
   aws_region            = var.aws_region[0]
@@ -14,6 +14,8 @@ module "aws__instances_eu" {
   private_ip            = each.value["private_ip"]
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
+  upstream_host         = each.value["upstream_host"]
+  upstream_ports        = each.value["upstream_ports"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -24,7 +26,7 @@ module "aws__instances_eu" {
 module "aws__instances_us" {
   source = "./modules/aws-resources"
   providers         = { 
-  aws = aws.us-east-1
+    aws = aws.us-east-1
   }
   for_each              = var.US_East_FrontEnd
   aws_region            = var.aws_region[1]
@@ -33,6 +35,8 @@ module "aws__instances_us" {
   private_ip            = each.value["private_ip"]
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
+  upstream_host         = each.value["upstream_host"]
+  upstream_ports        = each.value["upstream_ports"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -45,7 +49,7 @@ module "aws__instances_us" {
 module "azure_instances_eu" {
   source = "./modules/azure-resources"
   providers = {
-  azurerm = azurerm.eun
+    azurerm = azurerm.eun
   }
   for_each             = var.North_EU_AppSvcs_VNets
   azure_resource_group = each.value["azure_resource_group"]
@@ -53,6 +57,7 @@ module "azure_instances_eu" {
   azure_vnet_name      = each.value["azure_vnet_name"]
   azure_subnet_name    = each.value["azure_subnet_name"]
   azure_instance_name  = each.value["azure_instance_name"]
+  server_ports         = each.value["server_ports"]
   azure_private_ip     = each.value["azure_private_ip"]
   azure_server_key_pair_name  = each.value["azure_server_key_pair_name"]
   azure_vm_size        = "Standard_DS1_v2"

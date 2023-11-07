@@ -160,6 +160,10 @@ resource "aws_key_pair" "demo_key_pair" {
 
 data "template_file" "user_data" {
   template = file("/root/prosimo-lab/assets/scripts/aws-user-data.sh")
+  vars = {
+    upstream_host = "${var.upstream_host}"
+    upstream_ports = var.upstream_ports
+  }
 }
 
 # Create EC2 Instance

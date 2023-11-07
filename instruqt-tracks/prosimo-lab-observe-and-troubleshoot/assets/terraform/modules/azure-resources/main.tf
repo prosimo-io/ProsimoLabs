@@ -75,7 +75,10 @@ resource "azurerm_network_interface" "nic_1" {
   ]
 }
 data "template_file" "apache_install" {
-    template = file("/root/prosimo-lab/assets/scripts/azure-user-data.sh")
+  template = file("/root/prosimo-lab/assets/scripts/azure-user-data.sh")
+  vars = {
+    server_ports = var.server_ports
+  }
 }
 
 # Create a VM
