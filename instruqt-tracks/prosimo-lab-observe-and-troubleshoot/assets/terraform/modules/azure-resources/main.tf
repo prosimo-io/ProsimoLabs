@@ -74,11 +74,11 @@ resource "azurerm_network_interface" "nic_1" {
     azurerm_public_ip.ip_1
   ]
 }
-data "template_file" "apache_install" {
-  template = file("/root/prosimo-lab/assets/scripts/azure-user-data.sh")
-  vars = {
+
+locals {
+  custom_data = templatefile("/root/prosimo-lab/assets/scripts/azure-user-data.sh", {
     server_ports = var.server_ports
-  }
+  })
 }
 
 # Create a VM
@@ -89,7 +89,7 @@ resource "azurerm_linux_virtual_machine" "vm_1" {
   size             = var.azure_vm_size
   network_interface_ids = [azurerm_network_interface.nic_1.id]
   admin_username = "linuxuser"
-  custom_data = base64encode(data.template_file.apache_install.rendered)
+  custom_data = base64encode(local.custom_data)
   admin_ssh_key {
     username   = "linuxuser"
     public_key = tls_private_key.linux_vm_key.public_key_openssh

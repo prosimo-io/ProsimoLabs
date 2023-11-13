@@ -78,7 +78,7 @@ variable "US_East_FrontEnd" {
     private_ip                  = string
     aws_ec2_name                = string
     upstream_host               = string
-    upstream_ports              = list
+    upstream_ports              = list(string)
     aws_ec2_key_pair_name       = string
     aws_vpc_cidr                = string
     aws_subnet_cidr             = string
@@ -94,7 +94,7 @@ variable "EU_West_FrontEnd" {
     private_ip                  = string
     aws_ec2_name                = string
     upstream_host               = string
-    upstream_ports              = list
+    upstream_ports              = list(string)
     aws_ec2_key_pair_name       = string
     aws_vpc_cidr                = string
     aws_subnet_cidr             = string
@@ -108,7 +108,7 @@ variable "North_EU_AppSvcs_VNets" {
     azure_vnet_name             = string
     azure_subnet_name           = string
     azure_instance_name         = string
-    server_ports                = list
+    server_ports                = list(string)
     azure_server_key_pair_name  = string
     azure_private_ip            = string
     azure_vm_size               = string

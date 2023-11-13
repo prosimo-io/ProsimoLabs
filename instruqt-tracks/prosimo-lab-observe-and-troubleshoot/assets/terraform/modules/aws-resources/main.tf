@@ -158,12 +158,11 @@ resource "aws_key_pair" "demo_key_pair" {
   }
 }
 
-data "template_file" "user_data" {
-  template = file("/root/prosimo-lab/assets/scripts/aws-user-data.sh")
-  vars = {
-    upstream_host = "${var.upstream_host}"
+locals {
+  user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
+    upstream_host = var.upstream_host
     upstream_ports = var.upstream_ports
-  }
+  })
 }
 
 # Create EC2 Instance
@@ -180,7 +179,7 @@ resource "aws_instance" "ec2_linux" {
     "Name" = var.aws_ec2_name
   }
 
-  user_data              = "${data.template_file.user_data.rendered}"
+  user_data              = "${local.user_data}"
 
 }
 
@@ -191,5 +190,3 @@ resource "aws_eip" "eip" {
   associate_with_private_ip = var.private_ip
   depends_on                = [aws_internet_gateway.igw]
 }
-
-
