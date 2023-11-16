@@ -20,7 +20,7 @@ Restart=on-failure
 RestartSec=1
 RemainAfterExit=yes
 User=ec2-user
-ExecStart=/usr/bin/iperf3 -c ${upstream_host} -p ${port} -t 14400
+ExecStart=/usr/bin/iperf3 -c ${upstream_host} -p ${port} -t 14400 --logfile /home/ec2-user/iperf-client-${port}.log --verbose
 
 [Install]
 WantedBy=multi-user.target
