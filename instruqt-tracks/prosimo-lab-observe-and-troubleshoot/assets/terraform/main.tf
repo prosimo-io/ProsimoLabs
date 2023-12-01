@@ -68,69 +68,10 @@ module "azure_instances_eu" {
   azure_vnet_cidr      = each.value["azure_vnet_cidr"]
 }
 
-# Onboard CSP Account into Prosimo Dashboard
-
-resource "prosimo_cloud_creds" "aws" {
-  cloud_type = "AWS"
-  nickname   = "Prosimo_AWS"
-
-  aws {
-    preferred_auth = "AWSKEY"
-
-    access_keys {
-      access_key_id = var.Access_Key_AWS
-      secret_key_id = var.Access_Secret_AWS
-    }
-  }
-}
-
-resource "prosimo_cloud_creds" "azure" {
-  cloud_type = "AZURE"
-  nickname   = "Prosimo_Azure"
-
-  azure {
-    subscription_id = var.subscription
-    tenant_id       = var.tenantazure
-    client_id       = var.client
-    secret_id       = var.clientsecret
-  }
-}
-
-# Create Prosimo Infra resources
-
-module "prosimo_resource_aws" {
-  source     = "./modules/prosimo-resources"
-  prosimo_teamName = var.prosimo_teamName
-  prosimo_token = var.prosimo_token
-  count      = length(var.prosimo_cidr)
-  prosimo_cidr       = var.prosimo_cidr[count.index]
-  cloud = "AWS"
-  cloud1 = "Prosimo_AWS"
-  apply_node_size_settings = "true"
-  bandwidth = "<1 Gbps"
-  instance_type = "t3.medium"
-  multipleRegion = var.aws_region[count.index]
-  wait = "false"
-  
-}
-
-module "prosimo_resource_azure" {
-  source     = "./modules/prosimo-resources"
-  prosimo_teamName = var.prosimo_teamName
-  prosimo_token = var.prosimo_token
-  prosimo_cidr       = "10.253.0.0/23"
-  cloud = "AZURE"
-  apply_node_size_settings = "false"
-  cloud1 = "Prosimo_Azure"
-  multipleRegion = "northeurope"
-  wait = "false"
-  
-}
-
 resource "aws_ec2_transit_gateway" "eu_west_tgw" {
-provider = aws.eu-aws
-description = "EU_WEST_TGW"
-tags = {
+  provider = aws.eu-aws
+  description = "EU_WEST_TGW"
+  tags = {
     Name = "TGW"
   }
 }

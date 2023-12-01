@@ -55,15 +55,7 @@ variable tenantazure {
 }
 
 
-variable Access_Key_AWS {
-  type = string
-  description = "valid AWS Key"
-}
 
-variable Access_Secret_AWS {
-  type = string
-  description = "valid AWS Secret"
-}
 variable cloud_type {
   type = string
 
