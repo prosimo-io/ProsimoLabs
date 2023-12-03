@@ -11,11 +11,11 @@ variable "prosimo_token" {
 variable "prosimo_cidr" {
   type        = string
   description = "valid subnets to assign to server"
-  default = "10.251.0.0/23"
+  default     = "10.251.0.0/23"
 }
 
 variable "aws_region" {
   type        = string
   description = "Region for AWS resoruces"
-  default = "eu-west-1"
+  default     = "eu-west-1"
 }

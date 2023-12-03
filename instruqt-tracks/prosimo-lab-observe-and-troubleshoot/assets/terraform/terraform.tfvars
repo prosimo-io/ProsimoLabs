@@ -1,26 +1,26 @@
 aws_region = [
-          "eu-west-1",
-          "us-east-1",
+  "eu-west-1",
+  "us-east-1",
 ]
 
-vpc_cidr = [ 
-          "10.0.0.0/16",
-          "10.1.0.0/16", 
+vpc_cidr = [
+  "10.0.0.0/16",
+  "10.1.0.0/16",
 ]
 
-subnet_cidr = [ 
-          "10.0.0.0/24",
-          "10.1.0.0/24",
- ]
+subnet_cidr = [
+  "10.0.0.0/24",
+  "10.1.0.0/24",
+]
 
 prosimo_cidr = [
-          "10.251.0.0/23",
-          "10.252.0.0/23",
+  "10.251.0.0/23",
+  "10.252.0.0/23",
 ]
 
 private_ip = [
-          "10.0.0.100",
-          "10.1.0.100",
+  "10.0.0.100",
+  "10.1.0.100",
 ]
 
 cloud_type = "AWS"
@@ -88,34 +88,34 @@ EU_West_FrontEnd = {
 
 North_EU_AppSvcs_VNets = {
   Vnet1 = {
-    azure_resource_group        = "AppSvcsProdEu"
-    azure_location              = "North Europe"
-    azure_vnet_name             = "AppSvcsProdEu_Vnet"
-    azure_subnet_name           = "AppSvcsProdEu_Vnet_subnet"
-    azure_instance_name         = "AppSvcsProdEu"
-    server_ports                = ["8280","8281","8282","8480","8481","8482"]
-    azure_vm_size               = "Standard_DS1_v2"
-    azure_server_key_pair_name  = "Azure_Srv1"
-    azure_admin_username        = "igorlinux"
-    azure_admin_password        = "igorlinux"
-    azure_subnet_cidr           = "10.0.0.0/24"
-    azure_vnet_cidr             = "10.0.0.0/16"
-    azure_private_ip            = "10.0.0.100"
+    azure_resource_group       = "AppSvcsProdEu"
+    azure_location             = "North Europe"
+    azure_vnet_name            = "AppSvcsProdEu_Vnet"
+    azure_subnet_name          = "AppSvcsProdEu_Vnet_subnet"
+    azure_instance_name        = "AppSvcsProdEu"
+    server_ports               = ["8280", "8281", "8282", "8480", "8481", "8482"]
+    azure_vm_size              = "Standard_DS1_v2"
+    azure_server_key_pair_name = "Azure_Srv1"
+    azure_admin_username       = "igorlinux"
+    azure_admin_password       = "igorlinux"
+    azure_subnet_cidr          = "10.0.0.0/24"
+    azure_vnet_cidr            = "10.0.0.0/16"
+    azure_private_ip           = "10.0.0.100"
   },
 
   Vnet2 = {
-    azure_resource_group        = "AppSvcsDevEu"
-    azure_location              = "North Europe"
-    azure_vnet_name             = "AppSvcsDevEu_Vnet"
-    azure_subnet_name           = "AppSvcsDevEu_Vnet_subnet"
-    azure_instance_name         = "AppSvcsDevEu"
-    server_ports                = ["8380","8381","8382","8580","8581","8582"]
-    azure_vm_size               = "Standard_DS1_v2"
-    azure_server_key_pair_name  = "Azure_Srv2"
-    azure_admin_username        = "igorlinux"
-    azure_admin_password        = "igorlinux"
-    azure_subnet_cidr           = "10.1.0.0/24"
-    azure_vnet_cidr             = "10.1.0.0/16"
-    azure_private_ip            = "10.1.0.100"
+    azure_resource_group       = "AppSvcsDevEu"
+    azure_location             = "North Europe"
+    azure_vnet_name            = "AppSvcsDevEu_Vnet"
+    azure_subnet_name          = "AppSvcsDevEu_Vnet_subnet"
+    azure_instance_name        = "AppSvcsDevEu"
+    server_ports               = ["8380", "8381", "8382", "8580", "8581", "8582"]
+    azure_vm_size              = "Standard_DS1_v2"
+    azure_server_key_pair_name = "Azure_Srv2"
+    azure_admin_username       = "igorlinux"
+    azure_admin_password       = "igorlinux"
+    azure_subnet_cidr          = "10.1.0.0/24"
+    azure_vnet_cidr            = "10.1.0.0/16"
+    azure_private_ip           = "10.1.0.100"
   }
 }

@@ -51,7 +51,7 @@ variable "aws_ec2_instance_type" {
 
 variable "private_ip" {
   description = "Static IP for EC2"
-  type = string
+  type        = string
 }
 
 variable "aws_ec2_key_pair_name" {
@@ -61,15 +61,15 @@ variable "aws_ec2_key_pair_name" {
 
 variable "tgw" {
   description = "Conditional resource"
-  type = bool
+  type        = bool
 }
 
 variable "igw_name" {
   description = "Name of IGW"
-  default = ""
+  default     = ""
 }
 
 variable "rt_name" {
   description = "Name of RT"
-  default = ""
+  default     = ""
 }

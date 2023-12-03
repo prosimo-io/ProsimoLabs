@@ -18,7 +18,7 @@ variable "azure_vnet_name" {
 
 variable "azure_private_ip" {
   description = "Private IP for VM"
-  type       = string
+  type        = string
 }
 
 variable "azure_server_key_pair_name" {
