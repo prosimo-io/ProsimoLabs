@@ -1,8 +1,8 @@
 # Create Prosimo Infra resources
 
 module "prosimo_resource_aws_eu_west" {
-  source                   = "./modules/prosimo-resources"
-  prosimo_teamName         = var.prosimo_teamName
+  source                   = "../modules/prosimo-resources"
+  prosimo_teamName         = var.prosimo_team_name
   prosimo_token            = var.prosimo_token
   prosimo_cidr             = var.prosimo_cidr
   cloud                    = "AWS"
@@ -12,5 +12,4 @@ module "prosimo_resource_aws_eu_west" {
   instance_type            = "t3.medium"
   multipleRegion           = var.aws_region
   wait                     = "false"
-
 }

@@ -29,27 +29,27 @@ variable prosimo_token {
 }
 
 
-variable prosimo_teamName {
+variable prosimo_team_name {
   type = string
   description = "valid name of the tenant"
 }
 
-variable subscription {
+variable azure_subscription_id {
   type = string
   description = "azure subscription id"
 }
 
-variable client {
+variable azure_client_id {
   type = string
   description = "azure client id"
 }
 
-variable clientsecret {
+variable azure_client_secret {
   type = string
   description = "azure client secret"
 }
 
-variable tenantazure {
+variable azure_tenant_id {
   type = string
   description = "azure tenant id"
 }

@@ -69,7 +69,8 @@ module "azure_instances_eu" {
 }
 
 resource "aws_ec2_transit_gateway" "eu_west_tgw" {
-  provider = aws.eu-aws
+#  provider = aws.eu-aws
+  provider = aws.eu-west-1
   description = "EU_WEST_TGW"
   tags = {
     Name = "TGW"
@@ -81,7 +82,7 @@ resource "aws_ec2_transit_gateway" "eu_west_tgw" {
 
 module "network_eu" {
   source = "./modules/prosimo-network"
-  prosimo_teamName = var.prosimo_teamName
+  prosimo_team_name = var.prosimo_team_name
   prosimo_token = var.prosimo_token
   name         = "WEB_Subnet_EU"
   region       = var.aws_region[0]

@@ -8,22 +8,22 @@ variable Access_Secret_AWS {
   description = "valid AWS Secret"
 }
 
-variable subscription {
+variable azure_subscription_id {
   type = string
   description = "azure subscription id"
 }
 
-variable tenantazure {
+variable azure_tenant_id {
   type = string
   description = "azure tenant id"
 }
 
-variable client {
+variable azure_client_id {
   type = string
   description = "azure client id"
 }
 
-variable clientsecret {
+variable azure_client_secret {
   type = string
   description = "azure client secret"
 }

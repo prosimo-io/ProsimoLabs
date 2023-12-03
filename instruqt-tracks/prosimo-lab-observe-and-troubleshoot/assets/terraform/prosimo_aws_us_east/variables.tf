@@ -1,19 +1,21 @@
-variable prosimo_teamName {
+variable "prosimo_team_name" {
   type = string
   description = "valid name of the tenant"
 }
 
-variable prosimo_token {
+variable "prosimo_token" {
   type = string
   description = "valid prosimo token - from MSP Portal"
 }
 
-variable prosimo_cidr {
+variable "prosimo_cidr" {
   type = string
   description = "valid subnets to assign to server"
+  default = "10.252.0.0/23"
 }
 
-variable aws_region {
+variable "aws_region" {
     type = string
     description = "Region for AWS resoruces"
+    default = "us-east-1"
 }

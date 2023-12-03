@@ -19,7 +19,7 @@ terraform {
 provider "prosimo" {
   token    = var.prosimo_token
   insecure = true
-  base_url = "https://${var.prosimo_teamName}.admin.prosimo.io"
+  base_url = "https://${var.prosimo_team_name}.admin.prosimo.io"
 }
 
 
@@ -37,12 +37,12 @@ provider "aws" {
   profile = "default"
 }
 
-provider "aws" {
-  region = "eu-west-1"
-  alias = "eu-aws"
-  shared_credentials_files = ["./credentials"]
-  profile = "default"
-}
+#provider "aws" {
+#  region = "eu-west-1"
+#  alias = "eu-aws"
+#  shared_credentials_files = ["./credentials"]
+#  profile = "default"
+#}
 
 provider "azurerm" {
   
@@ -52,10 +52,10 @@ provider "azurerm" {
       prevent_deletion_if_contains_resources = false
     }
   }
-  subscription_id = var.subscription
-  client_id       = var.client
-  client_secret   = var.clientsecret
-  tenant_id       = var.tenantazure
+  subscription_id = var.azure_subscription_id
+  client_id       = var.azure_client_id
+  client_secret   = var.azure_client_secret
+  tenant_id       = var.azure_tenant_id
   skip_provider_registration = "true"
 
 }

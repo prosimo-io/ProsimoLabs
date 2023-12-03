@@ -1,4 +1,4 @@
-variable "prosimo_teamName" {
+variable "prosimo_team_name" {
   type = string
 }
 variable "prosimo_token" {

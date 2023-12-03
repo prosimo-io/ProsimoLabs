@@ -19,9 +19,9 @@ resource "prosimo_cloud_creds" "azure" {
   nickname   = "Prosimo_Azure"
 
   azure {
-    subscription_id = var.subscription
-    tenant_id       = var.tenantazure
-    client_id       = var.client
-    secret_id       = var.clientsecret
+    subscription_id = var.azure_subscription_id
+    tenant_id       = var.azure_tenant_id
+    client_id       = var.azure_client_id
+    secret_id       = var.azure_client_secret
   }
 }

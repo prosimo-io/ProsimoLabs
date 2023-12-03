@@ -4,7 +4,7 @@ import os
 
 API_KEY = "$Instruqt_API_TOKEN"
 ENDPOINT = "https://play.instruqt.com/graphql"
-PROSIMO_TOKEN = os.getenv("PROSIMO_TOKEN")
+prosimo_token = os.getenv("prosimo_token")
 INSTRUQT_POOL_ID = os.getenv("INSTRUQT_POOL_ID")
 
 # GraphQL Queries and Mutations
@@ -29,7 +29,7 @@ class Prosimo:
     def __init__(self, tenant_id):
         self.api_url = "https://{tenant_id}.admin.prosimo.io/api"
         self.session = requests.Session()
-        self.session.headers.update({"Prosimo-ApiToken": PROSIMO_TOKEN, "Content-Type": "application/json"})
+        self.session.headers.update({"Prosimo-ApiToken": prosimo_token, "Content-Type": "application/json"})
 
     def get_all_edges(self):
         response = self.session.get("{self.api_url}/prosimo/app").json()
