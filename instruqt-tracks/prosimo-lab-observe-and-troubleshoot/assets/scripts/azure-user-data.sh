@@ -17,9 +17,8 @@ After=network.target
 Type=simple
 Restart=on-failure
 RestartSec=1
-RemainAfterExit=yes
 User=linuxuser
-ExecStart=/usr/bin/iperf3 -s -D -p ${port} 
+ExecStart=/usr/bin/iperf3 -s -p ${port} 
 
 [Install]
 WantedBy=multi-user.target
