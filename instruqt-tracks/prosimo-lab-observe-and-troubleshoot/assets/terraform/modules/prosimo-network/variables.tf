@@ -18,7 +18,7 @@ variable "subnets" {
   type = string
 }
 
-variable "connectType" {
+variable "connect_type" {
   type = string
 }
 
@@ -38,7 +38,7 @@ variable "cloud" {
   type = string
 }
 
-variable "cloudNickname" {
+variable "cloud_creds_name" {
   type = string
 }
 
