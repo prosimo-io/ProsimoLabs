@@ -1,3 +1,19 @@
+# initiate required Providers
+terraform {
+  required_providers {
+    prosimo = {
+      source  = "prosimo-io/prosimo"
+      version = "~> 3.9.0"
+    }
+  }
+}
+
+provider "prosimo" {
+  token    = var.prosimo_token
+  insecure = true
+  base_url = "https://${var.prosimo_team_name}.admin.prosimo.io"
+}
+
 # Create Prosimo Infra resources
 
 module "prosimo_resource_aws_eu_west" {
