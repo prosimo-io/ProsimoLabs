@@ -14,6 +14,16 @@ variable "prosimo_cidr" {
   default     = "10.252.0.0/23"
 }
 
+variable "aws_access_key_id" {
+  type        = string
+  description = "valid AWS Key"
+}
+
+variable "aws_secret_key_id" {
+  type        = string
+  description = "valid AWS Secret"
+}
+
 variable "aws_region" {
   type        = string
   description = "Region for AWS resoruces"

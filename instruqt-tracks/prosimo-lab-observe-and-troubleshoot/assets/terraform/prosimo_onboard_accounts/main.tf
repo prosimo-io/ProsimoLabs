@@ -24,8 +24,8 @@ resource "prosimo_cloud_creds" "aws" {
     preferred_auth = "AWSKEY"
 
     access_keys {
-      access_key_id = var.Access_Key_AWS
-      secret_key_id = var.Access_Secret_AWS
+      access_key_id = var.aws_access_key_id
+      secret_key_id = var.aws_secret_key_id
     }
   }
 }
