@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "##############################"
+echo "# START: Installing binaries #"
+echo "##############################"
+
 # Install Terraform & Requests library
 apt update -y
 apt install git -y
@@ -8,6 +12,20 @@ echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://
 apt update -y
 apt install terraform -y
 pip3 install requests
+
+# Install AWS Cli v2
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+
+echo "############################"
+echo "# END: Installing binaries #"
+echo "############################"
+
+echo "#############################"
+echo "# START: Cloning track repo #"
+echo "#############################"
+
 
 # Pull Lab assets (terraform & scripts) from github
 mkdir /root/prosimo-lab/
@@ -18,15 +36,28 @@ git checkout n8-updates
 cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
 ## rm -r /root/ProsimoLabs
 
+echo "###########################"
+echo "# END: Cloning track repo #"
+echo "###########################"
+
+
 # Run Python scripts
 cd /root/prosimo-lab/
-#python3 /root/prosimo-lab/assets/scripts/tenant_deploy.py
-echo "\n\ncreating tenant\n\n"
-python3 assets/scripts/tenant_deploy.py
-#python3 /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets/scripts/tenant_deploy.py
 
-# sleep 300 ## PUT THIS BACK IN!! Needed for tenant creation!!
+echo "##################################"
+echo "# START: Creating Prosimo Tenant #"
+echo "##################################"
 
+python3 /root/prosimo-lab/assets/scripts/tenant_deploy.py
+#python3 assets/scripts/tenant_deploy.py
+echo "Sleeping for 5 mins for tenant creation propagation..."
+sleep 300
+
+echo "Awake!!"
+
+echo "################################"
+echo "# END: Creating Prosimo Tenant #"
+echo "################################"
 
 
 # Set env variables
@@ -75,6 +106,16 @@ cd /root/prosimo-lab/assets/terraform/prosimo_aws_eu_west/
 terraform init
 sleep 10
 
+terraform apply --auto-approve \
+ -var prosimo_token=$TF_VAR_prosimo_token \
+ -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
+ -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
+ -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
+
+echo "Sleeping 10 mins before next Prosimo Edge deploy..."
+sleep 600
+echo "Awake!!"
+
 echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS eu-west-1 #"
 echo "#################################################"
@@ -86,6 +127,16 @@ echo "###################################################"
 cd /root/prosimo-lab/assets/terraform/prosimo_aws_us_east/
 terraform init
 sleep 10
+
+terraform apply --auto-approve \
+ -var prosimo_token=$TF_VAR_prosimo_token \
+ -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
+ -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
+ -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
+
+echo "Sleeping 10 mins before next Prosimo Edge deploy..."
+sleep 600
+echo "Awake!!"
 
 echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS us-east-1 #"
@@ -100,21 +151,17 @@ cd /root/prosimo-lab/assets/terraform/prosimo_azure_northerneurope/
 terraform init
 sleep 10
 
+terraform apply --auto-approve \
+ -var prosimo_token=$TF_VAR_prosimo_token \
+ -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
+ -var azure_subscription_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID \
+ -var azure_tenant_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID \
+ -var azure_client_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID \
+ -var azure_client_secret=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD
+
 echo "########################################################"
 echo "# END - Prosimo: Deploying Edge - Azure northerneurope #"
 echo "########################################################"
-
-
-### cd /root/prosimo-lab/assets/terraform
-### terraform init 
-### sleep 10
-### terraform apply --auto-approve -target=prosimo_cloud_creds.aws -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
-### sleep 5
-### terraform apply --auto-approve -target=prosimo_cloud_creds.azure -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
-### sleep 10
-### terraform apply -auto-approve -target=module.prosimo_resource_aws -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} 
-### sleep 10
-### terraform apply -auto-approve -target=module.prosimo_resource_azure -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} 
 
 # Set AWS creds
 cp ~/.aws/credentials /root/prosimo-lab/assets/terraform

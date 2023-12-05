@@ -3,28 +3,12 @@ aws_region = [
   "us-east-1",
 ]
 
-vpc_cidr = [
-  "10.0.0.0/16",
-  "10.1.0.0/16",
-]
+## subnet_cidr = [
+##   "10.0.0.0/24",
+##   "10.1.0.0/24",
+## ]
 
-subnet_cidr = [
-  "10.0.0.0/24",
-  "10.1.0.0/24",
-]
-
-prosimo_cidr = [
-  "10.251.0.0/23",
-  "10.252.0.0/23",
-]
-
-private_ip = [
-  "10.0.0.100",
-  "10.1.0.100",
-]
-
-cloud_type = "AWS"
-
+## cloud_type = "AWS"
 
 US_East_FrontEnd = {
   VPC1 = {

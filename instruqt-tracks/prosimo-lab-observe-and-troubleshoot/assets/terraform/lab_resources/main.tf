@@ -91,40 +91,12 @@ module "network_eu" {
   placement    = "Workload VPC"
   cloud        = "AWS"
   cloud_type   = "public"
-  connectType  = "private"
+  connect_type  = "private"
   vpc          = module.aws__instances_eu.aws_vpc_id
-  cloudNickname= "Prosimo"
+  cloud_creds_name= "Prosimo"
   decommission = "false"
   onboard      = "true"
   depends_on   = [ module.prosimo_resource ] 
 }
 
-
-
-resource "aws_ec2_transit_gateway" "dev" {
-provider = aws.eu-aws
-description = "DEV"
-tags = {
-    Name = "DEV"
-  }
-}
-
-
-
-# Create Virtual Instance and Networking Infrastructre in Azure
-module "azure_instances_1" {
-  source = "./modules/azure-resources"
-
-  azure_resource_group = "demo_IaC_basic"
-  azure_location       = "North Europe"
-  azure_vnet_name      = "vnet_1"
-  azure_subnet_name    = "subnet_1"
-  azure_instance_name  = "vm_1"
-  azure_vm_size        = "Standard_DS1_v2"
-  azure_admin_username = "$test"
-  azure_admin_password = "Test2022"
-
-  azure_subnet_cidr = "10.0.0.0/16"
-  azure_vnet_cidr   = "10.0.0.0/24"
-}
 */
