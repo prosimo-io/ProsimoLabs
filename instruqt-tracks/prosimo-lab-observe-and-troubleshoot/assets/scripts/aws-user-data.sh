@@ -25,10 +25,11 @@ while true; do
 
 done
 EOT'
-%{ endfor ~}
 
 sudo chmod +x /home/ec2-user/iperf-client-${port}.sh
 sudo chown ec2-user:ec2-user /home/ec2-user/iperf-client-${port}.sh
+
+%{ endfor ~}
 
 
 # Create Systemd Unit for Traffic generator script, for each port.
@@ -43,7 +44,7 @@ After=network.target
 Type=simple
 Restart=on-failure
 RestartSec=1
-RemainAfterExit=yes
+# RemainAfterExit=yes
 User=ec2-user
 ExecStart=/home/ec2-user/iperf-client-${port}.sh
 
