@@ -8,6 +8,6 @@
 
 echo "This is the setup script"
 
-set-workdir /root/prosimo-lab
+set-workdir /root/prosimo-lab/assets/terraform/lab_resources/
 
 exit 0
