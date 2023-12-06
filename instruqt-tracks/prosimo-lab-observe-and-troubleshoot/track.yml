@@ -11,10 +11,11 @@ tags: []
 owner: prosimo
 developers:
 - nathan@prosimo.io
+show_timer: true
 lab_config:
   overlay: false
   width: 33
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "5697820187153704229"
+checksum: "14380479814361418393"

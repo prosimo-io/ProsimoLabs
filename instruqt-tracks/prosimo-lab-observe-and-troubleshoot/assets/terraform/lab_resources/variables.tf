@@ -1,26 +1,6 @@
-variable "aws_region" {
-  type        = list(string)
-  description = "Region for AWS resoruces"
-}
-
-variable "vpc_cidr" {
-  type        = list(string)
-  description = "valid subnets to assign to server"
-}
-
-variable "subnet_cidr" {
-  type        = list(string)
-  description = "valid subnets to assign to server"
-}
-
-variable "prosimo_cidr" {
-  type        = list(string)
-  description = "valid subnets to assign to server"
-}
-
-variable "private_ip" {
-  description = "Static Private IP"
-  type        = list(string)
+variable "prosimo_team_name" {
+  type        = string
+  description = "valid name of the tenant"
 }
 
 variable "prosimo_token" {
@@ -28,10 +8,19 @@ variable "prosimo_token" {
   description = "valid prosimo token - from MSP Portal"
 }
 
+variable "aws_region" {
+  type        = list(string)
+  description = "Region for AWS resoruces"
+}
 
-variable "prosimo_team_name" {
+variable "aws_access_key_id" {
   type        = string
-  description = "valid name of the tenant"
+  description = "valid AWS Key"
+}
+
+variable "aws_secret_key_id" {
+  type        = string
+  description = "valid AWS Secret"
 }
 
 variable "azure_subscription_id" {
@@ -54,20 +43,13 @@ variable "azure_tenant_id" {
   description = "azure tenant id"
 }
 
-
-
-variable "cloud_type" {
-  type = string
-
-}
-
 variable "US_East_FrontEnd" {
   type = map(object({
     aws_vpc_name          = string
     igw_name              = string
     rt_name               = string
     aws_subnet_name       = string
-    private_ip            = string
+    aws_private_ip        = string
     aws_ec2_name          = string
     upstream_host         = string
     upstream_ports        = list(string)
@@ -83,7 +65,7 @@ variable "EU_West_FrontEnd" {
     igw_name              = string
     rt_name               = string
     aws_subnet_name       = string
-    private_ip            = string
+    aws_private_ip        = string
     aws_ec2_name          = string
     upstream_host         = string
     upstream_ports        = list(string)

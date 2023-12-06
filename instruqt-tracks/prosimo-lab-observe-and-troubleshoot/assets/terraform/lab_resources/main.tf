@@ -1,9 +1,7 @@
-
-
 # Create EC2 and Networking Infrastructure in AWS
 
 module "aws__instances_eu" {
-  source = "./modules/aws-resources"
+  source = "../modules/aws-resources"
   providers = {
     aws = aws.eu-west-1
   }
@@ -11,7 +9,7 @@ module "aws__instances_eu" {
   aws_region            = var.aws_region[0]
   aws_vpc_name          = each.value["aws_vpc_name"]
   aws_subnet_name       = each.value["aws_subnet_name"]
-  private_ip            = each.value["private_ip"]
+  private_ip            = each.value["aws_private_ip"]
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
@@ -24,7 +22,7 @@ module "aws__instances_eu" {
 }
 
 module "aws__instances_us" {
-  source = "./modules/aws-resources"
+  source = "../modules/aws-resources"
   providers = {
     aws = aws.us-east-1
   }
@@ -32,7 +30,7 @@ module "aws__instances_us" {
   aws_region            = var.aws_region[1]
   aws_vpc_name          = each.value["aws_vpc_name"]
   aws_subnet_name       = each.value["aws_subnet_name"]
-  private_ip            = each.value["private_ip"]
+  private_ip            = each.value["aws_private_ip"]
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
@@ -47,7 +45,7 @@ module "aws__instances_us" {
 # Create Linux and Networking Infrastructure in Azure
 
 module "azure_instances_eu" {
-  source = "./modules/azure-resources"
+  source = "../modules/azure-resources"
   providers = {
     azurerm = azurerm.eun
   }

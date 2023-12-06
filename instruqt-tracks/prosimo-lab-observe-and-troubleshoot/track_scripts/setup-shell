@@ -15,17 +15,20 @@ pip3 install requests
 
 # Install AWS Cli v2
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
+unzip -q awscliv2.zip
 ./aws/install
+rm -rf aws/
+rm awscliv2.zip
 
 echo "############################"
 echo "# END: Installing binaries #"
 echo "############################"
 
+
+
 echo "#############################"
 echo "# START: Cloning track repo #"
 echo "#############################"
-
 
 # Pull Lab assets (terraform & scripts) from github
 mkdir /root/prosimo-lab/
@@ -39,6 +42,7 @@ cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/ass
 echo "###########################"
 echo "# END: Cloning track repo #"
 echo "###########################"
+
 
 
 # Run Python scripts
@@ -98,6 +102,8 @@ echo "############################################"
 echo "# END - Prosimo: Onboarding Cloud Accounts #"
 echo "############################################"
 
+
+
 echo "###################################################"
 echo "# START - Prosimo: Deploying Edge - AWS eu-west-1 #"
 echo "###################################################"
@@ -120,6 +126,8 @@ echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS eu-west-1 #"
 echo "#################################################"
 
+
+
 echo "###################################################"
 echo "# START - Prosimo: Deploying Edge - AWS us-east-1 #"
 echo "###################################################"
@@ -141,6 +149,7 @@ echo "Awake!!"
 echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS us-east-1 #"
 echo "#################################################"
+
 
 
 echo "##########################################################"
