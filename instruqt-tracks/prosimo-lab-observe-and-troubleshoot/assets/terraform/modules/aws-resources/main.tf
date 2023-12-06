@@ -9,7 +9,6 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 5.20.0"
-      
     }
   }
 }
@@ -29,9 +28,9 @@ resource "aws_vpc" "vpc1" {
 
 # Create a Subnet
 resource "aws_subnet" "subnet1" {
-  vpc_id     = aws_vpc.vpc1.id
-  cidr_block = var.aws_subnet_cidr
-  availability_zone       = "${data.aws_availability_zones.available.names[0]}"
+  vpc_id            = aws_vpc.vpc1.id
+  cidr_block        = var.aws_subnet_cidr
+  availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     "Name" = var.aws_subnet_name
   }
@@ -68,8 +67,8 @@ resource "aws_route" "route_igw" {
 
 #Create a Network Interface
 resource "aws_network_interface" "eth1" {
-  subnet_id = aws_subnet.subnet1.id
-  private_ips = [var.private_ip]
+  subnet_id       = aws_subnet.subnet1.id
+  private_ips     = [var.private_ip]
   security_groups = [aws_security_group.sg_allow_access_inbound.id]
   tags = {
     Name = "primary_network_interface"
@@ -78,8 +77,8 @@ resource "aws_network_interface" "eth1" {
 
 #Create a TGW conditionally
 resource "aws_ec2_transit_gateway" "tgw_demo" {
-count = var.tgw ? 1 : 0 
-description = "example"
+  count       = var.tgw ? 1 : 0
+  description = "example"
 }
 
 
@@ -153,33 +152,33 @@ resource "aws_key_pair" "demo_key_pair" {
   key_name   = var.aws_ec2_key_pair_name
   public_key = tls_private_key.demo_key.public_key_openssh
 
-  provisioner "local-exec"{
+  provisioner "local-exec" {
     command = "echo '${tls_private_key.demo_key.private_key_pem}' > ./${var.aws_ec2_key_pair_name}.pem"
   }
 }
 
 locals {
   user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
-    upstream_host = var.upstream_host
+    upstream_host  = var.upstream_host
     upstream_ports = var.upstream_ports
   })
 }
 
 # Create EC2 Instance
 resource "aws_instance" "ec2_linux" {
-  ami                         = data.aws_ami.amazon-linux-2-kernel-5.id
+  ami = data.aws_ami.amazon-linux-2-kernel-5.id
   network_interface {
-     network_interface_id = aws_network_interface.eth1.id
-     device_index = 0
+    network_interface_id = aws_network_interface.eth1.id
+    device_index         = 0
   }
-  depends_on = [ aws_key_pair.demo_key_pair ]
-  instance_type               = var.aws_ec2_instance_type
-  key_name                    = var.aws_ec2_key_pair_name
+  depends_on    = [aws_key_pair.demo_key_pair]
+  instance_type = var.aws_ec2_instance_type
+  key_name      = var.aws_ec2_key_pair_name
   tags = {
     "Name" = var.aws_ec2_name
   }
 
-  user_data              = "${local.user_data}"
+  user_data = local.user_data
 
 }
 

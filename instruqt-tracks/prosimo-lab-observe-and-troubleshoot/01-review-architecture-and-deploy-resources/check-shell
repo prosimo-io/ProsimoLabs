@@ -8,7 +8,7 @@
 
 echo "## Challenge 1 Check Script"
 
-cd /root/prosimo-lab/assets/terraform/
+cd /root/prosimo-lab/assets/terraform/lab_resources/
 
 TF_COUNT=$(terraform output | wc -l)
 if [ "$TF_COUNT" -ne 12 ]

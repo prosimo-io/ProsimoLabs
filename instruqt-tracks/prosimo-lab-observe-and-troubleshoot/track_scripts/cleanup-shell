@@ -1,14 +1,5 @@
 ##!/bin/bash
 
-cd /root/prosimo-lab/assets/terraform
-terraform init 
-sleep 5
-terraform destroy --auto-approve -target=module.aws__instances_eu
-sleep 5
-terraform destroy --auto-approve -target=module.aws__instances_us
-sleep 5
-terraform destroy --auto-approve -target=module.azure_instances_eu
-sleep 5
-terraform destroy -auto-approve -target=module.prosimo_resource_aws
-sleep 5
-terraform destroy -auto-approve -target=module.prosimo_resource_azure
+echo "################################################"
+echo "# START - Commencing Lab Cleanup - NUKE IT ALL #"
+echo "################################################"

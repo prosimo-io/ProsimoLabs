@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~> 3.71.0"
     }
 
@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "rg_iac" {
 # tls for ssh key
 resource "tls_private_key" "linux_vm_key" {
   algorithm = "RSA"
-  rsa_bits = 4096
+  rsa_bits  = 4096
 }
 
 # save key in our machine
@@ -26,9 +26,9 @@ resource "azurerm_ssh_public_key" "example" {
   resource_group_name = azurerm_resource_group.rg_iac.name
   location            = azurerm_resource_group.rg_iac.location
   public_key          = tls_private_key.linux_vm_key.public_key_openssh
-  provisioner "local-exec"{
-  command = "echo '${tls_private_key.linux_vm_key.private_key_pem}' > ./${var.azure_server_key_pair_name}.pem"
-}
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.linux_vm_key.private_key_pem}' > ./${var.azure_server_key_pair_name}.pem"
+  }
 }
 # Create a VNet
 resource "azurerm_virtual_network" "vnet_1" {
@@ -51,10 +51,10 @@ resource "azurerm_subnet" "subnet_1" {
 
 # Create a Public IP
 resource "azurerm_public_ip" "ip_1" {
-  allocation_method = "Static"
-  name = "public_ip_1"
+  allocation_method   = "Static"
+  name                = "public_ip_1"
   resource_group_name = azurerm_resource_group.rg_iac.name
-  location = azurerm_resource_group.rg_iac.location
+  location            = azurerm_resource_group.rg_iac.location
 }
 
 # Create a Network Interface
@@ -67,7 +67,7 @@ resource "azurerm_network_interface" "nic_1" {
     subnet_id                     = azurerm_subnet.subnet_1.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.azure_private_ip
-    public_ip_address_id = azurerm_public_ip.ip_1.id
+    public_ip_address_id          = azurerm_public_ip.ip_1.id
   }
   depends_on = [
     azurerm_virtual_network.vnet_1,
@@ -83,29 +83,29 @@ locals {
 
 # Create a VM
 resource "azurerm_linux_virtual_machine" "vm_1" {
-  name                = var.azure_instance_name
-  location            = azurerm_resource_group.rg_iac.location
-  resource_group_name = azurerm_resource_group.rg_iac.name
-  size             = var.azure_vm_size
+  name                  = var.azure_instance_name
+  location              = azurerm_resource_group.rg_iac.location
+  resource_group_name   = azurerm_resource_group.rg_iac.name
+  size                  = var.azure_vm_size
   network_interface_ids = [azurerm_network_interface.nic_1.id]
-  admin_username = "linuxuser"
-  custom_data = base64encode(local.custom_data)
+  admin_username        = "linuxuser"
+  custom_data           = base64encode(local.custom_data)
   admin_ssh_key {
     username   = "linuxuser"
     public_key = tls_private_key.linux_vm_key.public_key_openssh
   }
   os_disk {
-  caching = "ReadWrite"
-  storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
   }
 
   source_image_reference {
-  publisher = "Canonical"
-  offer = "UbuntuServer"
-  sku = "16.04-LTS"
-  version = "latest"
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "16.04-LTS"
+    version   = "latest"
   }
-  
+
   depends_on = [
     azurerm_network_interface.nic_1,
     tls_private_key.linux_vm_key

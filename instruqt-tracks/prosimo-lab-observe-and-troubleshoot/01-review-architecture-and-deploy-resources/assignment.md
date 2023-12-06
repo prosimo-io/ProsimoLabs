@@ -17,6 +17,10 @@ tabs:
   type: code
   hostname: shell
   path: /root/prosimo-lab
+- title: Editor - DevMode
+  type: code
+  hostname: shell
+  path: /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/
 - title: AWS Console
   type: browser
   hostname: aws
@@ -77,11 +81,6 @@ Select "IAM Account" and enter the **AWS ID**:
 
 # AZURE Credentials ☁️
 
-**AZURE SUBSCRIPTION**
-```
-[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID" hostname="shell" ]]
-```
-
 **AZURE USERNAME**
 ```
 [[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_USERNAME" hostname="shell" ]]
@@ -98,30 +97,18 @@ Select "IAM Account" and enter the **AWS ID**:
 
 Now that you've logged into the cloud providers consoles its time to deploy resources for upcoming Instruqt Challenges:
 
-### 1. Deploy AWS resources in EU
-
-Apply the resources:
-
-```
-cd ~/prosimo-lab/assets/terraform
-terraform apply --auto-approve  -target=module.aws__instances_eu -target=aws_ec2_transit_gateway.eu_west_tgw
-```
-
-### 2. Deploy AWS resources in the US
-
-Apply the resources:
-
-```
-terraform apply --auto-approve -target=module.aws__instances_us
+```sh
+terraform apply -auto-approve \
+ -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
+ -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
+ -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
+ -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} \
+ -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
 ```
 
-### 3. Deploy Azure resources in North Europe
+You are now deploying the dev and prod servers in each of the three regions, as show in the Lab Diagram.
 
-Apply the resources:
-
-```
-terraform apply --auto-approve -target=module.azure_instances_eu
-```
 
 ## 4) Create Admin User to your Prosimo Dashboard
 ===

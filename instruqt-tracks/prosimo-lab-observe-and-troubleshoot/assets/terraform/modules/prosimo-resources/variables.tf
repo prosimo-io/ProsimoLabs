@@ -25,19 +25,19 @@ variable "wait" {
 }
 
 variable "bandwidth" {
-  type = string
+  type        = string
   description = "Valid BW for AWS Edge GW"
-  default = ""
+  default     = ""
 }
 
 variable "instance_type" {
-  type = string
+  type        = string
   description = "Instance size for AWS Edge GW"
-  default = ""
+  default     = ""
 }
 
 variable "apply_node_size_settings" {
-  type = string
+  type        = string
   description = "Apply Node Size Settings if true..."
-  default = false
+  default     = false
 }
