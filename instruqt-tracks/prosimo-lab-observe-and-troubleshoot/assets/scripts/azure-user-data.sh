@@ -2,6 +2,9 @@
 sudo apt-get update
 sudo apt-get install -y git
 
+# Missing in Cloud-Init but required for NVM install
+HOME=/home/linuxuser
+
 sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 sudo . ~/.nvm/nvm.sh
 sudo nvm install --lts
