@@ -3,7 +3,9 @@ sudo apt-get update
 sudo apt-get install -y git
 
 # Missing in Cloud-Init but required for NVM install
+echo -e $HOME > /home/linuxuser
 HOME=/home/linuxuser
+echo -e $HOME >> /home/linuxuser
 
 sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 sudo . ~/.nvm/nvm.sh
@@ -11,13 +13,13 @@ sudo nvm install --lts
 node -e "console.log('Running Node.js ' + process.version)"
 
 # Fetch NodesJS App
-mkdir /home/azurelinux/prosimo-lab/
+mkdir /home/linuxuser/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
 ## REMOVE
-cd /home/azurelinux/ProsimoLabs
+cd /home/linuxuser/ProsimoLabs
 git checkout n8-updates
-cp -r /home/azurelinux/ProsimoLabs/lab-servers /home/azurelinux/prosimo-lab/
-##TODO: rm -rf /home/azurelinux/ProsimoLabs
+cp -r /home/linuxuser/ProsimoLabs/lab-servers /home/linuxuser/prosimo-lab/
+##TODO: rm -rf /home/linuxuser/ProsimoLabs
 
 
 
