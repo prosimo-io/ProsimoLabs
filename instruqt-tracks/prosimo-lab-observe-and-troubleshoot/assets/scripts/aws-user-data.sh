@@ -1,13 +1,26 @@
 #! /bin/bash
 sudo yum update -y && ## << Fixes 'Yum lock error'
 sudo touch /home/ec2-user/USERDATA_EXECUTED
-yum install -y httpd.x86_64
-systemctl start httpd.service
-systemctl enable httpd.service
-echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
+yum install -y git node
+#yum install -y httpd.x86_64
+#systemctl start httpd.service
+#systemctl enable httpd.service
+#echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
 
-sudo yum -y install iperf3
+#Install NVM/Node
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+sudo . ~/.nvm/nvm.sh
+sudo nvm install --lts
+node -e "console.log('Running Node.js ' + process.version)"
 
+# Fetch NodesJS App
+mkdir /home/ec2-user/prosimo-lab/
+git clone https://github.com/prosimo-io/ProsimoLabs.git
+## REMOVE
+cd /home/ec2-user/ProsimoLabs
+git checkout n8-updates
+cp -r /home/ec2-user/ProsimoLabs/lab-servers /home/ec2-user/prosimo-lab/
+##TODO: rm -rf /home/ec2-user/ProsimoLabs
 
 # Create Traffic generator script for each port.
 
