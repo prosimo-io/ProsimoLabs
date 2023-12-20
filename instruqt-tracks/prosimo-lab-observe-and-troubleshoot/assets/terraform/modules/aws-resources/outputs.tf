@@ -12,5 +12,5 @@ output "aws_vpc_id" {
 }
 
 output "ssh_access" {
-  value = "${var.aws_ec2_name} - ${aws_instance.ec2_linux.private_ip} => ssh -i '~/prosimo-lab/assets/terraform/${var.aws_ec2_key_pair_name}.pem' ec2-user@${aws_eip.eip.public_ip}"
+  value = "${var.aws_ec2_name} - ${aws_instance.ec2_linux.private_ip} => ssh -i './${var.aws_ec2_key_pair_name}.pem' ec2-user@${aws_eip.eip.public_ip}"
 }
