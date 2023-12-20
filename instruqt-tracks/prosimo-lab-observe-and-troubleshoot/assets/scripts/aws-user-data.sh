@@ -7,11 +7,10 @@ yum install -y git node
 #systemctl enable httpd.service
 #echo “Hello Prosimo MCN fans and Welcome” > /var/www/html/index.html
 
-#Install NVM/Node
-sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-sudo . ~/.nvm/nvm.sh
-sudo nvm install --lts
-node -e "console.log('Running Node.js ' + process.version)"
+#Install Node
+# install nodejs 20
+sudo yum install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
+sudo yum install nsolid -y
 
 # Fetch NodesJS App
 mkdir /home/ec2-user/prosimo-lab/
