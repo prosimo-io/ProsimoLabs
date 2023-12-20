@@ -89,7 +89,7 @@ data "aws_ami" "amazon-linux-2-kernel-5" {
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["amzn2-ami-kernel-5*"]
+    values = ["al2023-ami-kernel-6*"]
   }
 }
 
