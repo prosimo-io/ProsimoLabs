@@ -83,15 +83,16 @@ resource "aws_ec2_transit_gateway" "tgw_demo" {
 
 
 
-# Get latest AWS Linux AMI
-data "aws_ami" "amazon-linux-2-kernel-5" {
+# Get latest AWS Linux AMI 2023
+data "aws_ami" "amazon-linux-2023" {
   most_recent = true
   owners      = ["amazon"]
   filter {
     name   = "name"
-    values = ["al2023-ami-kernel-6*"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 }
+
 
 # Create Security Group
 resource "aws_security_group" "sg_allow_access_inbound" {
@@ -160,13 +161,13 @@ resource "aws_key_pair" "demo_key_pair" {
 locals {
   user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
     upstream_host  = var.upstream_host
-    upstream_ports = var.upstream_ports
+    upstream_port = var.upstream_port
   })
 }
 
 # Create EC2 Instance
 resource "aws_instance" "ec2_linux" {
-  ami = data.aws_ami.amazon-linux-2-kernel-5.id
+  ami = data.aws_ami.amazon-linux-2023.id
   network_interface {
     network_interface_id = aws_network_interface.eth1.id
     device_index         = 0

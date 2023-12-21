@@ -13,7 +13,7 @@ module "aws__instances_eu" {
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
-  upstream_ports        = each.value["upstream_ports"]
+  upstream_port        = each.value["upstream_port"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -34,7 +34,7 @@ module "aws__instances_us" {
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
-  upstream_ports        = each.value["upstream_ports"]
+  upstream_port        = each.value["upstream_ports"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -55,7 +55,7 @@ module "azure_instances_eu" {
   azure_vnet_name            = each.value["azure_vnet_name"]
   azure_subnet_name          = each.value["azure_subnet_name"]
   azure_instance_name        = each.value["azure_instance_name"]
-  server_ports               = each.value["server_ports"]
+  server_port                = each.value["server_port"]
   azure_private_ip           = each.value["azure_private_ip"]
   azure_server_key_pair_name = each.value["azure_server_key_pair_name"]
   azure_vm_size              = "Standard_DS1_v2"

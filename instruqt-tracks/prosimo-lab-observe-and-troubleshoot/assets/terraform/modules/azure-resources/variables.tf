@@ -48,9 +48,9 @@ variable "azure_instance_name" {
   type        = string
 }
 
-variable "server_ports" {
-  description = "server_ports"
-  type        = list(string)
+variable "server_port" {
+  description = "server_port"
+  type        = string
 }
 
 variable "azure_vm_size" {

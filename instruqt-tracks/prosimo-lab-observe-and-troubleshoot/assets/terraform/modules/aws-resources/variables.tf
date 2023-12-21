@@ -38,9 +38,9 @@ variable "upstream_host" {
   type        = string
 }
 
-variable "upstream_ports" {
-  description = "upstream_ports"
-  type        = list(string)
+variable "upstream_port" {
+  description = "upstream_port"
+  type        = string
 }
 
 variable "aws_ec2_instance_type" {

@@ -45,27 +45,3 @@ WantedBy=multi-user.target
 EOT'
 
 sudo systemctl start lab-api-server.service
-
-## 
-## %{ for port in server_ports ~}
-## sudo bash -c 'cat <<"EOT" > /etc/systemd/system/iperf-server-${port}.service 
-## [Unit]
-## Description=iperf3 Server ${port}
-## After=network.target
-## 
-## [Service]
-## Type=simple
-## Restart=on-failure
-## RestartSec=1
-## User=linuxuser
-## ExecStart=/usr/bin/iperf3 -s -p ${port} 
-## 
-## [Install]
-## WantedBy=multi-user.target
-## EOT'
-## %{ endfor ~}
-## 
-## 
-## %{ for port in server_ports ~}
-## sudo systemctl start iperf-server-${port}.service
-## %{ endfor ~}

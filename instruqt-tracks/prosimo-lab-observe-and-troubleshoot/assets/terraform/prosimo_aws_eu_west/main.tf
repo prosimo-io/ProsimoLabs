@@ -35,8 +35,6 @@ module "prosimo_resource_aws_eu_west" {
   prosimo_cidr             = var.prosimo_cidr
   cloud                    = "AWS"
   cloud1                   = "Prosimo_AWS"
-  bandwidth                = "<1 Gbps"
-  instance_type            = "t3.medium"
   multipleRegion           = var.aws_region
   wait                     = "false"
 }

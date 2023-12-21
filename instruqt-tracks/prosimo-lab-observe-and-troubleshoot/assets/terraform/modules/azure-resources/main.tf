@@ -77,7 +77,7 @@ resource "azurerm_network_interface" "nic_1" {
 
 locals {
   custom_data = templatefile("/root/prosimo-lab/assets/scripts/azure-user-data.sh", {
-    server_ports = var.server_ports
+    server_port = var.server_port
   })
 }
 
@@ -100,10 +100,10 @@ resource "azurerm_linux_virtual_machine" "vm_1" {
   }
 
   source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
-    version   = "latest"
+    offer       = "0001-com-ubuntu-server-focal"
+    publisher   = "Canonical"
+    sku         = "20_04-lts-gen2"
+    version     = "latest"
   }
 
   depends_on = [
