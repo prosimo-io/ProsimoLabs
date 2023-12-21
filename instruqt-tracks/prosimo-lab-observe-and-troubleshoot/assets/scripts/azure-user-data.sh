@@ -12,21 +12,40 @@ sudo apt-get update && sudo apt-get install nodejs -y
 
 # Fetch NodesJS App
 mkdir /home/linuxuser/prosimo-lab/
+sudo chown linuxuser:linuxuser /home/linuxuser/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
 ## REMOVE
 cd /home/linuxuser/ProsimoLabs
 git checkout n8-updates
 cp -r /home/linuxuser/ProsimoLabs/lab-servers /home/linuxuser/prosimo-lab/
+sudo chown -R linuxuser:linuxuser /home/linuxuser/prosimo-lab/
 ##TODO: rm -rf /home/linuxuser/ProsimoLabs
+cd /home/linuxuser/prosimo-lab/lab-servers/middleware
+npm install
 
 
+# Create Systemd Unit for Traffic generator script, for each port.
 
-## sudo apt-get install -y apache2
-## sudo systemctl start apache2
-## sudo systemctl enable apache2
-## echo "<h1>Hello Prosimo MCN fans and Welcome</h1>" | sudo tee /var/www/html/index.html
-## 
-## sudo apt install iperf3 -y
+sudo bash -c 'cat <<"EOT" > /etc/systemd/system/lab-api-server.service
+[Unit]
+Description=Prosimo Labs API Server
+After=network.target
+
+[Service]
+Environment="PORT=3000"
+Type=simple
+Restart=on-failure
+RestartSec=1
+User=linuxuser
+WorkingDirectory=/home/linuxuser/prosimo-lab/lab-servers/middleware
+ExecStart=/usr/bin/node .
+
+[Install]
+WantedBy=multi-user.target
+EOT'
+
+sudo systemctl start lab-api-server.service
+
 ## 
 ## %{ for port in server_ports ~}
 ## sudo bash -c 'cat <<"EOT" > /etc/systemd/system/iperf-server-${port}.service 
