@@ -110,14 +110,7 @@ resource "aws_security_group" "sg_allow_access_inbound" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = [
-      "10.0.0.0/24",
-      "10.1.0.0/24",
-      "10.2.0.0/24",
-      "10.3.0.0/24",
-      "10.5.0.0/24",
-      "10.6.0.0/24"
-    ]
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
     description = "Allow all incoming ICMP IPv4 traffic "
@@ -160,7 +153,8 @@ resource "aws_key_pair" "demo_key_pair" {
 
 locals {
   user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
-    upstream_host  = var.upstream_host
+    lab_version   = var.lab_version
+    upstream_host = var.upstream_host
     upstream_port = var.upstream_port
   })
 }
