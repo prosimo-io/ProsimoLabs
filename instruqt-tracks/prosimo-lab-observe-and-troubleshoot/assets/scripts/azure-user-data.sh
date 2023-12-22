@@ -13,10 +13,11 @@ sudo apt-get update && sudo apt-get install nodejs -y
 # Fetch NodesJS App
 mkdir /home/linuxuser/prosimo-lab/
 sudo chown linuxuser:linuxuser /home/linuxuser/prosimo-lab/
+cd /home/linuxuser
 git clone https://github.com/prosimo-io/ProsimoLabs.git
 ## REMOVE
 cd /home/linuxuser/ProsimoLabs
-git checkout n8-updates
+git checkout ${lab_version}
 cp -r /home/linuxuser/ProsimoLabs/lab-servers /home/linuxuser/prosimo-lab/
 sudo chown -R linuxuser:linuxuser /home/linuxuser/prosimo-lab/
 ##TODO: rm -rf /home/linuxuser/ProsimoLabs
