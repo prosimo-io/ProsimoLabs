@@ -10,4 +10,7 @@ echo "This is the setup script"
 
 set-workdir /root/prosimo-lab/assets/terraform/lab_resources/
 
+cd /root/prosimo-lab/assets/terraform/lab_resources/
+terraform init
+
 exit 0
