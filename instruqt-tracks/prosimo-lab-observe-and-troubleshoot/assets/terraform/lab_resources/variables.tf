@@ -1,3 +1,8 @@
+variable "lab_version" {
+  type = string
+  description = "Release Version (GitHub Tag) of this Lab"
+}
+
 variable "prosimo_team_name" {
   type        = string
   description = "valid name of the tenant"

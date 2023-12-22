@@ -1,3 +1,5 @@
+lab_version = "n8-updates"
+
 aws_region = [
   "eu-west-1",
   "us-east-1",

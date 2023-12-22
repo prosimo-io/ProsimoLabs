@@ -5,6 +5,7 @@ module "aws__instances_eu" {
   providers = {
     aws = aws.eu-west-1
   }
+  lab_version           = var.lab_version
   for_each              = var.EU_West_FrontEnd
   aws_region            = var.aws_region[0]
   aws_vpc_name          = each.value["aws_vpc_name"]
@@ -26,6 +27,7 @@ module "aws__instances_us" {
   providers = {
     aws = aws.us-east-1
   }
+  lab_version           = var.lab_version
   for_each              = var.US_East_FrontEnd
   aws_region            = var.aws_region[1]
   aws_vpc_name          = each.value["aws_vpc_name"]
@@ -34,7 +36,7 @@ module "aws__instances_us" {
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
-  upstream_port        = each.value["upstream_ports"]
+  upstream_port        = each.value["upstream_port"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -49,6 +51,7 @@ module "azure_instances_eu" {
   providers = {
     azurerm = azurerm.eun
   }
+  lab_version                = var.lab_version
   for_each                   = var.North_EU_AppSvcs_VNets
   azure_resource_group       = each.value["azure_resource_group"]
   azure_location             = "North Europe"

@@ -77,6 +77,7 @@ resource "azurerm_network_interface" "nic_1" {
 
 locals {
   custom_data = templatefile("/root/prosimo-lab/assets/scripts/azure-user-data.sh", {
+    lab_version = var.lab_version
     server_port = var.server_port
   })
 }

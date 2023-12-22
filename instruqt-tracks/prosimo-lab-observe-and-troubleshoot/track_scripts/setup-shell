@@ -35,7 +35,7 @@ mkdir /root/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
 ## REMOVE
 cd /root/ProsimoLabs
-git checkout n8-updates
+git checkout $TRACK_VERSION
 cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
 ## rm -r /root/ProsimoLabs
 
@@ -66,6 +66,7 @@ echo "################################"
 
 # Set env variables
 
+echo "export TRACK_VERSION=${TRACK_VERSION} " >> /root/.basrc
 echo "export TF_VAR_aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} " >> /root/.bashrc
 echo "export TF_VAR_aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} " >> /root/.bashrc
 echo "export INPUT_ENV_VAR_NAME=${INSTRUQT_USER_EMAIL}" >> /root/.bashrc

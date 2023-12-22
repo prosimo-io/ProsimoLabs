@@ -1,4 +1,9 @@
 ## Input variable definitions
+variable "lab_version" {
+  description = "Lab Release Version (github tag)"
+  type = string
+}
+
 # AWS
 
 variable "aws_region" {
