@@ -1,0 +1,71 @@
+<html>
+<body>
+
+<img src="/Prosimo-Labs-Banner-Generic.png">
+
+<div style="padding:10%">
+  <h2>Users:</h2>
+  <ul id="userListOutput"></ul>
+</div>
+  
+<div style="padding:10%">
+  <h2>API Server Status:</h2>
+  <div id="statusOutput">Attempting to reach upstream API...</div>
+</div>
+
+<script>
+const apiUrl = '/api';
+const apiUsersUrl = '/api/users';
+const usersOutputElement = document.getElementById('usersOutput')
+const satusOutputElement = document.getElementById('statusOutput')
+
+fetchData(apiUrl)
+.then(data => {
+  if (typeof data !== 'undefined' && isJson(data)) {
+    satusOutputElement.innerText = JSON.stringify(data, null, 2)
+  }
+  else {
+    satusOutputElement.innerText = `Upstream Service "${apiUrl}" sent garbage.`
+  }
+})
+
+fetchData(apiUsersUrl)
+.then(data => {
+  if (typeof data !== 'undefined' && isJson(data)) {
+    let userList = document.getElementById('userListOutput')
+    data.forEach(element => { 
+      console.log(element.name);
+      let li = document.createElement('li')
+      li.innerHTML = `<a href=/api/user/${element.name}/repos>${element.name}</a>`;
+      userList.appendChild(li);
+    }) 
+  }
+  else {
+    usersOutputElement.innerText = `Upstream Service "${apiUrl}" sent garbage.`
+  }
+})
+
+async function fetchData(path) {
+  try {
+    const response = await fetch(path)
+    const data = await response.json()
+    return data
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return JSON.parse(`{"Status": "Error reaching Message Router", "Message": "Something went really wrong. Blame the network!"}`)
+  }
+}
+
+function isJson(str) {
+  try {
+    JSON.parse(JSON.stringify(str))
+  } catch (error) {
+    console.error(`EROOR: trying to parse JSON: ${error}`)
+    return false
+  }
+  return true
+}
+</script>
+
+</body>
+</html>

@@ -1,4 +1,9 @@
 ## Input variable definitions
+variable "lab_version" {
+  description = "Lab Release Version (github tag)"
+  type = string
+}
+
 # AWS
 
 variable "aws_region" {
@@ -38,9 +43,9 @@ variable "upstream_host" {
   type        = string
 }
 
-variable "upstream_ports" {
-  description = "upstream_ports"
-  type        = list(string)
+variable "upstream_port" {
+  description = "upstream_port"
+  type        = string
 }
 
 variable "aws_ec2_instance_type" {

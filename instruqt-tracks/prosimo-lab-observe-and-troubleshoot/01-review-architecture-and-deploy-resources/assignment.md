@@ -99,6 +99,7 @@ Now that you've logged into the cloud providers consoles its time to deploy reso
 
 ```sh
 terraform apply -auto-approve \
+ -var lab_version=${TRACK_VERSION} \
  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
  -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \

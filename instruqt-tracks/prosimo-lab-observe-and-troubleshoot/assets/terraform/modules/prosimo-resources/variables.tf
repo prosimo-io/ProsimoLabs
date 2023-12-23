@@ -30,14 +30,8 @@ variable "bandwidth" {
   default     = ""
 }
 
-variable "instance_type" {
-  type        = string
-  description = "Instance size for AWS Edge GW"
-  default     = ""
-}
-
-variable "apply_node_size_settings" {
-  type        = string
-  description = "Apply Node Size Settings if true..."
-  default     = false
-}
+#variable "instance_type" {
+#  type        = string
+#  description = "Instance size for AWS Edge GW"
+#  default     = ""
+#}
