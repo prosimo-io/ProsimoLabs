@@ -1,5 +1,5 @@
 variable "lab_version" {
-  type = string
+  type        = string
   description = "Release Version (GitHub Tag) of this Lab"
 }
 

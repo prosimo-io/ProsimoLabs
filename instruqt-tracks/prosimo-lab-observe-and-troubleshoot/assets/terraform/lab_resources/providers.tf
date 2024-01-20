@@ -24,21 +24,21 @@ provider "prosimo" {
 
 
 provider "aws" {
-  region                   = "eu-west-1"
-  alias                    = "eu-west-1"
-#  shared_credentials_files = ["./credentials"]
+  region = "eu-west-1"
+  alias  = "eu-west-1"
+  #  shared_credentials_files = ["./credentials"]
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_key_id
-  profile                  = "default"
+  profile    = "default"
 }
 
 provider "aws" {
-  region                   = "us-east-1"
-  alias                    = "us-east-1"
-#  shared_credentials_files = ["./credentials"]
+  region = "us-east-1"
+  alias  = "us-east-1"
+  #  shared_credentials_files = ["./credentials"]
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_key_id
-  profile                  = "default"
+  profile    = "default"
 }
 
 #provider "aws" {

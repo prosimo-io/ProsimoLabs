@@ -14,7 +14,7 @@ module "aws__instances_eu" {
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
-  upstream_port        = each.value["upstream_port"]
+  upstream_port         = each.value["upstream_port"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -36,7 +36,7 @@ module "aws__instances_us" {
   tgw                   = "false"
   aws_ec2_name          = each.value["aws_ec2_name"]
   upstream_host         = each.value["upstream_host"]
-  upstream_port        = each.value["upstream_port"]
+  upstream_port         = each.value["upstream_port"]
   aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
 
   aws_vpc_cidr    = each.value["aws_vpc_cidr"]
@@ -77,27 +77,3 @@ resource "aws_ec2_transit_gateway" "eu_west_tgw" {
     Name = "TGW"
   }
 }
-
-/*
-# Onboard Networks to Prosimo Fabric
-
-module "network_eu" {
-  source = "./modules/prosimo-network"
-  prosimo_team_name = var.prosimo_team_name
-  prosimo_token = var.prosimo_token
-  name         = "WEB_Subnet_EU"
-  region       = var.aws_region[0]
-  subnets      = var.subnet_cidr[0]
-  connectivity_type  = "vpc-peering"
-  placement    = "Workload VPC"
-  cloud        = "AWS"
-  cloud_type   = "public"
-  connect_type  = "private"
-  vpc          = module.aws__instances_eu.aws_vpc_id
-  cloud_creds_name= "Prosimo"
-  decommission = "false"
-  onboard      = "true"
-  depends_on   = [ module.prosimo_resource ] 
-}
-
-*/
