@@ -5,12 +5,12 @@ resource "prosimo_edge" "edge" {
   wait_for_rollout = var.wait
   ip_range         = var.prosimo_cidr
   node_size_settings {
-    bandwidth     = "<1 Gbps"
-    instance_type = "t3.medium"
-#    bandwidth_range { # Ready for provider upgrade
-#      min = 1
-#      max = 1
-#    }  
+#    bandwidth     = "<1 Gbps"
+#    instance_type = "t3.medium"
+    bandwidth_range { # Ready for provider upgrade
+      min = 1
+      max = 1
+    }  
   }
   deploy_edge       = true
   decommission_edge = false
