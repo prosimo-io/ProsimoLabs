@@ -2,15 +2,13 @@
 resource "prosimo_edge" "edge" {
   cloud_name       = var.cloud1
   cloud_region     = var.multipleRegion
-  wait_for_rollout = var.wait
+#  wait_for_rollout = var.wait
   ip_range         = var.prosimo_cidr
   node_size_settings {
-#    bandwidth     = "<1 Gbps"
-#    instance_type = "t3.medium"
-    bandwidth_range { # Ready for provider upgrade
+    bandwidth_range {
       min = 1
       max = 1
-    }  
+    }
   }
   deploy_edge       = true
   decommission_edge = false
