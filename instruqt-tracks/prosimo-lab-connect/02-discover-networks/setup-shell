@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+echo "This is the setup script"
+
+# Run Python scripts
+echo "\n\n### Running Auto-Refresh NOW"
+python3 /root/prosimo-lab/assets/scripts/auto_refresh.py > /root/prosimo-lab/auto_refresh.log
+sleep 10
+echo "### Auto-Refresh Complete\n\n"
+
+set-workdir /root/prosimo-lab
+
+exit 0
