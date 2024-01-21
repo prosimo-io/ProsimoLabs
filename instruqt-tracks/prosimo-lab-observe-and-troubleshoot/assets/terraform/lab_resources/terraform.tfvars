@@ -1,76 +1,11 @@
-lab_version = "n8-updates"
+lab_version = "n8-updates" // Add this to setup-shell: https://stackoverflow.com/questions/17414104/git-checkout-latest-tag
 
 aws_region = [
   "eu-west-1",
   "us-east-1",
 ]
 
-## subnet_cidr = [
-##   "10.0.0.0/24",
-##   "10.1.0.0/24",
-## ]
 
-## cloud_type = "AWS"
-
-US_East_FrontEnd = {
-  VPC1 = {
-    aws_vpc_name          = "WebSvcsProdUs"
-    igw_name              = "WebSvcsProdUs-IGW"
-    rt_name               = "WebSvcsProdUs-RT"
-    aws_subnet_name       = "WebSvcsProdUs-subnet"
-    aws_private_ip        = "10.2.0.100"
-    aws_ec2_name          = "WebServerProdUs1"
-    upstream_host         = "10.0.0.100"
-    upstream_port         = "3000"
-    aws_ec2_key_pair_name = "US_EAST_WebSvcsProd"
-    aws_vpc_cidr          = "10.2.0.0/16"
-    aws_subnet_cidr       = "10.2.0.0/24"
-  },
-
-  VPC2 = {
-    aws_vpc_name          = "WebSvcsDevUs"
-    igw_name              = "WebSvcsDevUs-IGW"
-    rt_name               = "WebSvcsDevUs-RT"
-    aws_subnet_name       = "WebSvcsDevUs-subnet"
-    aws_private_ip        = "10.3.0.100"
-    aws_ec2_name          = "WebServerDevUs1"
-    upstream_host         = "10.1.0.100"
-    upstream_port         = "3000"
-    aws_ec2_key_pair_name = "US_EAST_WebSvcsDev"
-    aws_vpc_cidr          = "10.3.0.0/16"
-    aws_subnet_cidr       = "10.3.0.0/24"
-  }
-}
-
-EU_West_FrontEnd = {
-  VPC1 = {
-    aws_vpc_name          = "WebSvcsProdEu"
-    igw_name              = "WebSvcsProdEu-IGW"
-    rt_name               = "WebSvcsProdEu-RT"
-    aws_subnet_name       = "WebSvcsProdEu-Subnet"
-    aws_private_ip        = "10.4.0.100"
-    aws_ec2_name          = "WebServerProdEu1"
-    upstream_host         = "10.0.0.100"
-    upstream_port         = "3000"
-    aws_ec2_key_pair_name = "EU_WEST_WebSvcsProd"
-    aws_vpc_cidr          = "10.4.0.0/16"
-    aws_subnet_cidr       = "10.4.0.0/24"
-  },
-
-  VPC2 = {
-    aws_vpc_name          = "WebSvcsDevEu"
-    igw_name              = "WebSvcsDevEu-IGW"
-    rt_name               = "WebSvcsDevEu-RT"
-    aws_subnet_name       = "WebSvcsDevEu-Subnet"
-    aws_private_ip        = "10.5.0.100"
-    aws_ec2_name          = "WebServerDevEu1"
-    upstream_host         = "10.1.0.100"
-    upstream_port         = "3000"
-    aws_ec2_key_pair_name = "EU_WEST_WebSvcsDev"
-    aws_vpc_cidr          = "10.5.0.0/16"
-    aws_subnet_cidr       = "10.5.0.0/24"
-  }
-}
 
 North_EU_AppSvcs_VNets = {
   Vnet1 = {

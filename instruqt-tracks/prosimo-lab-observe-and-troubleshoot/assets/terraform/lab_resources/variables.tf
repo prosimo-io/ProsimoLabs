@@ -64,22 +64,6 @@ variable "US_East_FrontEnd" {
   }))
 }
 
-variable "EU_West_FrontEnd" {
-  type = map(object({
-    aws_vpc_name          = string
-    igw_name              = string
-    rt_name               = string
-    aws_subnet_name       = string
-    aws_private_ip        = string
-    aws_ec2_name          = string
-    upstream_host         = string
-    upstream_port         = string
-    aws_ec2_key_pair_name = string
-    aws_vpc_cidr          = string
-    aws_subnet_cidr       = string
-  }))
-}
-
 variable "North_EU_AppSvcs_VNets" {
   type = map(object({
     azure_resource_group       = string

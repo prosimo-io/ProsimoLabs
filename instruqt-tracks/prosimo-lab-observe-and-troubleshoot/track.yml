@@ -3,9 +3,11 @@ id: m2bwgkxkyndg
 title: Prosimo Lab - Observe and Troubleshoot
 teaser: Learn to Observe and Troubleshoot Multi-Cloud Networking.
 description: |-
-  A long description of the track.
+  In this lab you will:
 
-  You can use any GitHub flavoured markdown.
+    - learn how to observe multi-cloud networks
+    - inspect network traffic flow patterns and metrics
+    - troubleshoot and resolve multi-cloud network issues
 icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
 tags: []
 owner: prosimo
@@ -18,4 +20,4 @@ lab_config:
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "16656267083074998088"
+checksum: "8751841156762306525"

@@ -13,9 +13,9 @@ output "ssh_access_azure_eu" {
 }
 
 # Required for Prosimo Network On-boarding
-output "vpc_id_WebSvcsProdUs" {
-  value = values(module.aws__instances_us)[*].vpc_id
-}
+# output "vpc_id_WebSvcsProdUs" {
+#   value = values(module.aws__instances_us)[*].vpc_id
+# }
 
 # data.terraform_remote_state.lab_resources.vpc_id_<name>
 # data.terraform_remote_state.lab_resources.<tgw_id>

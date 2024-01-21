@@ -2,7 +2,7 @@
 resource "prosimo_edge" "edge" {
   cloud_name       = var.cloud1
   cloud_region     = var.multipleRegion
-#  wait_for_rollout = var.wait
+  wait_for_rollout = var.wait
   ip_range         = var.prosimo_cidr
   node_size_settings {
     bandwidth_range {
