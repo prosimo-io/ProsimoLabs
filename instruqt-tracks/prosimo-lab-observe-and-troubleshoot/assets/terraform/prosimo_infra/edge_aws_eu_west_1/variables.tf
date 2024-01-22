@@ -38,10 +38,10 @@ variable "cloud_name" {
   description = "Prosimo Edge - name of cloud e.g. 'Prosimo_AWS'"
 }
 
-variable "cloud_region" {
-  type        = string
-  description = "Prosimo Edge - name of cloud_region, e.g. 'us-east-1'"
-}
+#variable "cloud_region" {
+#  type        = string
+#  description = "Prosimo Edge - name of cloud_region, e.g. 'us-east-1'"
+#}
 
 variable "wait_for_rollout" {
   type        = bool
