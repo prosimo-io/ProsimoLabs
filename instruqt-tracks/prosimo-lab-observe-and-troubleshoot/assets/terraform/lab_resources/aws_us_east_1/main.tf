@@ -39,7 +39,7 @@ resource "prosimo_network_onboarding" "aws_us_east_1" {
   public_cloud {
     cloud_type = var.cloud_type
     connection_option = var.connection_option
-    cloud_creds_name = "prosimo-aws-iam" # Can this be any string??
+    cloud_creds_name = "Prosimo_AWS"
     region_name = var.aws_region # get from remote state file?
     cloud_networks {
       vpc = module.aws_us_east_1_vpc1.aws_vpc_id # data.terraform_remote_state.lab_resources.vpc_id_<name>
