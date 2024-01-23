@@ -1,7 +1,7 @@
 # Create VPC, Servers, and required resources
 
 module "aws_us_east_1_vpc1" {
-  source = "../modules/aws-resources"
+  source = "../../modules/aws-resources"
   lab_version           = var.lab_version
   aws_region            = var.aws_region
   aws_vpc_name          = var.VPC1.aws_vpc_name
@@ -17,7 +17,7 @@ module "aws_us_east_1_vpc1" {
 }
 
 module "aws_us_east_1_vpc2" {
-  source = "../modules/aws-resources"
+  source = "../../modules/aws-resources"
   lab_version           = var.lab_version
   aws_region            = var.aws_region
   aws_vpc_name          = var.VPC2.aws_vpc_name
