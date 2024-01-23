@@ -62,6 +62,10 @@ variable "VPC2" {
   }))
 }
 
+variable "lab_version" {
+    type = string
+}
+
 # Network Onboarding
 
 variable "network_name" {
