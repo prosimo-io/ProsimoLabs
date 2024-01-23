@@ -1,8 +1,7 @@
+# Create VPC, Servers, and required resources
+
 module "aws_eu_west_1_vpc1" {
   source = "../modules/aws-resources"
-#  providers = {
-#    aws = aws.eu-west-1
-#  }
   lab_version           = var.lab_version
   aws_region            = var.aws_region
   aws_vpc_name          = var.VPC1.aws_vpc_name
@@ -19,9 +18,6 @@ module "aws_eu_west_1_vpc1" {
 
 module "aws_eu_west_1_vpc2" {
   source = "../modules/aws-resources"
-#  providers = {
-#    aws = aws.eu-west-1
-#  }
   lab_version           = var.lab_version
   aws_region            = var.aws_region
   aws_vpc_name          = var.VPC2.aws_vpc_name
@@ -37,9 +33,9 @@ module "aws_eu_west_1_vpc2" {
 }
 
 
-resource "prosimo_network_onboarding" "aws_eu_west_1" {
+# Onboard VPC Networks to Prosimo Network
 
-#  depends_on = [ module.aws_eu_west_1_vpc1, module.aws_eu_west_1_vpc2 ]
+resource "prosimo_network_onboarding" "aws_eu_west_1" {
 
   name = var.network_name
   namespace = var.network_namespace
@@ -48,14 +44,30 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
     cloud_type = var.cloud_type
     connection_option = var.connection_option
     cloud_creds_name = "Prosimo_AWS"
-    region_name = var.aws_region # get from remote state file?
+    region_name = var.aws_region
     cloud_networks {
-      vpc = module.aws_eu_west_1_vpc1.aws_vpc_id # data.terraform_remote_state.lab_resources.vpc_id_<name>
+      vpc = module.aws_eu_west_1_vpc1.aws_vpc_id
       hub_id = module.aws_eu_west_1_vpc1.transit_gw_id
       connector_placement = "Infra VPC"
       connectivity_type = "transit-gateway"
       subnets {
-        subnet = var.VPC1.aws_subnet_cidr # data.terraform_remote_state.lab_resources.public_subnets[0]
+        subnet = var.VPC1.aws_subnet_cidr
+        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
+      }
+      connector_settings {
+        bandwidth_range {
+            min = 1
+            max = 1
+        }
+      }
+    }
+    cloud_networks {
+      vpc = module.aws_eu_west_1_vpc2.aws_vpc_id
+      hub_id = module.aws_eu_west_1_vpc2.transit_gw_id
+      connector_placement = "Infra VPC"
+      connectivity_type = "transit-gateway"
+      subnets {
+        subnet = var.VPC2.aws_subnet_cidr
         # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
       }
       connector_settings {
@@ -68,6 +80,7 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
     connect_type = "connector"
   }
   policies = ["ALLOW-ALL-NETWORKS"]
-  onboard_app = false
+  onboard_app = true
   decommission_app = false
+  wait_for_rollout = false
 }

@@ -12,7 +12,7 @@ output "aws_vpc_id" {
 }
 
 output "transit_gw_id" {
-  value = aws_ec2_transit_gateway.tgw_demo.id
+  value = aws_ec2_transit_gateway.tgw_demo[0].id
 }
 
 output "vpc_subnet" {

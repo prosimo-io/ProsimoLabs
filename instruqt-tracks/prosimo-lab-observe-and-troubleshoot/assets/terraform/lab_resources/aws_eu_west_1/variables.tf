@@ -71,11 +71,13 @@ variable "lab_version" {
 variable "network_name" {
   type        = string
   description = "Name of the Prosimo Network"
+  default     = "aws_eu_west_1"
 }
 
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "default"
 }
 
 variable "cloud_type" {
