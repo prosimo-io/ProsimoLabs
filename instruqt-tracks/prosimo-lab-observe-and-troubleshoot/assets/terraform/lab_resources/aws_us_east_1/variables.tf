@@ -25,7 +25,7 @@ variable "aws_secret_key_id" {
 variable "aws_region" {
   type        = string
   description = "Region for AWS resoruces"
-  default     = "eu-west-1"
+  default     = "us-eest-1"
 }
 
 # VPCs and Servers
@@ -71,11 +71,13 @@ variable "lab_version" {
 variable "network_name" {
   type        = string
   description = "Name of the Prosimo Network"
+  default     = "aws_us_east_1"
 }
 
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "default"
 }
 
 variable "cloud_type" {
