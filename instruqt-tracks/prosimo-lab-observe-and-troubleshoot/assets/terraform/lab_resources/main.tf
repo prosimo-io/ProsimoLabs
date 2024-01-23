@@ -47,11 +47,5 @@ module "azure_instances_eu" {
   azure_vnet_cidr   = each.value["azure_vnet_cidr"]
 }
 
-resource "aws_ec2_transit_gateway" "eu_west_tgw" {
-  #  provider = aws.eu-aws
-  provider    = aws.eu-west-1
-  description = "EU_WEST_TGW"
-  tags = {
-    Name = "TGW"
-  }
-}
+#cloud_creds_name = "Peosimo_Azure"
+
