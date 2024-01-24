@@ -35,7 +35,7 @@ module "aws_us_east_1_vpc2" {
 
 # Onboard VPC Networks to Prosimo Network
 
-resource "prosimo_network_onboarding" "aws_eu_west_1" {
+resource "prosimo_network_onboarding" "aws_us_east_1" {
 
   name = var.network_name
   namespace = var.network_namespace
@@ -46,8 +46,8 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
     cloud_creds_name = "Prosimo_AWS"
     region_name = var.aws_region
     cloud_networks {
-      vpc = module.aws_eu_west_1_vpc1.aws_vpc_id
-      hub_id = module.aws_eu_west_1_vpc1.transit_gw_id
+      vpc = module.aws_us_east_1_vpc1.aws_vpc_id
+      hub_id = module.aws_us_east_1_vpc1.transit_gw_id
       connector_placement = "Infra VPC"
       connectivity_type = "transit-gateway"
       subnets {
@@ -62,8 +62,8 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
       }
     }
     cloud_networks {
-      vpc = module.aws_eu_west_1_vpc2.aws_vpc_id
-      hub_id = module.aws_eu_west_1_vpc2.transit_gw_id
+      vpc = module.aws_us_east_1_vpc2.aws_vpc_id
+      hub_id = module.aws_us_east_1_vpc2.transit_gw_id
       connector_placement = "Infra VPC"
       connectivity_type = "transit-gateway"
       subnets {
