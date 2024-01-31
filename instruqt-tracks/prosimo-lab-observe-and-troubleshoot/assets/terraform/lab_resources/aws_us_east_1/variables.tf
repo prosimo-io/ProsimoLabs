@@ -31,7 +31,7 @@ variable "aws_region" {
 # VPCs and Servers
 
 variable "VPC1" {
-  type = map(object({
+  type = object({
     aws_vpc_name          = string
     igw_name              = string
     rt_name               = string
@@ -43,11 +43,11 @@ variable "VPC1" {
     aws_ec2_key_pair_name = string
     aws_vpc_cidr          = string
     aws_subnet_cidr       = string
-  }))
+  })
 }
 
 variable "VPC2" {
-  type = map(object({
+  type = object({
     aws_vpc_name          = string
     igw_name              = string
     rt_name               = string
@@ -59,7 +59,7 @@ variable "VPC2" {
     aws_ec2_key_pair_name = string
     aws_vpc_cidr          = string
     aws_subnet_cidr       = string
-  }))
+  })
 }
 
 variable "lab_version" {
