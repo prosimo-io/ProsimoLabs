@@ -1,12 +1,5 @@
 lab_version = "n8-updates" // Add this to setup-shell: https://stackoverflow.com/questions/17414104/git-checkout-latest-tag
 
-aws_region = [
-  "eu-west-1",
-  "us-east-1",
-]
-
-
-
 North_EU_AppSvcs_VNets = {
   Vnet1 = {
     azure_resource_group       = "AppSvcsProdEu"

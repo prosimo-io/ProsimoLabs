@@ -1,26 +1,3 @@
-# Create EC2 and Networking Infrastructure in AWS
-
-module "aws__instances_us" {
-  source = "../modules/aws-resources"
-  providers = {
-    aws = aws.us-east-1
-  }
-  lab_version           = var.lab_version
-  for_each              = var.US_East_FrontEnd
-  aws_region            = var.aws_region[1]
-  aws_vpc_name          = each.value["aws_vpc_name"]
-  aws_subnet_name       = each.value["aws_subnet_name"]
-  private_ip            = each.value["aws_private_ip"]
-  tgw                   = "false"
-  aws_ec2_name          = each.value["aws_ec2_name"]
-  upstream_host         = each.value["upstream_host"]
-  upstream_port         = each.value["upstream_port"]
-  aws_ec2_key_pair_name = each.value["aws_ec2_key_pair_name"]
-
-  aws_vpc_cidr    = each.value["aws_vpc_cidr"]
-  aws_subnet_cidr = each.value["aws_subnet_cidr"]
-
-}
 
 # Create Linux and Networking Infrastructure in Azure
 

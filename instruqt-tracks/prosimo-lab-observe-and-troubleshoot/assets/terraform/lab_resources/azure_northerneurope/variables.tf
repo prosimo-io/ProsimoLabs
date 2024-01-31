@@ -13,21 +13,6 @@ variable "prosimo_token" {
   description = "valid prosimo token - from MSP Portal"
 }
 
-variable "aws_region" {
-  type        = list(string)
-  description = "Region for AWS resoruces"
-}
-
-variable "aws_access_key_id" {
-  type        = string
-  description = "valid AWS Key"
-}
-
-variable "aws_secret_key_id" {
-  type        = string
-  description = "valid AWS Secret"
-}
-
 variable "azure_subscription_id" {
   type        = string
   description = "azure subscription id"
