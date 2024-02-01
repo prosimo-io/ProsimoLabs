@@ -38,7 +38,7 @@ module "aws_eu_west_1_vpc2" {
 resource "prosimo_network_onboarding" "aws_eu_west_1" {
 
   name = var.network_name
-  namespace = var.network_namespace
+  namespace = prosimo_namespace.namespace.name
   network_exportable_policy = false
   public_cloud {
     cloud_type = var.cloud_type
@@ -83,4 +83,8 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
   onboard_app = true
   decommission_app = false
   wait_for_rollout = false
+}
+
+resource "prosimo_namespace" "namespace" {
+    name = var.network_namespace
 }
