@@ -25,7 +25,7 @@ variable "aws_secret_key_id" {
 variable "aws_region" {
   type        = string
   description = "Region for AWS resoruces"
-  default     = "us-eest-1"
+  default     = "us-east-1"
 }
 
 # VPCs and Servers
