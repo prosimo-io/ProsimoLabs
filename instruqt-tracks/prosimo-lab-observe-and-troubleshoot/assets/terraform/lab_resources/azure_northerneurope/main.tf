@@ -1,4 +1,3 @@
-
 # Create Linux and Networking Infrastructure in Azure
 
 module "azure_instances_eu_vnet1" {
@@ -47,4 +46,3 @@ module "azure_instances_eu_vnet2" {
 
 
 #cloud_creds_name = "Peosimo_Azure"
-
