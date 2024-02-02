@@ -27,3 +27,28 @@ variable "azure_client_secret" {
   type        = string
   description = "azure client secret"
 }
+
+# Prosimo Edge Settings
+
+variable "cloud_name" {
+  type        = string
+  description = "Prosimo Edge - name of cloud e.g. 'Prosimo_AWS'"
+}
+
+variable "wait_for_rollout" {
+  type        = bool
+  description = "Wait for edge deployment to finish - might hit API timeout before complete so default to false"
+  default     = false
+}
+
+variable "azure_region" {
+  type        = string
+  description = "azure client secret"
+  default     = "northeurope"
+}
+
+variable "prosimo_cidr" {
+  type        = string
+  description = "valid subnets to assign to server"
+  default     = "10.253.0.0/23"
+}
