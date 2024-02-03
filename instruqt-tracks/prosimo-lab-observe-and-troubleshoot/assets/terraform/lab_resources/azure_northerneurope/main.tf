@@ -1,6 +1,6 @@
 # Create Linux and Networking Infrastructure in Azure
 
-module "azure_instances_eu_vnet1" {
+module "azure_northeurope_vnet1" {
   source = "../../modules/azure-resources"
   providers = {
     azurerm = azurerm.eun
@@ -22,7 +22,7 @@ module "azure_instances_eu_vnet1" {
   azure_vnet_cidr   = var.Vnet1.azure_vnet_cidr
 }
 
-module "azure_instances_eu_vnet2" {
+module "azure_northeurope_vnet2" {
   source = "../../modules/azure-resources"
   providers = {
     azurerm = azurerm.eun
@@ -45,4 +45,58 @@ module "azure_instances_eu_vnet2" {
 }
 
 
-#cloud_creds_name = "Peosimo_Azure"
+# Onboard VPC Networks to Prosimo Network
+
+resource "prosimo_network_onboarding" "azure_northeurope" {
+
+  name = var.network_name
+  namespace = prosimo_namespace.namespace.name
+  network_exportable_policy = false
+  public_cloud {
+    cloud_type = var.cloud_type
+    connection_option = var.connection_option
+    cloud_creds_name = "Prosimo_Azure"
+    region_name = var.azure_region
+    cloud_networks {
+      vnet = module.azure_northeurope_vnet1.azure_vnet_id
+#      hub_id = module.azure_northeurope_vnet1.transit_gw_id
+      connector_placement = "Infra VPC"
+      connectivity_type = "vnet-peering"
+      subnets {
+        subnet = var.Vnet1.azure_vnet_cidr
+        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
+      }
+      connector_settings {
+        bandwidth_range {
+            min = 1
+            max = 1
+        }
+      }
+    }
+    cloud_networks {
+      vnet = module.azure_northeurope_vnet2.azure_vnet_id
+#      hub_id = module.azure_northeurope_vnet2.transit_gw_id
+      connector_placement = "Infra VPC"
+      connectivity_type = "vnet-peering"
+      subnets {
+        subnet = var.Vnet2.azure_vnet_cidr
+        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
+      }
+      connector_settings {
+        bandwidth_range {
+            min = 1
+            max = 1
+        }
+      }
+    }
+    connect_type = "connector"
+  }
+  policies = ["ALLOW-ALL-NETWORKS"]
+  onboard_app = true
+  decommission_app = false
+  wait_for_rollout = false
+}
+
+resource "prosimo_namespace" "namespace" {
+    name = var.network_namespace
+}

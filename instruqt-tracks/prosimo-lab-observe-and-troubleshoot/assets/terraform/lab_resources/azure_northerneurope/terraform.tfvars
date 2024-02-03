@@ -32,3 +32,4 @@ Vnet2 = {
   azure_private_ip           = "10.1.0.100"
 }
 
+network_namespace = "northern_europe"

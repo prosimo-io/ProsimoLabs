@@ -43,7 +43,7 @@ variable "wait_for_rollout" {
 
 variable "azure_region" {
   type        = string
-  description = "azure client secret"
+  description = "azure region"
   default     = "northeurope"
 }
 

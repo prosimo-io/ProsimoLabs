@@ -1,7 +1,11 @@
 ## Output variable definitions
 
-output "ssh_access_azure_eu" {
-  value = values(module.azure_instances_eu)[*].ssh_access
+output "ssh_access_azure_eu1" {
+  value = module.azure_northeurope_vnet1.ssh_access
+}
+
+output "ssh_access_azure_eu2" {
+  value = module.azure_northeurope_vnet2.ssh_access
 }
 
 # Required for Prosimo Network On-boarding

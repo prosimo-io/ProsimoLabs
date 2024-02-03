@@ -33,6 +33,12 @@ variable "azure_tenant_id" {
   description = "azure tenant id"
 }
 
+variable "azure_region" {
+  type        = string
+  description = "azure region"
+  default     = "northeurope"
+}
+
 variable "Vnet1" {
   type = object({
     azure_resource_group       = string
@@ -67,4 +73,30 @@ variable "Vnet2" {
     azure_vnet_cidr            = string
     azure_admin_password       = string
   })
+}
+
+# Network Onboarding
+
+variable "network_name" {
+  type        = string
+  description = "Name of the Prosimo Network"
+  default     = "azure_northeurope"
+}
+
+variable "network_namespace" {
+  type        = string
+  description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "default"
+}
+
+variable "cloud_type" {
+  type        = string
+  description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "public"
+}
+
+variable "connection_option" {
+  type        = string
+  description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "private"
 }
