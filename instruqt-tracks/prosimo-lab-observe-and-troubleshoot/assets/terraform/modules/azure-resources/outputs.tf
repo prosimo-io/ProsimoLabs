@@ -12,5 +12,5 @@ output "azure_vnet_id" {
 }
 
 output "public_subnets" {
-  value = azurerm_subnet.subnet_1.azurerm_subnet
+  value = azurerm_subnet.subnet_1.address_prefixes
 }

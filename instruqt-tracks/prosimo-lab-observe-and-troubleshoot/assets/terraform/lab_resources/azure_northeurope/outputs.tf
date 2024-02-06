@@ -17,14 +17,9 @@ output "vnet2_id" {
 }
 
 output "vnet1_public_subnets" {
-  value = module.azure_northeurope_vnet1.public_subnets
+  value = module.azure_northeurope_vnet1.public_subnets[0]
 }
 
 output "vnet2_public_subnets" {
-  value = module.azure_northeurope_vnet2.public_subnets
+  value = module.azure_northeurope_vnet2.public_subnets[0]
 }
-
-
-# data.terraform_remote_state.lab_resources.vpc_id_<name>
-# data.terraform_remote_state.lab_resources.<tgw_id>
-# data.terraform_remote_state.lab_resources.public_subnets[0]

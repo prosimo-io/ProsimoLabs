@@ -15,12 +15,6 @@ locals {
   public_subnets1 = data.terraform_remote_state.lab_resources.vpc1_public_subnets
   public_subnets2 = data.terraform_remote_state.lab_resources.vpc2_public_subnets
 }
-/*
-Remote State Output List
-data.terraform_remote_state.lab_resources.vpc_id_<name>
-data.terraform_remote_state.lab_resources.<tgw_id>
-data.terraform_remote_state.lab_resources.public_subnets[0]
-*/
 
 #AWS with transit gateway and infra vpc
 # Onboard VPC Networks to Prosimo Network

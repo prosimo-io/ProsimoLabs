@@ -1,30 +1,5 @@
 # Onboard Networks to Prosimo Fabric
 
-/*
-module "network_eu" {
-  source            = "../modules/prosimo-network"
-  prosimo_team_name = var.prosimo_team_name
-  prosimo_token     = var.prosimo_token
-  name              = "WEB_Subnet_EU"
-  region            = var.aws_region[0]
-  subnets           = var.subnet_cidr[0]
-  connectivity_type = "vpc-peering"
-  placement         = "Workload VPC"
-  cloud             = "AWS"
-  cloud_type        = "public"
-  connect_type      = "private"
-  vpc               = module.aws__instances_eu.aws_vpc_id
-  cloud_creds_name  = "Prosimo"
-  decommission      = "false"
-  onboard           = "true"
-  depends_on        = [module.prosimo_resource]
-}
-*/
-
-
-// Remote Data Source
-// "../lab_resources/"
-
 data "terraform_remote_state" "lab_resources" {
   backend = "local"
   config = {

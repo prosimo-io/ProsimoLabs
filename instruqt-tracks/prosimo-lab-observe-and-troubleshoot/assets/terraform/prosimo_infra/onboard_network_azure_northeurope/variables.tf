@@ -43,12 +43,13 @@ variable "azure_tenant_id" {
 variable "network_name" {
   type        = string
   description = "Name of the Prosimo Network"
+  default     = "northern_europe1"
 }
 
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "northern_europe" 
+  default     = "frontend_northern_europe"
 }
 
 variable "cloud_type" {

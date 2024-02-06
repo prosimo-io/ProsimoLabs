@@ -16,7 +16,7 @@ output "transit_gw_id" {
 }
 
 output "vpc_subnet" {
-  value = aws_subnet.subnet1
+  value = aws_subnet.subnet1.cidr_block
 }
 
 output "ssh_access" {

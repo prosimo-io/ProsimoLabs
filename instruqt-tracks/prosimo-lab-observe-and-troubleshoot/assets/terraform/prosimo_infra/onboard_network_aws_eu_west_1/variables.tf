@@ -39,12 +39,13 @@ variable "azure_region" {
 variable "network_name" {
   type        = string
   description = "Name of the Prosimo Network"
+  default     = "eu_west_1"
 }
 
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "eu_west_1"
+  default     = "frontend_eu_west"
 }
 
 variable "cloud_type" {

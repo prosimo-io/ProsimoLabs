@@ -10,6 +10,7 @@ variable "prosimo_token" {
   description = "valid prosimo token - from MSP Portal"
 }
 
+
 # AWS Provider
 
 variable "aws_access_key_id" {
@@ -25,26 +26,22 @@ variable "aws_secret_key_id" {
 variable "aws_region" {
   type        = string
   description = "Region for AWS resoruces"
-  default     = "eu-west-1"
+  default     = "us-east-1"
 }
 
-variable "azure_region" {
-  type        = string
-  description = "azure region"
-  default     = "northeurope"
-}
 
 # Network Onboarding
 
 variable "network_name" {
   type        = string
   description = "Name of the Prosimo Network"
+  default     = "us_east_1" 
 }
 
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "us_east_1" 
+  default     = "frontend_us_east" 
 }
 
 variable "cloud_type" {
