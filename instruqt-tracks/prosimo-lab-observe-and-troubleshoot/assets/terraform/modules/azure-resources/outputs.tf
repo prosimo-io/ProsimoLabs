@@ -10,3 +10,7 @@ output "ssh_access" {
 output "azure_vnet_id" {
   value = azurerm_virtual_network.vnet_1.id
 }
+
+output "public_subnets" {
+  value = azurerm_subnet.subnet_1.azurerm_subnet
+}

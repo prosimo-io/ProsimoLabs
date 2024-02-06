@@ -10,22 +10,32 @@ variable "prosimo_token" {
   description = "valid prosimo token - from MSP Portal"
 }
 
-# AWS Provider
+# Azure Provider
 
-variable "aws_access_key_id" {
+variable "azure_region" {
   type        = string
-  description = "valid AWS Key"
+  description = "azure region"
+  default     = "northeurope"
 }
 
-variable "aws_secret_key_id" {
+variable "azure_subscription_id" {
   type        = string
-  description = "valid AWS Secret"
+  description = "azure subscription id"
 }
 
-variable "aws_region" {
+variable "azure_client_id" {
   type        = string
-  description = "Region for AWS resoruces"
-  default     = "eu-west-1"
+  description = "azure client id"
+}
+
+variable "azure_client_secret" {
+  type        = string
+  description = "azure client secret"
+}
+
+variable "azure_tenant_id" {
+  type        = string
+  description = "azure tenant id"
 }
 
 # Network Onboarding
@@ -38,6 +48,7 @@ variable "network_name" {
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
+  default     = "northern_europe" 
 }
 
 variable "cloud_type" {

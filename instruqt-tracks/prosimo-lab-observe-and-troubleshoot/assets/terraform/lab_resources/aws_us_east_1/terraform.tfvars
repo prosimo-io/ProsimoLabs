@@ -25,5 +25,3 @@ VPC2 = {
   aws_vpc_cidr          = "10.1.0.0/16"
   aws_subnet_cidr       = "10.1.0.0/24"
 }
-
-network_namespace = "us_east_1"

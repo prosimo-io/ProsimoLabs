@@ -1,15 +1,3 @@
-# Prosimo Provider
-
-variable "prosimo_team_name" {
-  type        = string
-  description = "valid name of the tenant"
-}
-
-variable "prosimo_token" {
-  type        = string
-  description = "valid prosimo token - from MSP Portal"
-}
-
 # AWS Provider
 
 variable "aws_access_key_id" {
@@ -64,30 +52,4 @@ variable "VPC2" {
 
 variable "lab_version" {
     type = string
-}
-
-# Network Onboarding
-
-variable "network_name" {
-  type        = string
-  description = "Name of the Prosimo Network"
-  default     = "aws_eu_west_1"
-}
-
-variable "network_namespace" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "default"
-}
-
-variable "cloud_type" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "public"
-}
-
-variable "connection_option" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "private"
 }
