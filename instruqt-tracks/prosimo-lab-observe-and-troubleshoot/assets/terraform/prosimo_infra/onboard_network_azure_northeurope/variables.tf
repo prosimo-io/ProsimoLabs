@@ -49,7 +49,7 @@ variable "network_name" {
 variable "network_namespace" {
   type        = string
   description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "frontend_northern_europe"
+  default     = "app_svcs_north_europe"
 }
 
 variable "cloud_type" {
