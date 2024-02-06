@@ -8,10 +8,10 @@ data "terraform_remote_state" "lab_resources" {
 }
 
 locals {
-  vnet1_id = data.terraform_remote_state.lab_resources.vnet1_id
-  vnet2_id = data.terraform_remote_state.lab_resources.vnet2_id
-  vnet1_public_subnets = data.terraform_remote_state.lab_resources.vnet1_public_subnets
-  vnet2_public_subnets = data.terraform_remote_state.lab_resources.vnet2_public_subnets
+  vnet1_id = data.terraform_remote_state.lab_resources.outputs.vnet1_id
+  vnet2_id = data.terraform_remote_state.lab_resources.outputs.vnet2_id
+  vnet1_public_subnets = data.terraform_remote_state.lab_resources.outputs.vnet1_public_subnets
+  vnet2_public_subnets = data.terraform_remote_state.lab_resources.outputs.vnet2_public_subnets
 }
 
 
