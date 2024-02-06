@@ -16,12 +16,8 @@ output "vpc2_id" {
   value = module.aws_eu_west_1_vpc2.aws_vpc_id
 }
 
-output "vpc1_transit_gw_id" {
-  value = module.aws_eu_west_1_vpc1.transit_gw_id
-}
-
-output "vpc2_transit_gw_id" {
-  value = module.aws_eu_west_1_vpc2.transit_gw_id
+output "tgw_eu_west_1" {
+  value = aws_ec2_transit_gateway.tgw_eu_west_1.id
 }
 
 output "vpc1_public_subnets" {

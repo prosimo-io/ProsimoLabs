@@ -10,8 +10,7 @@ data "terraform_remote_state" "lab_resources" {
 locals {
   vpc1_id = data.terraform_remote_state.lab_resources.outputs.vpc1_id
   vpc2_id = data.terraform_remote_state.lab_resources.outputs.vpc2_id
-  tgw1 = data.terraform_remote_state.lab_resources.outputs.vpc1_transit_gw_id
-  tgw2 = data.terraform_remote_state.lab_resources.outputs.vpc2_transit_gw_id
+  tgw_id = data.terraform_remote_state.lab_resources.outputs.tgw_eu_west_1
   public_subnets1 = data.terraform_remote_state.lab_resources.outputs.vpc1_public_subnets
   public_subnets2 = data.terraform_remote_state.lab_resources.outputs.vpc2_public_subnets
 }
@@ -31,7 +30,7 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
     region_name = var.aws_region
     cloud_networks {
       vpc = local.vpc1_id
-      hub_id = local.tgw1
+      hub_id = local.tgw_id
       connector_placement = "Infra VPC"
       connectivity_type = "transit-gateway"
       subnets {
@@ -47,7 +46,7 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
     }
     cloud_networks {
       vpc = local.vpc2_id
-      hub_id = local.tgw2
+      hub_id = local.tgw_id
       connector_placement = "Infra VPC"
       connectivity_type = "transit-gateway"
       subnets {

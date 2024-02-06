@@ -7,7 +7,6 @@ module "aws_eu_west_1_vpc1" {
   aws_vpc_name          = var.VPC1.aws_vpc_name
   aws_subnet_name       = var.VPC1.aws_subnet_name
   private_ip            = var.VPC1.aws_private_ip
-  tgw                   = true
   aws_ec2_name          = var.VPC1.aws_ec2_name
   upstream_host         = var.VPC1.upstream_host
   upstream_port         = var.VPC1.upstream_port
@@ -23,7 +22,6 @@ module "aws_eu_west_1_vpc2" {
   aws_vpc_name          = var.VPC2.aws_vpc_name
   aws_subnet_name       = var.VPC2.aws_subnet_name
   private_ip            = var.VPC2.aws_private_ip
-  tgw                   = true
   aws_ec2_name          = var.VPC2.aws_ec2_name
   upstream_host         = var.VPC2.upstream_host
   upstream_port         = var.VPC2.upstream_port
@@ -31,3 +29,9 @@ module "aws_eu_west_1_vpc2" {
   aws_vpc_cidr          = var.VPC2.aws_vpc_cidr
   aws_subnet_cidr       = var.VPC2.aws_subnet_cidr
 }
+
+#Create a TGW
+resource "aws_ec2_transit_gateway" "tgw_eu_west_1" {
+  description = "tgw_eu_west_1"
+}
+

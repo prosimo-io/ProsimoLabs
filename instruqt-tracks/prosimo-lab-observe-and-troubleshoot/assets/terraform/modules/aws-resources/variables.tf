@@ -64,11 +64,6 @@ variable "aws_ec2_key_pair_name" {
   type        = string
 }
 
-variable "tgw" {
-  description = "Conditional resource"
-  type        = bool
-}
-
 variable "igw_name" {
   description = "Name of IGW"
   default     = ""
