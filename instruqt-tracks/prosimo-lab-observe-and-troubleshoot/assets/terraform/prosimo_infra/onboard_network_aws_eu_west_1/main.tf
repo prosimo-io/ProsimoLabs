@@ -8,12 +8,12 @@ data "terraform_remote_state" "lab_resources" {
 }
 
 locals {
-  vpc1_id = data.terraform_remote_state.lab_resources.vpc1_id
-  vpc2_id = data.terraform_remote_state.lab_resources.vpc2_id
-  tgw1 = data.terraform_remote_state.lab_resources.vpc1_transit_gw_id
-  tgw2 = data.terraform_remote_state.lab_resources.vpc2_transit_gw_id
-  public_subnets1 = data.terraform_remote_state.lab_resources.vpc1_public_subnets
-  public_subnets2 = data.terraform_remote_state.lab_resources.vpc2_public_subnets
+  vpc1_id = data.terraform_remote_state.lab_resources.outputs.vpc1_id
+  vpc2_id = data.terraform_remote_state.lab_resources.outputs.vpc2_id
+  tgw1 = data.terraform_remote_state.lab_resources.outputs.vpc1_transit_gw_id
+  tgw2 = data.terraform_remote_state.lab_resources.outputs.vpc2_transit_gw_id
+  public_subnets1 = data.terraform_remote_state.lab_resources.outputs.vpc1_public_subnets
+  public_subnets2 = data.terraform_remote_state.lab_resources.outputs.vpc2_public_subnets
 }
 
 #AWS with transit gateway and infra vpc
