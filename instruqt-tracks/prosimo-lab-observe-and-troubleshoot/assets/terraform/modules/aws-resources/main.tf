@@ -75,14 +75,6 @@ resource "aws_network_interface" "eth1" {
   }
 }
 
-#Create a TGW conditionally
-resource "aws_ec2_transit_gateway" "tgw_demo" {
-  count       = var.tgw ? 1 : 0
-  description = "example"
-}
-
-
-
 # Get latest AWS Linux AMI 2023
 data "aws_ami" "amazon-linux-2023" {
   most_recent = true
@@ -92,7 +84,6 @@ data "aws_ami" "amazon-linux-2023" {
     values = ["al2023-ami-2023.*-x86_64"]
   }
 }
-
 
 # Create Security Group
 resource "aws_security_group" "sg_allow_access_inbound" {
