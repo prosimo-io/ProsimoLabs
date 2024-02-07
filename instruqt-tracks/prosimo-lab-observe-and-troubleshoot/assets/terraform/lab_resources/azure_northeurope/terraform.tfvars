@@ -11,9 +11,9 @@ Vnet1 = {
   azure_server_key_pair_name = "Azure_Srv1"
   azure_admin_username       = "igorlinux"
   azure_admin_password       = "igorlinux"
-  azure_subnet_cidr          = "10.0.0.0/24"
-  azure_vnet_cidr            = "10.0.0.0/16"
-  azure_private_ip           = "10.0.0.100"
+  azure_vnet_cidr            = "10.1.0.0/16"
+  azure_subnet_cidr          = "10.1.1.0/24"
+  azure_private_ip           = "10.1.1.100"
 }
 
 Vnet2 = {
@@ -27,7 +27,7 @@ Vnet2 = {
   azure_server_key_pair_name = "Azure_Srv2"
   azure_admin_username       = "igorlinux"
   azure_admin_password       = "igorlinux"
-  azure_subnet_cidr          = "10.1.0.0/24"
-  azure_vnet_cidr            = "10.1.0.0/16"
-  azure_private_ip           = "10.1.0.100"
+  azure_vnet_cidr            = "10.2.0.0/16"
+  azure_subnet_cidr          = "10.2.2.0/24"
+  azure_private_ip           = "10.2.2.100"
 }

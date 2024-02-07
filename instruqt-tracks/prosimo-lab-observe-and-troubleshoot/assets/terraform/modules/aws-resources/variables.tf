@@ -19,13 +19,11 @@ variable "aws_vpc_name" {
 variable "aws_vpc_cidr" {
   description = "CIDR block for VPC"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
 variable "aws_subnet_cidr" {
   description = "Subnet CIDR"
   type        = string
-  default     = "10.0.1.0/24"
 }
 
 variable "aws_subnet_name" {

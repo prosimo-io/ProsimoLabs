@@ -34,13 +34,11 @@ variable "azure_server_key_pair_name" {
 variable "azure_vnet_cidr" {
   description = "CIDR block for VPC"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
 variable "azure_subnet_cidr" {
   description = "Subnet CIDR"
   type        = string
-  default     = "10.0.1.0/24"
 }
 
 variable "azure_subnet_name" {
