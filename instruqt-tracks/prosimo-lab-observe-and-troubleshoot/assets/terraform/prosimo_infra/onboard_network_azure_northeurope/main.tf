@@ -55,7 +55,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
       connectivity_type = "vnet-peering"
       subnets {
         subnet = local.vnet1_public_subnets
-        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
+        virtual_subnet = "192.168.1.0/24"
       }
       connector_settings {
         bandwidth_range {
@@ -70,7 +70,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
       connectivity_type = "vnet-peering"
       subnets {
         subnet = local.vnet2_public_subnets
-        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
+        virtual_subnet = "192.168.2.0/24"
       }
       connector_settings {
         bandwidth_range {
