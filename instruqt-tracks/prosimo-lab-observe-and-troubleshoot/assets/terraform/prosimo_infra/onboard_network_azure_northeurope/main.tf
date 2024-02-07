@@ -15,6 +15,28 @@ locals {
 }
 
 
+## Build Transit
+
+# Transit Setup to create edge connection with TGW and VPC
+resource "prosimo_visual_transit" "eu_west_1" {
+  transit_input {
+    cloud_type   = "AWS"  
+    cloud_region = var.azure_region
+    transit_deployment {
+      vnets {
+        action = "ADD"
+        name = "AppSvcsProdEu_Vnet"
+      }
+      vnets {
+        action = "ADD"
+        name = "AppSvcsDevEu_Vnet"
+      }
+    }
+  }
+  deploy_transit_setup = true
+}
+
+
 # Onboard Azure Networks with VNET Peering
 
 resource "prosimo_network_onboarding" "azure_northeurope" {

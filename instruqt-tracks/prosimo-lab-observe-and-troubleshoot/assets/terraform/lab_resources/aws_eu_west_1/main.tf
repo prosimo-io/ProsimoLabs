@@ -32,6 +32,9 @@ module "aws_eu_west_1_vpc2" {
 
 #Create a TGW
 resource "aws_ec2_transit_gateway" "tgw_eu_west_1" {
-  description = "tgw_eu_west_1"
+  description = "TWG eu-west-1"
+  tags = {
+    Name = "tgw_eu_west_1"
+  }
 }
 

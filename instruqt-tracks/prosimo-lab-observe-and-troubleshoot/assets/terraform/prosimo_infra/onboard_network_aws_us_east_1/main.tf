@@ -15,10 +15,44 @@ locals {
   public_subnets2 = data.terraform_remote_state.lab_resources.outputs.vpc2_public_subnets
 }
 
+
+## Build Transit
+
+# Transit Setup to create edge connection with TGW and VPC
+resource "prosimo_visual_transit" "eu_west_1" {
+  transit_input {
+    cloud_type   = "AWS"  
+    cloud_region = var.aws_region
+    transit_deployment {
+      tgws {
+        name = "tgw_us_east_1"
+        action = "MOD"
+        connection {
+          type = "EDGE"
+          action = "ADD"
+        }
+        connection {
+          type = "VPC"
+          action = "ADD"
+          name = "WebSvcsUs1"
+        }
+        connection {
+          type = "VPC"
+          action = "ADD"
+          name = "WebSvcsUs2"
+        }
+      }
+    }
+  }
+  deploy_transit_setup = true
+}
+
+
 #AWS with transit gateway and infra vpc
 # Onboard VPC Networks to Prosimo Network
 
 resource "prosimo_network_onboarding" "aws_us_east_1" {
+  depends_on = [ prosimo_visual_transit.eu_west_1 ]
 
   name = var.network_name
   namespace = prosimo_namespace.namespace.name
