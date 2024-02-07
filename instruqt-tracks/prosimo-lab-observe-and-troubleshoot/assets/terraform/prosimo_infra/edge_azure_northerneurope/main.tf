@@ -1,14 +1,4 @@
-# module "prosimo_resource_azure" {
-#   source           = "../../modules/prosimo-resources"
-#   prosimo_teamName = var.prosimo_team_name
-#   prosimo_token    = var.prosimo_token
-#   prosimo_cidr     = "10.253.0.0/23"
-#   cloud            = "AZURE"
-#   cloud1           = "Prosimo_Azure"
-#   multipleRegion   = "northeurope"
-#   wait             = "false"
-# 
-# }
+# Deploy Prsimo Edge on Azure
 
 resource "prosimo_edge" "edge" {
   cloud_name       = var.cloud_name
