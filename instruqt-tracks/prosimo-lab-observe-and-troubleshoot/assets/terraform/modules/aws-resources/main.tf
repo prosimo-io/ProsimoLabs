@@ -87,7 +87,7 @@ data "aws_ami" "amazon-linux-2023" {
 
 # Create Security Group
 resource "aws_security_group" "sg_allow_access_inbound" {
-  name   = "sc_allow_ssh"
+  name   = "frontnet_allow"
   vpc_id = aws_vpc.vpc1.id
   ingress {
     description = "ssh"
@@ -102,20 +102,6 @@ resource "aws_security_group" "sg_allow_access_inbound" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "Allow all incoming ICMP IPv4 traffic "
-    from_port   = -1
-    to_port     = -1
-    protocol    = "icmp"
-    cidr_blocks = [
-      "10.0.0.0/24",
-      "10.1.0.0/24",
-      "10.2.0.0/24",
-      "10.3.0.0/24",
-      "10.5.0.0/24",
-      "10.6.0.0/24"
-    ]
   }
   egress {
     from_port   = 0
