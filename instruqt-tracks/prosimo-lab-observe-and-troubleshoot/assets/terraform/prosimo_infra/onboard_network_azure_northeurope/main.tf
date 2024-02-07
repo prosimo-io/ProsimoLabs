@@ -51,7 +51,6 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
     region_name = "northeurope"
     cloud_networks {
       vnet = local.vnet1_id
-#      hub_id = module.azure_northeurope_vnet1.transit_gw_id
       connector_placement = "Infra VPC"
       connectivity_type = "vnet-peering"
       subnets {
@@ -67,7 +66,6 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
     }
     cloud_networks {
       vnet = local.vnet2_id
-#      hub_id = module.azure_northeurope_vnet2.transit_gw_id
       connector_placement = "Infra VPC"
       connectivity_type = "vnet-peering"
       subnets {
