@@ -18,9 +18,9 @@ locals {
 ## Build Transit
 
 # Transit Setup to create edge connection with TGW and VPC
-resource "prosimo_visual_transit" "eu_west_1" {
+resource "prosimo_visual_transit" "northeurope" {
   transit_input {
-    cloud_type   = "AWS"  
+    cloud_type   = "AZURE"  
     cloud_region = var.azure_region
     transit_deployment {
       vnets {
