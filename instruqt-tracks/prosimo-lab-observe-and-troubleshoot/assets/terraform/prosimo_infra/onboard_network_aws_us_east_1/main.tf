@@ -19,7 +19,7 @@ locals {
 ## Build Transit
 
 # Transit Setup to create edge connection with TGW and VPC
-resource "prosimo_visual_transit" "eu_west_1" {
+resource "prosimo_visual_transit" "us_east_1" {
   transit_input {
     cloud_type   = "AWS"  
     cloud_region = var.aws_region
@@ -52,7 +52,7 @@ resource "prosimo_visual_transit" "eu_west_1" {
 # Onboard VPC Networks to Prosimo Network
 
 resource "prosimo_network_onboarding" "aws_us_east_1" {
-  depends_on = [ prosimo_visual_transit.eu_west_1 ]
+  depends_on = [ prosimo_visual_transit.us_east_1 ]
 
   name = var.network_name
   namespace = prosimo_namespace.namespace.name
