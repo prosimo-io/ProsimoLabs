@@ -3,15 +3,6 @@ variable "lab_version" {
   description = "Release Version (GitHub Tag) of this Lab"
 }
 
-variable "prosimo_team_name" {
-  type        = string
-  description = "valid name of the tenant"
-}
-
-variable "prosimo_token" {
-  type        = string
-  description = "valid prosimo token - from MSP Portal"
-}
 
 variable "azure_subscription_id" {
   type        = string
@@ -73,30 +64,4 @@ variable "Vnet2" {
     azure_vnet_cidr            = string
     azure_admin_password       = string
   })
-}
-
-# Network Onboarding
-
-variable "network_name" {
-  type        = string
-  description = "Name of the Prosimo Network"
-  default     = "azure_northeurope"
-}
-
-variable "network_namespace" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "default"
-}
-
-variable "cloud_type" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "public"
-}
-
-variable "connection_option" {
-  type        = string
-  description = "Name of the Prosimo Namespace to on-board network into"
-  default     = "private"
 }

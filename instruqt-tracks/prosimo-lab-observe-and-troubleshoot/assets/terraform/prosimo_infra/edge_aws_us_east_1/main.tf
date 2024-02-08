@@ -1,4 +1,3 @@
-
 # Deploy Prosimo Edge on AWS
 
 resource "prosimo_edge" "edge" {

@@ -69,7 +69,6 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
       connectivity_type = "transit-gateway"
       subnets {
         subnet = local.public_subnets1
-        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
       }
       connector_settings {
         bandwidth_range {
@@ -85,7 +84,6 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
       connectivity_type = "transit-gateway"
       subnets {
         subnet = local.public_subnets2
-        # virtual_subnet = "10.250.2.128/25" # Required for overlapping IP
       }
       connector_settings {
         bandwidth_range {

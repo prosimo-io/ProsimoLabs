@@ -27,9 +27,3 @@ output "vpc1_public_subnets" {
 output "vpc2_public_subnets" {
   value = module.aws_eu_west_1_vpc2.vpc_subnet
 }
-
-
-
-# data.terraform_remote_state.lab_resources.vpc_id_<name>
-# data.terraform_remote_state.lab_resources.<tgw_id>
-# data.terraform_remote_state.lab_resources.public_subnets[0]

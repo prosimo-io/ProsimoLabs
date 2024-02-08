@@ -30,7 +30,9 @@ module "aws_us_east_1_vpc2" {
   aws_subnet_cidr       = var.VPC2.aws_subnet_cidr
 }
 
+
 #Create a TGW
+
 resource "aws_ec2_transit_gateway" "tgw_us_east_1" {
   description = "TGW us-east-1"
   tags = {

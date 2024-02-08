@@ -1,5 +1,3 @@
-lab_version = "n8-updates" // Add this to setup-shell: https://stackoverflow.com/questions/17414104/git-checkout-latest-tag
-
 Vnet1 = {
   azure_resource_group       = "AppSvcsProdEu"
   azure_location             = "North Europe"
