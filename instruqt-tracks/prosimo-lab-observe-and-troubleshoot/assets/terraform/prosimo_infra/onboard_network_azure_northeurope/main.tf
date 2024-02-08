@@ -40,6 +40,7 @@ resource "prosimo_visual_transit" "northeurope" {
 # Onboard Azure Networks with VNET Peering
 
 resource "prosimo_network_onboarding" "azure_northeurope" {
+  depends_on = [ prosimo_visual_transit.northeurope ]
 
   name = var.network_name
   namespace = prosimo_namespace.namespace.name
