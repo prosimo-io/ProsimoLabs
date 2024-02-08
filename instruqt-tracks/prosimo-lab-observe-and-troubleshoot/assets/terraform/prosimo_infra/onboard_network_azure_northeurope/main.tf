@@ -44,7 +44,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
 
   name = var.network_name
   namespace = prosimo_namespace.namespace.name
-  network_exportable_policy = false
+  network_exportable_policy = true
   public_cloud {
     cloud_type = var.cloud_type
     connection_option = var.connection_option
