@@ -23,13 +23,8 @@ cat <<EOT > /etc/httpd/conf.d/prosimo-lab.conf
 </VirtualHost>
 EOT
 
-
-# Install NodeJS 20
-#sudo yum install https://rpm.nodesource.com/pub_20.x/nodistro/repo/nodesource-release-nodistro-1.noarch.rpm -y
-#sudo yum install nsolid -y
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash -
-. ~/.nvm/nvm.sh
-nvm install --lts
+# Install NodeJS 18
+sudo dnf install nodejs -y
 
 # Fetch NodesJS App
 mkdir /home/ec2-user/prosimo-lab/
@@ -67,5 +62,6 @@ ExecStart=/usr/bin/node .
 WantedBy=multi-user.target
 EOT'
 
+sudo systemctl daemon-reload
 sudo systemctl start lab-message-router
 sudo systemctl start httpd
