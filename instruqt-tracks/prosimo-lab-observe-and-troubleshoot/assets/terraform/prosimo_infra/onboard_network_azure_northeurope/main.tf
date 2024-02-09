@@ -56,7 +56,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
       connectivity_type = "vnet-peering"
       subnets {
         subnet = local.vnet1_public_subnets
-        virtual_subnet = "192.168.1.0/24"
+#        virtual_subnet = "192.168.1.0/24"
       }
       connector_settings {
         bandwidth_range {
@@ -71,7 +71,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
       connectivity_type = "vnet-peering"
       subnets {
         subnet = local.vnet2_public_subnets
-        virtual_subnet = "192.168.2.0/24"
+#        virtual_subnet = "192.168.2.0/24"
       }
       connector_settings {
         bandwidth_range {
@@ -90,4 +90,8 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
 
 resource "prosimo_namespace" "namespace" {
     name = var.network_namespace
+    export {
+        source_network = var.network_name
+        namespaces = [ "eu_west_1", "us_east_1" ]
+    }
 }
