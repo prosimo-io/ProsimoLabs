@@ -26,7 +26,7 @@ tabs:
   hostname: prosimo-tenant
 - title: Lab Diagram
   type: website
-  url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/prosimo-io/ProsimoLabs/main/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets/images/Prosimo_Lab_Architecture.html
+  url: https://htmlpreview.github.io/?https://raw.githubusercontent.com/prosimo-io/ProsimoLabs/main/instruqt-tracks/prosimo-lab-connect/assets/images/Prosimo_Lab_Architecture.html
 difficulty: basic
 timelimit: 3600
 ---

@@ -33,11 +33,18 @@ echo "#############################"
 # Pull Lab assets (terraform & scripts) from github
 mkdir /root/prosimo-lab/
 git clone https://github.com/prosimo-io/ProsimoLabs.git
-## REMOVE
+
 cd /root/ProsimoLabs
+if [ -z $TRACK_VERSION ]; then
+  echo "TRACK_VERSION was not set, fetching latest release.."
+  TRACK_VERSION=`git describe --tags "$(git rev-list --tags --max-count=1)"`
+  echo "TRACH_VERSION is: $TRACK_VERSION"
+fi
 git checkout $TRACK_VERSION
-cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
-## rm -r /root/ProsimoLabs
+cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-connect/assets /root/prosimo-lab/
+cp -r /root/ProsimoLabs/resources/scripts /root/prosimo-lab/assets/
+cp -r /root/ProsimoLabs/resources/terraform /root/prosimo-lab/assets/
+rm -r /root/ProsimoLabs
 
 echo "###########################"
 echo "# END: Cloning track repo #"
@@ -53,7 +60,6 @@ echo "# START: Creating Prosimo Tenant #"
 echo "##################################"
 
 python3 /root/prosimo-lab/assets/scripts/tenant_deploy.py
-#python3 assets/scripts/tenant_deploy.py
 echo "Sleeping for 5 mins for tenant creation propagation..."
 sleep 300
 
@@ -104,6 +110,8 @@ echo "# END - Prosimo: Onboarding Cloud Accounts #"
 echo "############################################"
 
 
+##################### Deploy Prosimo Edge's #####################
+
 
 echo "###################################################"
 echo "# START - Prosimo: Deploying Edge - AWS eu-west-1 #"
@@ -120,35 +128,11 @@ terraform apply --auto-approve \
  -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
 
 echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
+sleep 300
 echo "Awake!!"
 
 echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS eu-west-1 #"
-echo "#################################################"
-
-
-
-echo "###################################################"
-echo "# START - Prosimo: Deploying Edge - AWS us-east-1 #"
-echo "###################################################"
-
-cd /root/prosimo-lab/assets/terraform/prosimo_aws_us_east/
-terraform init
-sleep 10
-
-terraform apply --auto-approve \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
- -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
- -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
-
-echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
-echo "Awake!!"
-
-echo "#################################################"
-echo "# END - Prosimo: Deploying Edge - AWS us-east-1 #"
 echo "#################################################"
 
 
@@ -172,6 +156,3 @@ terraform apply --auto-approve \
 echo "########################################################"
 echo "# END - Prosimo: Deploying Edge - Azure northerneurope #"
 echo "########################################################"
-
-# Set AWS creds
-cp ~/.aws/credentials /root/prosimo-lab/assets/terraform
