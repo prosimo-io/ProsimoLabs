@@ -16,10 +16,6 @@ tabs:
   type: code
   hostname: shell
   path: /root/prosimo-lab
-- title: Editor - DevMode
-  type: code
-  hostname: shell
-  path: /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/
 - title: AWS Console
   type: browser
   hostname: aws

@@ -38,12 +38,13 @@ cd /root/ProsimoLabs
 #TODO: // Add this to env LAB_VERSION: https://stackoverflow.com/questions/17414104/git-checkout-latest-tag
 if [ -z $TRACK_VERSION ]; then
   echo "TRACK_VERSION was not set, fetching latest release.."
-  TRACK_VERSION=git describe --tags "$(git rev-list --tags --max-count=1)"
+  TRACK_VERSION=`git describe --tags "$(git rev-list --tags --max-count=1)"`
   echo "TRACH_VERSION is: $TRACK_VERSION"
 fi
-# $LATEST_RELEASE=git describe --tags "$(git rev-list --tags --max-count=1)"
 git checkout $TRACK_VERSION
 cp -r /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/assets /root/prosimo-lab/
+cp -r /root/ProsimoLabs/resources/scripts /root/prosimo-lab/assets/
+cp -r /root/ProsimoLabs/resources/terraform /root/prosimo-lab/assets/
 rm -r /root/ProsimoLabs
 
 echo "###########################"
@@ -60,9 +61,8 @@ echo "# START: Creating Prosimo Tenant #"
 echo "##################################"
 
 python3 /root/prosimo-lab/assets/scripts/tenant_deploy.py
-#python3 assets/scripts/tenant_deploy.py
 echo "Sleeping for 5 mins for tenant creation propagation..."
-# sleep 300 #FIXME: Add this back in after testing.
+sleep 300
 
 echo "Awake!!"
 
@@ -96,19 +96,21 @@ terraform init
 sleep 10
 
 terraform apply --auto-approve \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
- -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
- -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
- -var azure_subscription_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID \
- -var azure_tenant_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID \
- -var azure_client_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID \
- -var azure_client_secret=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
+ -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
+ -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
+ -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
+ -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
+ -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
 
 echo "############################################"
 echo "# END - Prosimo: Onboarding Cloud Accounts #"
 echo "############################################"
 
+
+##################### Deploy Prosimo Edge's #####################
 
 
 echo "###################################################"
@@ -120,45 +122,20 @@ terraform init
 sleep 10
 
 terraform apply --auto-approve \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
- -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
- -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
+ -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
  -var cloud_name="Prosimo_AWS"
 
-echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
+echo "Sleeping 5 mins before next Prosimo Edge deploy..."
+sleep 300
 echo "Awake!!"
 
 echo "#################################################"
 echo "# END - Prosimo: Deploying Edge - AWS eu-west-1 #"
 echo "#################################################"
 
-
-echo "########################################################"
-echo "# START - Prosimo: Onboarding Networks - AWS eu-west-1 #"
-echo "########################################################"
-
-cd /root/prosimo-lab/assets/terraform/lab_resources/aws_eu_west_1
-terraform init
-sleep 10
-
-terraform apply -auto-approve \
- -var lab_version=${TRACK_VERSION} \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
- -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
- -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
-
-echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
-echo "Awake!!"
-
-echo "######################################################"
-echo "# END - Prosimo: Onboarding Networks - aws-us-east-1 #"
-echo "######################################################"
-
- 
 
 echo "###################################################"
 echo "# START - Prosimo: Deploying Edge - AWS us-east-1 #"
@@ -169,13 +146,14 @@ terraform init
 sleep 10
 
 terraform apply --auto-approve \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
- -var aws_access_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID \
- -var aws_secret_key_id=$INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
+ -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
+ -var cloud_name="Prosimo_AWS"
 
-echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
+echo "Sleeping 5 mins before next Prosimo Edge deploy..."
+sleep 300
 echo "Awake!!"
 
 echo "#################################################"
@@ -183,49 +161,103 @@ echo "# END - Prosimo: Deploying Edge - AWS eu-west-1 #"
 echo "#################################################"
 
 
-echo "########################################################"
-echo "# START - Prosimo: Onboarding Networks - AWS us-east-1 #"
-echo "########################################################"
+echo "##########################################################"
+echo "# START - Prosimo: Deploying Edge - Azure northerneurope #"
+echo "##########################################################"
 
-cd /root/prosimo-lab/assets/terraform/lab_resources/aws_us_east_1
+cd /root/prosimo-lab/assets/terraform/prosimo_infra/edge_azure_northerneurope/
 terraform init
 sleep 10
 
+terraform apply --auto-approve \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
+ -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
+ -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
+ -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
+ -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} \
+ -var cloud_name="Prosimo_Azure"
+
+echo "########################################################"
+echo "# END - Prosimo: Deploying Edge - Azure northerneurope #"
+echo "########################################################"
+
+
+##################### Deploy Lab Resources / App #####################
+
+
+echo "################################################"
+echo "# START - Deploy Lab Resources - AWS eu-west-1 #"
+echo "################################################"
+
+cd /root/prosimo-lab/assets/terraform/lab_resources/aws_eu_west_1
+terraform init
+sleep 5
+
 terraform apply -auto-approve \
  -var lab_version=${TRACK_VERSION} \
- -var prosimo_token=$TF_VAR_prosimo_token \
- -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
- -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
 
-echo "Sleeping 10 mins before next Prosimo Edge deploy..."
-sleep 600
+echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
+sleep 60
 echo "Awake!!"
 
-echo "######################################################"
-echo "# END - Prosimo: Onboarding Networks - aws-us-east-1 #"
-echo "######################################################"
+echo "##############################################"
+echo "# END - Deploy Lab Resources - AWS eu-west-1 #"
+echo "##############################################"
 
 
-# echo "##########################################################"
-# echo "# START - Prosimo: Deploying Edge - Azure northerneurope #"
-# echo "##########################################################"
-# 
-# cd /root/prosimo-lab/assets/terraform/prosimo_infra/edge_azure_northerneurope/
-# terraform init
-# sleep 10
-# 
-# terraform apply --auto-approve \
-#  -var prosimo_token=$TF_VAR_prosimo_token \
-#  -var prosimo_team_name=$INSTRUQT_PARTICIPANT_ID \
-#  -var azure_subscription_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID \
-#  -var azure_tenant_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID \
-#  -var azure_client_id=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID \
-#  -var azure_client_secret=$INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD
-# 
-# echo "########################################################"
-# echo "# END - Prosimo: Deploying Edge - Azure northerneurope #"
-# echo "########################################################"
-# 
-# # Set AWS creds
-# cp ~/.aws/credentials /root/prosimo-lab/assets/terraform
+echo "################################################"
+echo "# START - Deploy Lab Resources - AWS us-east-1 #"
+echo "################################################"
+
+cd /root/prosimo-lab/assets/terraform/lab_resources/aws_us_east_1
+terraform init
+sleep 5
+
+terraform apply -auto-approve \
+ -var lab_version=${TRACK_VERSION} \
+ -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
+ -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
+
+echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
+sleep 60
+echo "Awake!!"
+
+echo "##############################################"
+echo "# END - Deploy Lab Resources - AWS us-east-1 #"
+echo "##############################################"
+
+
+echo "####################################################"
+echo "# START - Deploy Lab Resources - Azure northeurope #"
+echo "####################################################"
+
+cd /root/prosimo-lab/assets/terraform/lab_resources/azure_northeurope
+terraform init
+sleep 5
+
+terraform apply -auto-approve \
+ -var lab_version=${TRACK_VERSION} \
+ -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
+ -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
+ -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
+ -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
+
+echo "##################################################"
+echo "# END - Deploy Lab Resources - Azure northeurope #"
+echo "##################################################"
+
+
+echo "###################################################"
+echo "# START - Running Infrastructure Auto-Refresh NOW #"
+echo "###################################################"
+
+sleep 10
+python3 /root/prosimo-lab/assets/scripts/auto_refresh.py > /root/prosimo-lab/auto_refresh.log
+sleep 10
+
+echo "#################################################"
+echo "# END - Running Infrastructure Auto-Refresh NOW #"
+echo "#################################################"

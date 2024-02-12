@@ -17,10 +17,6 @@ tabs:
   type: code
   hostname: shell
   path: /root/prosimo-lab
-- title: Editor - DevMode
-  type: code
-  hostname: shell
-  path: /root/ProsimoLabs/instruqt-tracks/prosimo-lab-observe-and-troubleshoot/
 - title: AWS Console
   type: browser
   hostname: aws
@@ -92,26 +88,8 @@ Select "IAM Account" and enter the **AWS ID**:
 ```
 
 
-## 3) Deploy resources onto your cloud regions
-===
 
-Now that you've logged into the cloud providers consoles its time to deploy resources for upcoming Instruqt Challenges:
-
-```sh
-terraform apply -auto-approve \
- -var lab_version=${TRACK_VERSION} \
- -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
- -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
- -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
- -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
- -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} \
- -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
-```
-
-You are now deploying the dev and prod servers in each of the three regions, as show in the Lab Diagram.
-
-
-## 4) Create Admin User to your Prosimo Dashboard
+## 3) Create Admin User to your Prosimo Dashboard
 ===
 
 Note: Use your Business Email for User Creation
