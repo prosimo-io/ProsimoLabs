@@ -3,11 +3,11 @@ slug: review-architecture-and-deploy-resources
 id: uzzx4rly7wkc
 type: challenge
 title: Review Architecture and Deploy Resources
-teaser: A short description of the challenge.
+teaser: Connecting Multi-Cloud Networks and Resources.
 notes:
 - type: text
-  contents: Welcome to this hands-on Prosimo Lab for "Observability and Troubleshooting
-    across Multi-Cloud Networks"
+  contents: Welcome to this hands-on Prosimo Lab for "Connecting Multi-Cloud Networks
+    and Resources"
 tabs:
 - title: Shell
   type: terminal
@@ -32,7 +32,7 @@ difficulty: basic
 timelimit: 3600
 ---
 
-**NOTE:** This environment is *real*! AWS and Azure Cloud Accounts have been created for each student. No bitcoin mining, please! :)
+**NOTE:** This environment is *real*! AWS and Azure Cloud Accounts have been created for each student.
 
 In this section we will:
 1) Review the cloud architecture

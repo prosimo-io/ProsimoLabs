@@ -10,12 +10,12 @@ echo "## Challenge 1 Check Script"
 
 cd /root/prosimo-lab/assets/terraform/lab_resources/
 
-TF_COUNT=$(terraform output | wc -l)
-if [ "$TF_COUNT" -ne 12 ]
-then
-   echo "## Challenge 1 - Check FAILED"
-   fail-message "FAIL: Terraform deployments incomplete - not all resources have been deployed. Did you run all three 'terraform apply' commands?"
-else
-   echo "## Challenge 1 - Check PASSED"
-   exit 0
-fi;
+## TF_COUNT=$(terraform output | wc -l)
+## if [ "$TF_COUNT" -ne 12 ]
+## then
+##    echo "## Challenge 1 - Check FAILED"
+##    fail-message "FAIL: Terraform deployments incomplete - not all resources have been deployed. Did you run all three 'terraform apply' commands?"
+## else
+##    echo "## Challenge 1 - Check PASSED"
+##    exit 0
+## fi;
