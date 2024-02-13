@@ -1,0 +1,23 @@
+slug: prosimo-lab-connect
+id: jveui3kybgmi
+title: Prosimo Lab - Connect
+teaser: Build multi-cloud networks and rapidly solve complex networking problems.
+description: |-
+  In this lab you will:
+  - discover and on-board existing networks
+  - build new multi-cloud networks
+  - interconnect networks with overlapping IP ranges
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+tags: []
+owner: prosimo
+developers:
+- nathan@prosimo.io
+show_timer: true
+timelimit: 14400
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "9442691961296548896"

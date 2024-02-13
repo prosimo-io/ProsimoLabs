@@ -1,0 +1,21 @@
+#!/bin/sh
+#
+# This script runs when the platform check the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+
+echo "## Challenge 1 Check Script"
+
+cd /root/prosimo-lab/assets/terraform/lab_resources/
+
+## TF_COUNT=$(terraform output | wc -l)
+## if [ "$TF_COUNT" -ne 12 ]
+## then
+##    echo "## Challenge 1 - Check FAILED"
+##    fail-message "FAIL: Terraform deployments incomplete - not all resources have been deployed. Did you run all three 'terraform apply' commands?"
+## else
+##    echo "## Challenge 1 - Check PASSED"
+##    exit 0
+## fi;

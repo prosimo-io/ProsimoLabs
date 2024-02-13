@@ -1,0 +1,25 @@
+version: "3"
+containers:
+- name: shell
+  image: gcr.io/instruqt/cloud-client
+  shell: /bin/bash
+  ports:
+  - 80
+  memory: 2048
+virtualbrowsers:
+- name: aws
+  url: https://signin.aws.amazon.com/console
+- name: prosimo-tenant
+  url: https://${_SANDBOX_ID}.admin.prosimo.io/
+- name: azure
+  url: https://azure.microsoft.com/en-us/get-started/azure-portal
+aws_accounts:
+- name: prosimo-demo
+  managed_policies:
+  - arn:aws:iam::aws:policy/AdministratorAccess
+azure_subscriptions:
+- name: prosimo-tenant
+  roles:
+  - Owner
+secrets:
+- name: TF_VAR_prosimo_token
