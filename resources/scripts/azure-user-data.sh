@@ -20,7 +20,7 @@ cd /home/linuxuser/ProsimoLabs
 git checkout ${lab_version}
 cp -r /home/linuxuser/ProsimoLabs/resources/lab-servers /home/linuxuser/prosimo-lab/
 sudo chown -R linuxuser:linuxuser /home/linuxuser/prosimo-lab/
-##TODO: rm -rf /home/linuxuser/ProsimoLabs
+rm -rf /home/linuxuser/ProsimoLabs
 cd /home/linuxuser/prosimo-lab/lab-servers/middleware
 npm install
 

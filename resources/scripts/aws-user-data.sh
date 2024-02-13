@@ -36,7 +36,7 @@ cd /home/ec2-user/ProsimoLabs
 git checkout n8-updates
 cp -r /home/ec2-user/ProsimoLabs/resources/lab-servers /home/ec2-user/prosimo-lab/
 sudo chown -R ec2-user:ec2-user /home/ec2-user/prosimo-lab/
-##TODO: rm -rf /home/ec2-user/ProsimoLabs
+rm -rf /home/ec2-user/ProsimoLabs
 cd /home/ec2-user/prosimo-lab/lab-servers/frontend
 npm install
 
