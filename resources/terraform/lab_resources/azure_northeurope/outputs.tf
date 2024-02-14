@@ -4,8 +4,16 @@ output "ssh_access_azure_eu_1" {
   value = module.azure_northeurope_vnet1.ssh_access
 }
 
+output "azure_vm_public_ip1" {
+  value = module.azure_northeurope_vnet1.azure_vm_public_ip
+}
+
 output "ssh_access_azure_eu_2" {
   value = module.azure_northeurope_vnet2.ssh_access
+}
+
+output "azure_vm_public_ip2" {
+  value = module.azure_northeurope_vnet2.azure_vm_public_ip
 }
 
 output "vnet1_id" {
