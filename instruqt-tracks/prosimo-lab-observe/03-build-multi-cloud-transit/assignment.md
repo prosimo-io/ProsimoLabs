@@ -321,11 +321,6 @@ Select "IAM Account" and enter the **AWS ID**:
 
 # AZURE Credentials ☁️
 
-**AZURE SUBSCRIPTION**
-```
-[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID" hostname="shell" ]]
-```
-
 **AZURE USERNAME**
 ```
 [[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_USERNAME" hostname="shell" ]]

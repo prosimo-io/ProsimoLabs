@@ -90,8 +90,8 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
 
 resource "prosimo_namespace" "namespace" {
     name = var.network_namespace
-    export {
-        source_network = var.network_name
-        namespaces = [ "eu_west_1", "us_east_1" ]
-    }
+#    export {
+#        source_network = var.network_name
+#        namespaces = [ "eu_west_1", "us_east_1" ]
+#    }
 }
