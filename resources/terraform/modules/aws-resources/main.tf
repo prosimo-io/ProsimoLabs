@@ -124,7 +124,7 @@ resource "aws_key_pair" "demo_key_pair" {
   public_key = tls_private_key.demo_key.public_key_openssh
 
   provisioner "local-exec" {
-    command = "echo '${tls_private_key.demo_key.private_key_pem}' > ./${var.aws_ec2_key_pair_name}.pem"
+    command = "echo '${tls_private_key.demo_key.private_key_pem}' > ../${var.aws_ec2_key_pair_name}.pem && chmod 400 ../${var.aws_ec2_key_pair_name}.pem"
   }
 }
 

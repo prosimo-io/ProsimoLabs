@@ -36,8 +36,8 @@ timelimit: 3600
 
 In this section we will:
 1) Review the cloud architecture
-2) Login to your cloud account console's
-3) Deploy resources onto your cloud regions
+2) Access Lab Application
+3) Login to your cloud account console's
 4) Create your Prosimo Admin user
 
 ---
@@ -50,7 +50,23 @@ First lets review the cloud architecture that has been provision for your Prosim
 Navigate to the *Lab Diagram* tab above and review the diagram. This is what we're building today!
 
 
-## 2) Login to your cloud account consoles
+## 2) Access Lab Application
+===
+
+Obtain the 'public ip addresses' of our frontend servers using the following commands:
+
+```bash,run
+cat /root/prosimo-lab/assets/terraform/lab_resources/tf_eu_west_1.out
+```
+
+```bash,run
+cat /root/prosimo-lab/assets/terraform/lab_resources/tf_us_east_1.out
+```
+
+Look for `aws_ec2_public_ip1` and `aws_ec2_public_ip2` from each output. These are the pblic addresses of the app front end.
+
+
+## 3) Login to your cloud account consoles
 ===
 Using the credentials below, login to the AWS and Azure Web Consoles in their respective tabs above:
 
@@ -85,25 +101,6 @@ Select "IAM Account" and enter the **AWS ID**:
 ```
 [[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_PASSWORD" hostname="shell" ]]
 ```
-
-
-## 3) Deploy resources onto your cloud regions
-===
-
-Now that you've logged into the cloud providers consoles its time to deploy resources for upcoming Instruqt Challenges:
-
-```sh
-terraform apply -auto-approve \
- -var lab_version=${TRACK_VERSION} \
- -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
- -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY} \
- -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
- -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
- -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD} \
- -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID}
-```
-
-You are now deploying the dev and prod servers in each of the three regions, as show in the Lab Diagram.
 
 
 ## 4) Create Admin User to your Prosimo Dashboard

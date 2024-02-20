@@ -4,8 +4,16 @@ output "ssh_access_aws_eu_west_1" {
   value = module.aws_eu_west_1_vpc1.ssh_access
 }
 
+output "aws_ec2_public_ip1" {
+  value = module.aws_eu_west_1_vpc1.aws_eip_public_ip
+}
+
 output "ssh_access_aws_eu_west_2" {
   value = module.aws_eu_west_1_vpc2.ssh_access
+}
+
+output "aws_ec2_public_ip2" {
+  value = module.aws_eu_west_1_vpc2.aws_eip_public_ip
 }
 
 output "vpc1_id" {

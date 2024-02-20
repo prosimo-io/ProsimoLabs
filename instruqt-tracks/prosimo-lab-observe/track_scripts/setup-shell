@@ -198,6 +198,8 @@ terraform apply -auto-approve \
  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
 
+terraform output > /root/prosimo-lab/assets/terraform/lab_resources/tf_eu_west_1.out
+
 echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
 sleep 60
 echo "Awake!!"
@@ -219,6 +221,8 @@ terraform apply -auto-approve \
  -var lab_version=${TRACK_VERSION} \
  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
+
+terraform output > /root/prosimo-lab/assets/terraform/lab_resources/tf_us_east_1.out
 
 echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
 sleep 60
@@ -243,6 +247,8 @@ terraform apply -auto-approve \
  -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
  -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
  -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
+
+terraform output > /root/prosimo-lab/assets/terraform/lab_resources/tf_northeurope.out
 
 echo "##################################################"
 echo "# END - Deploy Lab Resources - Azure northeurope #"

@@ -39,8 +39,9 @@ In this challenge we shall use Prosimo to discover existing networks.
 In this section we will:
 1) Review Cloud Account On-boarding & Edge Deployment
 2) Discover Network Resources
-3) Review Edge Deployment
+3) Review Deployed Network Edge's
 4) Review the Prosimo Managed Infrastructure
+5) Deploy a Prosimo Edge
 
 Note that we've only associated our cloud accounts with the Prosimo dashboard thus far.
 
@@ -91,7 +92,7 @@ Following the same flow, review the network and ensure it matches the 'Lab Diagr
 
 Prosimo Network Edges are deployed 'per cloud region'. There is no requirement for 'spoke gateways' in every single VPC/VNet. This is possible due to Prosimo's strategy of bringing cloud and network together through its ochestraton of cloud native-network resources.
 
-Let's review the three Network Edges that were aleady deployed for you:
+Let's review the two Network Edges that were aleady deployed for you:
 1) In the left-hand navgation pane, select "Management"
 2) Click on the "Edges" tile
 3) Review the 'Status' column - all Edges should now be deployed.
@@ -105,7 +106,7 @@ Note there are no cloud network connections as we haven't on-boarded any network
 
 1) In the left-hand navgation pane, select "Transit 360"
 
-You are currently looking at 'Map View' which is showing you the three deployed Network Edges - 2 in EU, 1 in US - displayed geographically.
+You are currently looking at 'Map View' which is showing you the two deployed Network Edges, displayed geographically.
 
 2) In the top-right of the map, click on 'Topology View'. You are now looking at all of the providers and their regions. The regions with Prosimo's Network Edges deployed are identifiable with a green circle.
 
@@ -115,7 +116,28 @@ In the list provided you should see an Incoming and Outgoing connection from thi
 
 4) Click 'back' (bottom left corner) to return to the Map View.
 
-That concludes our review of the Prosimo infrastructure. You may now click the green "Check" button at the bottom-right corner and progress to the next challenge.
+That concludes our review of the Prosimo infrastructure. Next we shall deploy a new Prosimo Edge into `AWS us-east-1`
+
+
+# 5) Deploy a Prosimo Edge
+===
+
+1) In the Prosimo managemnet portal, navigate to Management > Edges.
+2) Click "Create New" (top right).
+3) Click the 'Select Cloud' drop-down menu.
+**NOTE:** you can see more detail if you hover the mouse over the entries.
+
+4) Select the Cloud that ends with "Prosimo_AWS".
+5) Select the region: 'us-east-1'.
+6) Leave the VPC Source as "Use Prosimo created VPC"
+6) In the IP Range text field enter `10.252.0.0/23`
+7) For "Badnwidth Range" leave both 'Minimum' and 'Maximum' at '1' Gbps
+8) Click "Validate Requirements"
+9) You should see a green "Successful" appear. If so, click "Create"
+10) In the top right corner, click "Tasks".
+11) Select the new 'In-progress' task and click "View".
+
+**NOTE**: Edge deployments can take as long as 30 minutes. You can check back in on this task in the following challenge.
 
 
 # Cloud Account Credentials (if needed)
@@ -146,11 +168,6 @@ Select "IAM Account" and enter the **AWS ID**:
 ---
 
 # AZURE Credentials ☁️
-
-**AZURE SUBSCRIPTION**
-```
-[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID" hostname="shell" ]]
-```
 
 **AZURE USERNAME**
 ```

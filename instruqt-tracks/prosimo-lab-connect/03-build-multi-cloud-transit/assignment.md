@@ -34,7 +34,8 @@ timelimit: 3600
 In this challenge we will on-board existing cloud network to Prosimo for management. We shall then create multi-cloud interconnectivity between these networks - across clouds, regions, and geographies.
 
 1) Build multi-region, multi-cloud transits
-2) On-boarding region networks
+2) Create Metwork Namespaces
+3) On-boarding region networks
 3) Verify the transit connectivity
 
 Before we begin, here's a quick introduction to the concepts of Prosimo Transits and Prosimo Networks:
@@ -49,14 +50,14 @@ Below we shall first create a Prosimo Transit (the blue lines in the diagram), t
 
 In this secion we will:
 * Attach an existing AWS Transit Gateway to the in-region Prosimo Network Edge - `AWS/eu-west-1`
-* Have Prosimo deploy a new Transit Gateway, configure it, and attach it to the regions Network Edge - `AWS/us-east-1`
 * Peer VNets directly to their regions Network Edge - `Azure/northerneurope`
+* (When Ready) Attach the us-east-1 TGW to the newly deployed Network Edge in - `AWS/us-east-1`
 
 Swith to the 'Prosimo' tab, and follow the steps below:
 
 ---
 
-## Build Transit for an Existing TGW/Networks:
+## Build Transit for eu-west-1:
 
 1) In the left-hand navgation pane, in the "Onboard" section, select "Transit".
 2) Click the blue cirlce with the number '2' in it to zoom into that region.
@@ -91,35 +92,67 @@ Verify change:
 NOTE: "Conenctions" is no longer "0"
 
 3) Click on "Connections"
-4) Click the "Transit Gateway" tab. You can see the transit gateway is now attacned to our Prosimo Edge deployed in that region.
+4) Click the "Transit Gateway" tab. You can see the transit gateway is now being attached to our Prosimo Edge deployed in that region.
 
 You have now connected the `AWS/eu-west-1` region to the Prosimo Mesh.
 
 ---
 
-## Build Transit and orchestrate new Transit Gateway (TGW):
-
-Repeat the steps above (1 - 14) for the `AWS/us-east-1` region, but this time create a new Transit Gateway (TGW) by clicking "Add Connections: TGW" at the bottom of the screen. Name it "TGW", and select the AWS account from list.
-
----
-
 ## Build Transit by peering networks directly with Prosimo Edge:
 
-Finally we shall now connect the `Azure/northerneurope` region to its Prosimo Edge, but this time we shall peer the VNets directly, as showin the following diagram.
+Next we shall connect the `Azure/northerneurope` region to its Prosimo Edge, but this time we shall peer the VNets directly, as showin the following diagram.
 
 ![Azure Peering](../assets/images/Prosimo_Lab_Transit_Azure_Peering.jpg)
 
+1) Navigate to "Onboard > Transit"
+2) Click the blue "2", and select 'Azure northeurope'
+3) Click "Lets start building transit'
+4) click "Add VNETs" (bottom right)
+5) Select all VNETs an click "Add VNets".
+6) Click on the Prosimo Edge (Prosimo Logo) and then click on the "2 VNETs" to draw a connection between them (green dashed line).
+7) Click "Save to deployment"
+8) Click "Preview deployment"
+9) Select the new 'Configured' deployment for Azure and click "Review & Deploy"
+10) Note in "Added" you should see `2 VNETs connected to the Edge via VNET Peering`.
+11) Click "Proceed"
+12) Review the new task in the Tasks section.
+
 ---
 
-NOTE: Before progressing to the next section ensure that the Transit onboarding has complete by monitoring the deployment tasks. To review the deployment:
+## Build Transit for newly deployed Edge:
 
-* Click the 'Tasks' button - top right corner.
-* Select the "In Progress" tasks at the top of the list and click the "View" button.
+Verify that your new edge has completed deploying in *AWS/us-east-1*. If not, you may continue onto the 'on-boarding networks section below for the already deployed Edges, and return to this section when ready.
 
-Once you have completed attaching all three regions to their Prosimo Edges you may proceed to the next section: **On-boarding Networks**
+Repeat the steps above (1 - 14) for the *Build Transit for eu-west-1* section above.
+
+---
+
+While we wait for the new Edge deployment to complete we will onboard the Azure networks. We have an Edge deployed in the region, and we have now 'peered' the VNETs with that Edge. Now its time to 'on-board' the Azure networks for communication...
+
+**BUT WAIT!** We have overlapping IP ranges!!!
+
+Fear not, Prosimo has a solution. We are going to use Prosimo's network namespaces to provide network domain isolation.
+
+# 2) Creating Namespaces
+===
+
+1) Navigate to "Policy > Namespaces"
+2) Click "Create New" (top right)
+3) Enter the name `frontend_eu_west`
+4) Leave the Source Networks blank - we haven't on-boarded the networks yet.
+5) Click 'Save'.
+6) Follow the same steps to create two more namespaces, named: `frontend_us_east` and `app_svcs_north_europe`
+
+You should now have 4 namespaces - the three new ones, and the `default` namespace.
+
+Return to the 'tasks' list (top right) and review the progress of the 'In Progress' tasks. You're AWS Edge should now be deloyed, or very nearly so. Once complete, repeat the steps above to 'Build Transit' for the new `us-east-1` Edge before continuing the next section "Onboard Cloud-Region Networks".
 
 
-# 2) Onboard Cloud-Region Networks
+**NOTE**: Before progressing to the next section ensure that the Transit onboarding has complete by monitoring the deployment tasks. To review the deployment:
+
+
+
+# 3) Onboard Cloud-Region Networks
 ===
 
 ![Prosimo Networks](../assets/images/Prosimo_Lab_Transit_and_Prosimo_Network.jpg)
@@ -130,166 +163,72 @@ In this section we will create Prosimo Networks – a Prosimo construct comprisi
 
 First we shall onboard the 'Dev' networks.
 
-| *Region* | *Dev Network* |
+| *Region* | *Prosimo Network* |
 |-----------|------------|
-| `eu-west-1` | `WebSvcsDevEu` |
-| `us-east-1` | `WebSvcsDevUs` |
-| `Azure/northerneurope` | `AppSvcsDevEu` |
+| `eu-west-1` | `eu_west_1` |
+| `us-east-1` | `us_east_1` |
+| `Azure/northerneurope` | `northern_europe1` |
 
 
 Switch to the Prismo tab and proceed with the instructions below:
 
+### On-board northern_europe1 Network
+
 1) In the left-hand pane, under "Onbaord", click "Networks".
 2) Select the "Discovered" tab.
 3) Under Cloud Service Providers, click "Prosimo_AWS".
-4) Under regions, select `eu-west-1`.
-5) Under VPCs, select `WebSvcsDevEu`.
-6) In the "Onboard Entities" box to the right, check the box next to each VPC name to select all of the VPCs subnets.
-7) Click the "Onboard" button at the bottom-right of the screen.
-8) Give this Prosimo Network a name (**NOTE**: Follow the naming convention from the LAB diagram.) and leave the Namespace as 'default'.
-9) The "Proceed"
+4) Under regions, select `northeurope`.
+5) Under VNETs, select both `AppSvcsEu1_Vnet` & `AppSvcsEu2_Vnet`.
+6) Click "Onboard"
+7) Enter the name `northern_europe1`
+8) Select the namespace `app_svcs_north_europe` from the menu.
+9) Click "Submit"
 
-![Prosimo Network Name](../assets/images/Prosimo_Lab_Network_Onboard_Name.jpg)
+**NOTE**: Several of the options will already be selected but please check them carefully.
 
+10) Change "5 Where do you want to run connectors?" to `Infra VNET`
+11) Expand the second VNETs setting (bottom of the screen). *Note* that the Connector deployment destination is not editable, due to the selection made above, which will be used for both.
+12) Click "Proceed"
+13) Select "All Networks"
+14) Click "Proceed"
+15) Review the summary and then click "Onboard"
 
-Next we shall provide some parameters for this newly created Prosimo Network.
-
-10) For the prompt "Where do you want to run connectors?", select "Infra VPC".
-11) For "Bandwidth" select "< 1Gbps".
-12) In peering optiond, select the TGW.
-13) Click "Proceed".
-
-![Prosimo Network Config](../assets/images/Prosimo_Lab_Network_Onboard_Config.jpg)
-
-
-Now we shall configure the "Security" settings for this new Prosimo Network.
-
-14) For the prompt "Configure Policies for this Network", select "Allow All Networks".
-15) Click Proceed.
-
-![Prosimo Network Policy](../assets/images/Prosimo_Lab_Network_Onboard_Policy.jpg)
+If you click the 'onboarded' tab you will see the Azure networks/VNets being onboarded. You can also monitor the progress in the Tasks section.
 
 
-16) Lastly, we shall review and confirm the options, and then deploy the new Prosimo Network by clicking "Onboard".
+### On-board eu_west_1 Networks
 
-![Prosimo Network Confirmation](../assets/images/Prosimo_Lab_Network_Onboard_Confirmation.jpg)
+To onboard the AWS eu-west_1 networks/VPCs, follow the steps above but for the Prosimo netowrk name use `eu_west_1` and select the Prosimo namespace `frontend_eu_west`.
 
-Repeat the steps above for each of the 'Dev' VPCs/VNets in the other regions/clouds.
+**NOTE**: Due to the presence of the TGW, the 'Infra VPC' connector placement will already be selected. You will have to select the Transit Gateway in the "7. Peering Options" for each network you are onboarding.
 
-**NOTE:** While on-boarding the networks you can observe their progress via a) the Prosimo Dashboard 'Onboarded' tab, or b) the Prosimo 'Tasks' button (top right).
+### On-board us_east_1 Networks
 
-**NOTE:** The Azure network onboarding options are slightly different as we are using VNet Peering:
+Verify that the AWS us-east-1 Transit Gateway has completed on-boarding before on-boarding that regions networks/VPCs. You can do this by checking the 'Tasks' are complete.
 
-![Prosimo Network Azure Config](../assets/images/Prosimo_Lab_Network_Onboard_Azure_Config.jpg)
-
----
-
-Upon completing the on-boarding of the 'Dev' networks, you may now on-board the 'Prod' networks using the same steps outlined above:
-
-| *Region* | *Prod Network* |
-|-----------|------------|
-| `eu-west-1` | `WebSvcsProdEu` |
-| `us-east-1` | `WebSvcsProdUs` |
-| `Azure/northerneurope` | `AppSvcsProdEu` |
+To onboard the AWS eu-west_1 networks/VPCs, follow the steps above but for the Prosimo netowrk name use `us_east_1` and select the Prosimo namespace `frontend_us_east`
 
 ---
 
 With all networks now onboarded you may proceed to the section below.
 
 
-# 3) Verify the transit connectivity
+# 4) Verify connectivity
 ===
 
-Now we shall verify the connectivity across these newly paved networks.
+You should now be able to reload the application using one of the front-end IP Addresses.
 
-Review the `Lab Diagram`. We are now going to verify connectivity from each of the 'Front End Web Services' virtual machines through to the 'App Services' virtual machines.
+To access the IP Addresses again, execute the following commands:
 
-1) First we must set safe permissions for the PEM format keys, using the following commands:
-
-```sh
-cd assets/terraform/
-chmod 400 *.pem
+```bash,run
+cat /root/prosimo-lab/assets/terraform/lab_resources/tf_eu_west_1.out
 ```
 
-2) Next we need to get the credentials for our Lab Servers, so that we can remote shell into them:
-
-```sh
-terraform output
+```bash,run
+cat /root/prosimo-lab/assets/terraform/lab_resources/tf_us_east_1.out
 ```
 
-You should see something like this (but with different IP Addresses):
-
-```
-ssh_access_aws_eu = [
-  "WebServerProdEu1 - 10.4.0.100 => ssh -i '~/prosimo-lab/assets/terraform/EU_WEST_WebSvcsProd.pem' ec2-user@52.211.200.131",
-  "WebServerDevEu1 - 10.5.0.100 => ssh -i '~/prosimo-lab/assets/terraform/EU_WEST_WebSvcsDev.pem' ec2-user@52.214.0.51",
-]
-ssh_access_aws_us = [
-  "WebServerProdUs1 - 10.2.0.100 => ssh -i '~/prosimo-lab/assets/terraform/US_EAST_WebSvcsProd.pem' ec2-user@54.162.135.145",
-  "WebServerDevUs1 - 10.3.0.100 => ssh -i '~/prosimo-lab/assets/terraform/US_EAST_WebSvcsDev.pem' ec2-user@107.21.232.146",
-]
-ssh_access_azure_eu = [
-  "AppSvcsProdEu - 10.0.0.100 =>  ssh -i '~/prosimo-lab/assets/terraform/Azure_Srv1.pem' linuxuser@98.71.85.11",
-  "AppSvcsDevEu - 10.1.0.100 =>  ssh -i '~/prosimo-lab/assets/terraform/Azure_Srv2.pem' linuxuser@98.71.84.253",
-]
-```
-
-*NOTE* the format of each entry:  <Virtual_Server_Name> - <private_ip_address> => <ssh_command>
-
-3) Verify that each `Server Name` and `Private IP Address` maps to those in the Lab Diagram.
-4) Starting with `WebServerProdEu1`, use the ssh command provided in the terraform output to remote shell into `WebServerProdEu1`,
-5) Ensure you can send an ICMP packet from this server to `AppSvcsProdEu` with the following command:
-
-```
-ping -c 4 10.0.0.100
-```
-
-5) Verify you have communication to the `AppSvcsProdEu` HTTP servers with the following command:
-
-```sh
-/home/ec2-user/traffic.sh test http://10.0.0.100
-```
-
-You should see something like:
-```sh
-[ec2-user@ip-10-4-0-100 ~]$ /home/ec2-user/traffic.sh test http://10.0.0.100
-The counter is 1 of 2
-“Hello Prosimo MCN fans and Welcome”
-The counter is 2 of 2
-“Hello Prosimo MCN fans and Welcome”
-```
-
-6) Now lets set this script running in the background to generate some network traffic across the environment:
-
-```sh
-/home/ec2-user/traffic.sh 2000 http://10.0.0.100 &
-```
-
-*NOTE:* you will see no output from the command above. It is running silently as a background process.
-
-Repeat the above steps verifying each of the "Web Front End" server can reach their "App Services" backend, as follows:
-
-| *Front End Web Svc* | *App Svc* |
-|-----------|------------|
-| `WebSvcsProdEu1` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsProdUs1` > | `AppSvcsProdEu` - 10.0.0.100 |
-| `WebSvcsDevEu1` > | `AppSvcsDevEu` - 10.1.0.100 |
-| `WebSvcsDevUs1` > | `AppSvcsDevEu` - 10.1.0.100 |
-
-
-For the **Prod** Front End Servers, run:
-```sh
-/home/ec2-user/traffic.sh 2000 http://10.0.0.100 &
-```
-
-For the **Dev** Front End Servers, run:
-```sh
-/home/ec2-user/traffic.sh 2000 http://10.1.0.100 &
-```
-
-
-This concludes the Building Multi-Cloud Transit sesssion. You may now click the green 'Check' button located at the bottom-right of the screen.
-
+Look for `aws_ec2_public_ip1` and `aws_ec2_public_ip2` from each output. These are the pblic addresses of the app front end.
 
 
 # Cloud Account Credentials (if needed)
@@ -320,11 +259,6 @@ Select "IAM Account" and enter the **AWS ID**:
 ---
 
 # AZURE Credentials ☁️
-
-**AZURE SUBSCRIPTION**
-```
-[[ Instruqt-Var key="INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID" hostname="shell" ]]
-```
 
 **AZURE USERNAME**
 ```

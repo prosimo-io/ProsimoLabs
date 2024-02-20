@@ -1,9 +1,9 @@
 Vnet1 = {
-  azure_resource_group       = "AppSvcsProdEu"
+  azure_resource_group       = "AppSvcsEu1"
   azure_location             = "North Europe"
-  azure_vnet_name            = "AppSvcsProdEu_Vnet"
-  azure_subnet_name          = "AppSvcsProdEu_Vnet_subnet"
-  azure_instance_name        = "AppSvcsProdEu"
+  azure_vnet_name            = "AppSvcsEu1_Vnet"
+  azure_subnet_name          = "AppSvcsEu1_Vnet_subnet"
+  azure_instance_name        = "AppSvcsEu1"
   server_port                = "3000"
   azure_vm_size              = "Standard_DS1_v2"
   azure_server_key_pair_name = "Azure_Srv1"
@@ -15,11 +15,11 @@ Vnet1 = {
 }
 
 Vnet2 = {
-  azure_resource_group       = "AppSvcsDevEu"
+  azure_resource_group       = "AppSvcsEu2"
   azure_location             = "North Europe"
-  azure_vnet_name            = "AppSvcsDevEu_Vnet"
-  azure_subnet_name          = "AppSvcsDevEu_Vnet_subnet"
-  azure_instance_name        = "AppSvcsDevEu"
+  azure_vnet_name            = "AppSvcsEu2_Vnet"
+  azure_subnet_name          = "AppSvcsEu2_Vnet_subnet"
+  azure_instance_name        = "AppSvcsEu2"
   server_port                = "3000"
   azure_vm_size              = "Standard_DS1_v2"
   azure_server_key_pair_name = "Azure_Srv2"
