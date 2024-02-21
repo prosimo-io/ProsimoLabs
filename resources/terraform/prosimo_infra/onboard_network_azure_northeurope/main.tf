@@ -25,11 +25,11 @@ resource "prosimo_visual_transit" "northeurope" {
     transit_deployment {
       vnets {
         action = "ADD"
-        name = "AppSvcsProdEu_Vnet"
+        name = "AppSvcsEu1_Vnet"
       }
       vnets {
         action = "ADD"
-        name = "AppSvcsDevEu_Vnet"
+        name = "AppSvcsEu2_Vnet"
       }
     }
   }
