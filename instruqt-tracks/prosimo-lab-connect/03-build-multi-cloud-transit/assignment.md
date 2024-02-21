@@ -161,7 +161,6 @@ Now we shall on-board specific networks for Prosimo management (orange lines abo
 
 In this section we will create Prosimo Networks – a Prosimo construct comprising of a collection of subnets across any number of VPCs or VNets, across any number of regions, within a common Cloud Account. A single Prosimo Network may not span two Cloud Accounts.
 
-First we shall onboard the 'Dev' networks.
 
 | *Region* | *Prosimo Network* |
 |-----------|------------|

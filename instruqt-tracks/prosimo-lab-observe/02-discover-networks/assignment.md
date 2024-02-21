@@ -60,34 +60,7 @@ To save time, we have automated the on-boarding of the Cloud Accounts to Prosimo
 Once you've clicked through the on-boarding demonstration and edge deployment demonstration you may proceed to the next section titled "Discover Network Resources".
 
 
-# 2) Discover Network Resources
-===
-
-In this challenge we shall be referencing the 'Lab Diagram' and 'Prosimo' tabs.
-
-1) Switch to the 'Prosimo' tab.
-
-Note that the 'Main Dashboard' view isn't showing any data yet. This is a freshly deployed implementation of Prosimo.
-
-2) In the left-hand menu, under the "On-board" section, click "Networks". No networks have been on-boarded to Prosimo for management yet (we'll do that later).
-
-3) Click "Discovered" - near the top of the window. You should now see two Cloud Accounts that were on-boarded for you, named:
-
-* Prosimo_AWS
-* Prosimo_Azure
-
-Next we shall review Prosimo's discovery of cloud-native resources.
-
-4) Click on `Prosimo_AWS` - you should now see the AWS Cloud Regions associated with this account.
-5) Click on the first AWS Region `eu-west-1` - You should now see the VPCs in that region.
-6) Click on the first VPC - you should now see this VPC's subnets.
-
-Following the same flow, review the network and ensure it matches the 'Lab Diagram'.
-
-**NOTE**: We are not 'on-boarding' networks at this stage. We shall do this after we've familiarized ourselves with the platform.
-
-
-# 3) Review Edge Deployment
+# 2) Review Edge Deployment
 ===
 
 Prosimo Network Edges are deployed 'per cloud region'. There is no requirement for 'spoke gateways' in every single VPC/VNet. This is possible due to Prosimo's strategy of bringing cloud and network together through its ochestraton of cloud native-network resources.
@@ -101,7 +74,7 @@ Let's review the three Network Edges that were aleady deployed for you:
 Note there are no cloud network connections as we haven't on-boarded any networks yet
 
 
-# 4) Review the Prosimo Managed Infrastructure
+# 3) Review the Prosimo Managed Infrastructure
 ===
 
 1) In the left-hand navgation pane, select "Transit 360"
@@ -118,6 +91,42 @@ In the list provided you should see an Incoming and Outgoing connection from thi
 
 That concludes our review of the Prosimo infrastructure. You may now click the green "Check" button at the bottom-right corner and progress to the next challenge.
 
+
+# 4) Discover Network Resources
+===
+
+As seen in the Lab Diagram, we are working with the following networks:
+
+| *Region* | *Prosimo Network* |
+|-----------|------------|
+| `eu-west-1` | `eu_west_1` |
+| `us-east-1` | `us_east_1` |
+| `Azure/northerneurope` | `northern_europe1` |
+
+The AWS region networks, `eu-west-1` and `us-east-1`, are already on-boarded. You will now on-board the `Azure/northerneurope` network by following the steps below.
+
+### On-board northern_europe1 Network
+
+1) In the left-hand pane, under "Onbaord", click "Networks".
+2) Select the "Discovered" tab.
+3) Under Cloud Service Providers, click "Prosimo_AWS".
+4) Under regions, select `northeurope`.
+5) Under VNETs, select both `AppSvcsEu1_Vnet` & `AppSvcsEu2_Vnet`.
+6) Click "Onboard"
+7) Enter the name `northern_europe1`
+8) Select the namespace `app_svcs_north_europe` from the menu.
+9) Click "Submit"
+
+**NOTE**: Several of the options will already be selected but please check them carefully.
+
+10) Change "5 Where do you want to run connectors?" to `Infra VNET`
+11) Expand the second VNETs setting (bottom of the screen). *Note* that the Connector deployment destination is not editable, due to the selection made above, which will be used for both.
+12) Click "Proceed"
+13) Select "All Networks"
+14) Click "Proceed"
+15) Review the summary and then click "Onboard"
+
+If you click the 'onboarded' tab you will see the Azure networks/VNets being onboarded. You can also monitor the progress in the Tasks section.
 
 # Cloud Account Credentials (if needed)
 ===

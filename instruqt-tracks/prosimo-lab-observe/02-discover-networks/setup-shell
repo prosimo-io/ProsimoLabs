@@ -5,7 +5,7 @@
 # The platform determines if the script was successful using the exit code of this
 # script. If the exit code is not 0, the script fails. 
 #
-connectecho "This is the setup script"
+echo "This is the setup script"
 
 echo "####################################################"
 echo "# Verifying Porosimo Edge's are deployed and ready #"
@@ -83,34 +83,34 @@ terraform apply -auto-approve \
  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
 
-echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
-sleep 60
-echo "Awake!!"
+# echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
+# sleep 60
+# echo "Awake!!"
 
 echo "######################################################"
 echo "# END - Prosimo: Onboarding Networks - AWS us-east-1 #"
 echo "######################################################"
 
 
-echo "############################################################"
-echo "# START - Prosimo: Onboarding Networks - Azure northeurope #"
-echo "############################################################"
-
-cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_network_azure_northeurope
-terraform init
-sleep 5
-
-terraform apply -auto-approve \
- -var prosimo_token=${TF_VAR_prosimo_token} \
- -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
- -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
- -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
- -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
- -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
-
-echo "##########################################################"
-echo "# END - Prosimo: Onboarding Networks - Azure northeurope #"
-echo "##########################################################"
+# echo "############################################################"
+# echo "# START - Prosimo: Onboarding Networks - Azure northeurope #"
+# echo "############################################################"
+# 
+# cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_network_azure_northeurope
+# terraform init
+# sleep 5
+# 
+# terraform apply -auto-approve \
+#  -var prosimo_token=${TF_VAR_prosimo_token} \
+#  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
+#  -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
+#  -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
+#  -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
+#  -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
+# 
+# echo "##########################################################"
+# echo "# END - Prosimo: Onboarding Networks - Azure northeurope #"
+# echo "##########################################################"
 
 
 set-workdir /root/prosimo-lab
