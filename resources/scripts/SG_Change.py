@@ -76,14 +76,7 @@ def modify_security_group(security_group_name, region, cidr_blocks):
         logging.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    security_group_name = "sc_allow_ssh"
+    security_group_name = "frontnet_allow"
     region = "us-east-1"
-    cidr_blocks = [
-        "10.0.0.0/24",
-        "10.1.0.0/24",
-        "10.2.0.0/24",
-        "10.3.0.0/24",
-        "10.5.0.0/24",
-        "10.6.0.0/24"
-    ]
+    cidr_blocks = [ "0.0.0.0/0" ]
     modify_security_group(security_group_name, region, cidr_blocks)
