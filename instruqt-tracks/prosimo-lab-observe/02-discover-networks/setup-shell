@@ -45,6 +45,28 @@ do
 done 
 
 
+echo "#####################################################"
+echo "# START - Prosimo: Namespace creation and exporting #"
+echo "#####################################################"
+
+cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces
+terraform init
+sleep 5
+
+terraform apply -auto-approve \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID}
+
+echo "Sleeping 1 mins before commencing Prosimo Network Onboarding..."
+sleep 60
+echo "Awake!!"
+
+echo "######################################################"
+echo "# END - Prosimo: Namespace creation and exporting #"
+echo "######################################################"
+
+
+
 echo "########################################################"
 echo "# START - Prosimo: Onboarding Networks - AWS eu-west-1 #"
 echo "########################################################"

@@ -55,7 +55,7 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
   depends_on = [ prosimo_visual_transit.eu_west_1 ]
 
   name = var.network_name
-  namespace = prosimo_namespace.namespace.name
+  namespace = var.network_namespace
   network_exportable_policy = true
   public_cloud {
     cloud_type = var.cloud_type
@@ -99,8 +99,3 @@ resource "prosimo_network_onboarding" "aws_eu_west_1" {
   decommission_app = false
   wait_for_rollout = false
 }
-
-resource "prosimo_namespace" "namespace" {
-    name = var.network_namespace
-}
-

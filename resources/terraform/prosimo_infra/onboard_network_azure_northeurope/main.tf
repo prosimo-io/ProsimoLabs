@@ -43,7 +43,7 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
   depends_on = [ prosimo_visual_transit.northeurope ]
 
   name = var.network_name
-  namespace = prosimo_namespace.namespace.name
+  namespace = var.network_namespace
   network_exportable_policy = true
   public_cloud {
     cloud_type = var.cloud_type
@@ -86,12 +86,4 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
   onboard_app = true
   decommission_app = false
   wait_for_rollout = false
-}
-
-resource "prosimo_namespace" "namespace" {
-    name = var.network_namespace
-#    export {
-#        source_network = var.network_name
-#        namespaces = [ "eu_west_1", "us_east_1" ]
-#    }
 }
