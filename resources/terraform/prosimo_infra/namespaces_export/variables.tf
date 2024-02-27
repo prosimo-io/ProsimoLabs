@@ -12,6 +12,12 @@ variable "prosimo_token" {
 
 # Network Onboarding
 
+variable "source_network_name" {
+  type        = string
+  description = "Name of the Prosimo Network"
+  default     = "northern_europe1"
+}
+
 variable "eu_west_1_network_namespace" {
   description = "Name of the Prosimo Namespace to on-board network into"
   type = string
