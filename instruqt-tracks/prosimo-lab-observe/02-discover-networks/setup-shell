@@ -144,13 +144,41 @@ echo "########################################"
 echo "# START - Prosimo: Namespace exporting #"
 echo "########################################"
 
-cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces_export
-terraform init
-sleep 5
+## cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces_export
+## terraform init
+## sleep 5
+## 
+## terraform apply -auto-approve \
+##  -var prosimo_token=${TF_VAR_prosimo_token} \
+##  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID}
 
-terraform apply -auto-approve \
- -var prosimo_token=${TF_VAR_prosimo_token} \
- -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID}
+NAMESPACE_EU_WEST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_eu_west") | .id')
+NAMESPACE_US_EAST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_us_east") | .id')
+NAMESPACE_APP_SVCS_NORTH_EUROPE_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "app_svcs_north_europe") | .id')
+NETWORK_NORTHERN_EUROPE1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/network/assigned  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "northern_europe1") | .id')
+
+echo "NAMESPACE_EU_WEST_1_ID: $NAMESPACE_EU_WEST_1_ID"
+echo "NAMESPACE_US_EAST_1_ID: $NAMESPACE_US_EAST_1_ID"
+echo "NAMESPACE_APP_SVCS_NORTH_EUROPE_ID: $NAMESPACE_APP_SVCS_NORTH_EUROPE_ID"
+echo "NETWORK_NORTHERN_EUROPE1_ID: $NETWORK_NORTHERN_EUROPE1_ID"
+
+curl -X PUT \
+  https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/export/${NAMESPACE_APP_SVCS_NORTH_EUROPE_ID} \
+  -H "Content-Type: application/json" \
+  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" \
+  --data @- <<EOF
+[
+  {
+    "networkID":"${NETWORK_NORTHERN_EUROPE1_ID}",
+    "namespaces": [
+      "${NAMESPACE_EU_WEST_1_ID}",
+      "${NAMESPACE_US_EAST_1_ID}"
+    ]
+  }
+]
+
+EOF
+
 
 echo "######################################"
 echo "# END - Prosimo: Namespace exporting #"
