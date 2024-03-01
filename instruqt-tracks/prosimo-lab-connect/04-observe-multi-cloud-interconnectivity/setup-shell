@@ -8,6 +8,12 @@
 
 echo "This is the setup script"
 
+# Run Python scripts
+echo "\n\n### Running Auto-Refresh NOW"
+python3 /root/prosimo-lab/assets/scripts/auto_refresh.py > /root/prosimo-lab/auto_refresh.log
+sleep 10
+echo "### Auto-Refresh Complete\n\n"
+
 set-workdir /root/prosimo-lab
 
 exit 0
