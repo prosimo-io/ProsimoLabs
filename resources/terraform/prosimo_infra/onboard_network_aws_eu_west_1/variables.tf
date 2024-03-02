@@ -28,12 +28,6 @@ variable "aws_region" {
   default     = "eu-west-1"
 }
 
-variable "azure_region" {
-  type        = string
-  description = "azure region"
-  default     = "northeurope"
-}
-
 # Network Onboarding
 
 variable "network_name" {

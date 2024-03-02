@@ -1,6 +1,6 @@
 # Onboard Networks to Prosimo Fabric
 
-data "terraform_remote_state" "lab_resources" {
+data "terraform_remote_state" "lab_resources_azure_northeurope" {
   backend = "local"
   config = {
     path = "../../lab_resources/azure_northeurope/terraform.tfstate"
@@ -8,10 +8,10 @@ data "terraform_remote_state" "lab_resources" {
 }
 
 locals {
-  vnet1_id = data.terraform_remote_state.lab_resources.outputs.vnet1_id
-  vnet2_id = data.terraform_remote_state.lab_resources.outputs.vnet2_id
-  vnet1_public_subnets = data.terraform_remote_state.lab_resources.outputs.vnet1_public_subnets
-  vnet2_public_subnets = data.terraform_remote_state.lab_resources.outputs.vnet2_public_subnets
+  azure_northeurope_vnet1_id = data.terraform_remote_state.lab_resources_azure_northeurope.outputs.vnet1_id
+  azure_northeurope_vnet2_id = data.terraform_remote_state.lab_resources_azure_northeurope.outputs.vnet2_id
+  azure_northeurope_vnet1_public_subnets = data.terraform_remote_state.lab_resources_azure_northeurope.outputs.vnet1_public_subnets
+  azure_northeurope_vnet2_public_subnets = data.terraform_remote_state.lab_resources_azure_northeurope.outputs.vnet2_public_subnets
 }
 
 
@@ -42,8 +42,8 @@ resource "prosimo_visual_transit" "northeurope" {
 resource "prosimo_network_onboarding" "azure_northeurope" {
   depends_on = [ prosimo_visual_transit.northeurope ]
 
-  name = var.network_name
-  namespace = var.network_namespace
+  name = var.north_europe_network_name
+  namespace = var.north_europe_network_namespace
   network_exportable_policy = true
   public_cloud {
     cloud_type = var.cloud_type
@@ -51,12 +51,11 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
     cloud_creds_name = "Prosimo_Azure"
     region_name = "northeurope"
     cloud_networks {
-      vnet = local.vnet1_id
+      vnet = local.azure_northeurope_vnet1_id
       connector_placement = "Infra VPC"
       connectivity_type = "vnet-peering"
       subnets {
-        subnet = local.vnet1_public_subnets
-#        virtual_subnet = "192.168.1.0/24"
+        subnet = local.azure_northeurope_vnet1_public_subnets
       }
       connector_settings {
         bandwidth_range {
@@ -66,12 +65,11 @@ resource "prosimo_network_onboarding" "azure_northeurope" {
       }
     }
     cloud_networks {
-      vnet = local.vnet2_id
+      vnet = local.azure_northeurope_vnet2_id
       connector_placement = "Infra VPC"
       connectivity_type = "vnet-peering"
       subnets {
-        subnet = local.vnet2_public_subnets
-#        virtual_subnet = "192.168.2.0/24"
+        subnet = local.azure_northeurope_vnet2_public_subnets
       }
       connector_settings {
         bandwidth_range {
