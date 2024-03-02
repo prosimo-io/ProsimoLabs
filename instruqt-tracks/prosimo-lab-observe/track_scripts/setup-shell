@@ -200,7 +200,7 @@ terraform apply -auto-approve \
 
 terraform output > /root/prosimo-lab/assets/terraform/lab_resources/tf_eu_west_1.out
 
-echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
+echo "Sleeping 1 mins before next Lab Resource Region..."
 sleep 60
 echo "Awake!!"
 
@@ -224,7 +224,7 @@ terraform apply -auto-approve \
 
 terraform output > /root/prosimo-lab/assets/terraform/lab_resources/tf_us_east_1.out
 
-echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
+echo "Sleeping 1 mins before next Lab Resource Region..."
 sleep 60
 echo "Awake!!"
 

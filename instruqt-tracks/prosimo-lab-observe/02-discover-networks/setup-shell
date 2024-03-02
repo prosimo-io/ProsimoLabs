@@ -45,9 +45,9 @@ do
 done 
 
 
-echo "#####################################################"
-echo "# START - Prosimo: Namespace creation and exporting #"
-echo "#####################################################"
+echo "#######################################"
+echo "# START - Prosimo: Namespace creation #"
+echo "#######################################"
 
 cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces
 terraform init
@@ -61,9 +61,9 @@ echo "Sleeping 1 mins before commencing Prosimo Network Onboarding..."
 sleep 60
 echo "Awake!!"
 
-echo "######################################################"
-echo "# END - Prosimo: Namespace creation and exporting #"
-echo "######################################################"
+echo "#####################################"
+echo "# END - Prosimo: Namespace creation #"
+echo "#####################################"
 
 
 echo "######################################################"
@@ -87,90 +87,49 @@ echo "# END - Prosimo: Onboarding Networks - All Regions #"
 echo "####################################################"
 
 
-## echo "########################################################"
-## echo "# START - Prosimo: Onboarding Networks - AWS eu-west-1 #"
-## echo "########################################################"
-## 
-## cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_network_aws_eu_west_1
-## terraform init
-## sleep 5
-## 
-## terraform apply -auto-approve \
-##  -var prosimo_token=${TF_VAR_prosimo_token} \
-##  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
-##  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
-##  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
-## 
-## echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
-## sleep 60
-## echo "Awake!!"
-## 
-## echo "######################################################"
-## echo "# END - Prosimo: Onboarding Networks - AWS eu-west-1 #"
-## echo "######################################################"
-## 
-## 
-## echo "########################################################"
-## echo "# START - Prosimo: Onboarding Networks - AWS us-east-1 #"
-## echo "########################################################"
-## 
-## cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_network_aws_us_east_1
-## 
-## terraform init
-## sleep 5
-## 
-## terraform apply -auto-approve \
-##  -var prosimo_token=${TF_VAR_prosimo_token} \
-##  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
-##  -var aws_access_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_ACCESS_KEY_ID} \
-##  -var aws_secret_key_id=${INSTRUQT_AWS_ACCOUNT_PROSIMO_DEMO_AWS_SECRET_ACCESS_KEY}
-## 
-## echo "Sleeping 1 mins before next Prosimo Network Onboarding..."
-## sleep 60
-## echo "Awake!!"
-## 
-## echo "######################################################"
-## echo "# END - Prosimo: Onboarding Networks - AWS us-east-1 #"
-## echo "######################################################"
-## 
-## 
-## echo "############################################################"
-## echo "# START - Prosimo: Onboarding Networks - Azure northeurope #"
-## echo "############################################################"
-## 
-## cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_network_azure_northeurope
-## terraform init
-## sleep 5
-## 
-## terraform apply -auto-approve \
-##  -var prosimo_token=${TF_VAR_prosimo_token} \
-##  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} \
-##  -var azure_subscription_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SUBSCRIPTION_ID} \
-##  -var azure_tenant_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_TENANT_ID} \
-##  -var azure_client_id=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_ID} \
-##  -var azure_client_secret=${INSTRUQT_AZURE_SUBSCRIPTION_PROSIMO_TENANT_SPN_PASSWORD}
-## 
-## echo "Sleeping 1 mins before exporting networks to namespaces..."
-## sleep 60
-## echo "Awake!!"
-## 
-## echo "##########################################################"
-## echo "# END - Prosimo: Onboarding Networks - Azure northeurope #"
-## echo "##########################################################"
+
+echo "######################################################"
+echo "# Verifying Prosimo Networks are Onboarded and ready #"
+echo "######################################################"
+
+ALL_ONBOARDS_READY=false
+NETOWRK_ONBOARD_STATUS_ARR=""
+while [ "$ALL_ONBOARDS_READY" = false ]
+do
+  NETOWRK_ONBOARD_STATUS_ARR=($(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/network/onboard \
+ -H "Content-Type: application/json" \
+ -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | .status'))
+
+  NETWORK_READY_COUNT=0
+
+  for i in ${NETOWRK_ONBOARD_STATUS_ARR[@]}
+  do
+    if [ "$i" = "DEPLOYED" ]
+    then
+      NETWORK_READY_COUNT=$((NETWORK_READY_COUNT + 1))
+    fi
+  done
+
+  ARR_LEN=${#NETOWRK_ONBOARD_STATUS_ARR[@]}
+
+  if [ "$NETWORK_READY_COUNT" -eq "$ARR_LEN" ]
+  then
+    echo "#################################################"
+    echo "# All Networks are Onboarded and READY!!! Yay!! #"
+    echo "#################################################"
+    ALL_ONBOARDS_READY=true
+  else
+    echo "All Networks are NOT READY yet."
+    echo "Retrying API for Edge Status in 60 seconds"
+    sleep 60
+  fi
+done 
 
 
 
 echo "########################################"
 echo "# START - Prosimo: Namespace exporting #"
 echo "########################################"
-
-## cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces_export
-## terraform init
-## sleep 5
-## 
-## terraform apply -auto-approve \
-##  -var prosimo_token=${TF_VAR_prosimo_token} \
-##  -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID}
 
 NAMESPACE_EU_WEST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_eu_west") | .id')
 NAMESPACE_US_EAST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_us_east") | .id')
