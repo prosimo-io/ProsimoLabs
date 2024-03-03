@@ -1,0 +1,169 @@
+#!/bin/bash
+#
+# This script runs when the platform setup the challenge.
+#
+# The platform determines if the script was successful using the exit code of this
+# script. If the exit code is not 0, the script fails. 
+#
+echo "This is the setup script"
+
+echo "####################################################"
+echo "# Verifying Porosimo Edge's are deployed and ready #"
+echo "####################################################"
+
+ALL_EDGE_READY=false
+EDGE_DEPLOY_STATUS_ARR=""
+while [ "$ALL_EDGE_READY" = false ]
+do
+  EDGE_DEPLOY_STATUS_ARR=($(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/prosimo/app \
+ -H "Content-Type: application/json" \
+ -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | .status'))
+
+  EDGE_READY_COUNT=0
+
+  for i in ${EDGE_DEPLOY_STATUS_ARR[@]}
+  do
+    if [ "$i" = "DEPLOYED" ]
+    then
+      EDGE_READY_COUNT=$((EDGE_READY_COUNT + 1))
+    fi
+  done
+
+  ARR_LEN=${#EDGE_DEPLOY_STATUS_ARR[@]}
+
+  if [ "$EDGE_READY_COUNT" -eq "$ARR_LEN" ]
+  then
+    echo "#############################################"
+    echo "# All Edges are Deployed and READY!!! Yay!! #"
+    echo "#############################################"
+    ALL_EDGE_READY=true
+  else
+    echo "All Edges are NOT READY yet."
+    echo "Retrying API for Edge Status in 60 seconds"
+    sleep 60
+  fi
+done 
+
+
+echo "#######################################"
+echo "# START - Prosimo: Namespace creation #"
+echo "#######################################"
+
+cd /root/prosimo-lab/assets/terraform/prosimo_infra/namespaces
+terraform init
+sleep 5
+
+terraform apply -auto-approve \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID}
+
+echo "Sleeping 1 mins before commencing Prosimo Network Onboarding..."
+sleep 60
+echo "Awake!!"
+
+echo "#####################################"
+echo "# END - Prosimo: Namespace creation #"
+echo "#####################################"
+
+
+echo "######################################################"
+echo "# START - Prosimo: Onboarding Networks - All Regions #"
+echo "######################################################"
+
+cd /root/prosimo-lab/assets/terraform/prosimo_infra/onboard_networks
+terraform init
+sleep 5
+
+terraform apply -auto-approve \
+ -var prosimo_token=${TF_VAR_prosimo_token} \
+ -var prosimo_team_name=${INSTRUQT_PARTICIPANT_ID} 
+
+echo "Sleeping 1 mins before Namespace Exports..."
+sleep 60
+echo "Awake!!"
+
+echo "####################################################"
+echo "# END - Prosimo: Onboarding Networks - All Regions #"
+echo "####################################################"
+
+
+
+echo "######################################################"
+echo "# Verifying Prosimo Networks are Onboarded and ready #"
+echo "######################################################"
+
+ALL_ONBOARDS_READY=false
+NETOWRK_ONBOARD_STATUS_ARR=""
+while [ "$ALL_ONBOARDS_READY" = false ]
+do
+  NETOWRK_ONBOARD_STATUS_ARR=($(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/network/onboard \
+ -H "Content-Type: application/json" \
+ -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | .status'))
+
+  NETWORK_READY_COUNT=0
+
+  for i in ${NETOWRK_ONBOARD_STATUS_ARR[@]}
+  do
+    if [ "$i" = "DEPLOYED" ]
+    then
+      NETWORK_READY_COUNT=$((NETWORK_READY_COUNT + 1))
+    fi
+  done
+
+  ARR_LEN=${#NETOWRK_ONBOARD_STATUS_ARR[@]}
+
+  if [ "$NETWORK_READY_COUNT" -eq "$ARR_LEN" ]
+  then
+    echo "#################################################"
+    echo "# All Networks are Onboarded and READY!!! Yay!! #"
+    echo "#################################################"
+    ALL_ONBOARDS_READY=true
+  else
+    echo "All Networks are NOT READY yet."
+    echo "Retrying API for Edge Status in 60 seconds"
+    sleep 60
+  fi
+done 
+
+
+
+echo "########################################"
+echo "# START - Prosimo: Namespace exporting #"
+echo "########################################"
+
+NAMESPACE_EU_WEST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_eu_west") | .id')
+NAMESPACE_US_EAST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "frontend_us_east") | .id')
+NAMESPACE_APP_SVCS_NORTH_EUROPE_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "app_svcs_north_europe") | .id')
+NETWORK_NORTHERN_EUROPE1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/network/assigned  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "northern_europe1") | .id')
+
+echo "NAMESPACE_EU_WEST_1_ID: $NAMESPACE_EU_WEST_1_ID"
+echo "NAMESPACE_US_EAST_1_ID: $NAMESPACE_US_EAST_1_ID"
+echo "NAMESPACE_APP_SVCS_NORTH_EUROPE_ID: $NAMESPACE_APP_SVCS_NORTH_EUROPE_ID"
+echo "NETWORK_NORTHERN_EUROPE1_ID: $NETWORK_NORTHERN_EUROPE1_ID"
+
+curl -X PUT \
+  https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/export/${NAMESPACE_APP_SVCS_NORTH_EUROPE_ID} \
+  -H "Content-Type: application/json" \
+  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" \
+  --data @- <<EOF
+[
+  {
+    "networkID":"${NETWORK_NORTHERN_EUROPE1_ID}",
+    "namespaces": [
+      "${NAMESPACE_EU_WEST_1_ID}",
+      "${NAMESPACE_US_EAST_1_ID}"
+    ]
+  }
+]
+
+EOF
+
+
+echo "######################################"
+echo "# END - Prosimo: Namespace exporting #"
+echo "######################################"
+
+
+set-workdir /root/prosimo-lab
+
+exit 0

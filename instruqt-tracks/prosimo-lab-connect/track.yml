@@ -13,6 +13,7 @@ owner: prosimo
 developers:
 - nathan@prosimo.io
 show_timer: true
+idle_timeout: 1200
 timelimit: 14400
 lab_config:
   overlay: false

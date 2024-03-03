@@ -1,0 +1,25 @@
+slug: prosimo-lab-secure
+id: ojls1itfgrsm
+title: Prosimo Lab - Secure Networks & Resources
+teaser: Learn to Secure Cloud Networks & Resources.
+description: |-
+  In this lab you will:
+
+    - learn how to apply securite policy across multi-cloud networks
+    - intelligenty steer application traffic to shared security appliance pools
+    - troubleshoot and resolve multi-cloud network security issues
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+tags: []
+owner: prosimo
+developers:
+- nathan@prosimo.io
+show_timer: true
+idle_timeout: 1200
+timelimit: 10800
+lab_config:
+  overlay: false
+  width: 33
+  position: right
+  feedback_recap_enabled: true
+  loadingMessages: true
+checksum: "6479603121788923677"
