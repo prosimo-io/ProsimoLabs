@@ -1,0 +1,33 @@
+api_fw_pool = {
+  azure_resource_group       = "ApiFw_Eu"
+  azure_location             = "North Europe"
+  azure_vnet_name            = "ApiFw_Eu_Vnet"
+  azure_subnet_name          = "ApiFw_Eu_Vnet_subnet"
+  azure_instance_name        = "ApiFw_Eu"
+  azure_user_data_file       = "/root/prosimo-lab/assets/scripts/azure-api-fw-user-data.sh"
+  server_port                = "3000"
+  azure_vm_size              = "Standard_DS1_v2"
+  azure_server_key_pair_name = "Azure_ApiFw_Eu"
+  azure_admin_username       = "linuxuser"
+  azure_admin_password       = "admin123"
+  azure_vnet_cidr            = "10.20.0.0/16"
+  azure_subnet_cidr          = "10.20.1.0/24"
+  azure_private_ip           = "10.20.1.100"
+}
+
+ai_guardrails_pool = {
+  azure_resource_group       = "AiRails_Eu"
+  azure_location             = "North Europe"
+  azure_vnet_name            = "AiRails_Eu_Vnet"
+  azure_subnet_name          = "AiRails_Eu_Vnet_subnet"
+  azure_instance_name        = "AiRails_Eu"
+  azure_user_data_file       = "/root/prosimo-lab/assets/scripts/azure-ai-guardrail-user-data.sh"
+  server_port                = "3000"
+  azure_vm_size              = "Standard_DS1_v2"
+  azure_server_key_pair_name = "Azure_AiRails_Eu"
+  azure_admin_username       = "linuxuser"
+  azure_admin_password       = "admin123"
+  azure_vnet_cidr            = "10.30.0.0/16"
+  azure_subnet_cidr          = "10.30.1.0/24"
+  azure_private_ip           = "10.30.1.100"
+}

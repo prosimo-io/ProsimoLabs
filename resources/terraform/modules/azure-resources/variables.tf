@@ -11,6 +11,11 @@ variable "azure_resource_group" {
   type        = string
 }
 
+variable "azure_user_data_file" {
+  description = "Name of Resource Group"
+  type        = string
+}
+
 variable "azure_location" {
   description = "Location of Resource Group"
   type        = string
