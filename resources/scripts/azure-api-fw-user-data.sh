@@ -4,7 +4,7 @@ sudo apt-get install -y git
 
 # Install Docker
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add –
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 
@@ -22,5 +22,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 git clone https://github.com/wallarm/api-firewall.git
 cd api-firewall/demo/docker-compose
-docker-compose up -d --force-recreate
-
+sudo docker-compose up -d --force-recreate
