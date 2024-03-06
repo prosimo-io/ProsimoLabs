@@ -1,9 +1,9 @@
 api_fw_pool = {
-  azure_resource_group       = "ApiFw_Eu"
-  azure_location             = "North Europe"
-  azure_vnet_name            = "ApiFw_Eu_Vnet"
-  azure_subnet_name          = "ApiFw_Eu_Vnet_subnet"
-  azure_instance_name        = "ApiFw_Eu"
+  azure_resource_group       = "ApiFwEu"
+  azure_location             = "NorthEurope"
+  azure_vnet_name            = "ApiFwEu_Vnet"
+  azure_subnet_name          = "ApiFwEu_Vnet_subnet"
+  azure_instance_name        = "ApiFwEu"
   azure_user_data_file       = "/root/prosimo-lab/assets/scripts/azure-api-fw-user-data.sh"
   server_port                = "3000"
   azure_vm_size              = "Standard_DS1_v2"
@@ -16,11 +16,11 @@ api_fw_pool = {
 }
 
 ai_guardrails_pool = {
-  azure_resource_group       = "AiRails_Eu"
+  azure_resource_group       = "AiRailsEu"
   azure_location             = "North Europe"
-  azure_vnet_name            = "AiRails_Eu_Vnet"
-  azure_subnet_name          = "AiRails_Eu_Vnet_subnet"
-  azure_instance_name        = "AiRails_Eu"
+  azure_vnet_name            = "AiRailsEu_Vnet"
+  azure_subnet_name          = "AiRailsEu_Vnet_subnet"
+  azure_instance_name        = "AiRailsEu"
   azure_user_data_file       = "/root/prosimo-lab/assets/scripts/azure-ai-guardrail-user-data.sh"
   server_port                = "3000"
   azure_vm_size              = "Standard_DS1_v2"
