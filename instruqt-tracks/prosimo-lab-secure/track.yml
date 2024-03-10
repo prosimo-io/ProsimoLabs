@@ -1,6 +1,6 @@
 slug: prosimo-lab-secure
 id: ojls1itfgrsm
-title: Prosimo Lab - Secure Networks & Resources
+title: Prosimo Lab - Secure
 teaser: Learn to Secure Cloud Networks & Resources.
 description: |-
   In this lab you will:
@@ -14,7 +14,7 @@ owner: prosimo
 developers:
 - nathan@prosimo.io
 show_timer: true
-idle_timeout: 1200
+idle_timeout: 3600
 timelimit: 10800
 lab_config:
   overlay: false
@@ -22,4 +22,4 @@ lab_config:
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "6479603121788923677"
+checksum: "14559807577547350369"

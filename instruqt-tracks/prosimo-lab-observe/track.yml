@@ -1,6 +1,6 @@
 slug: prosimo-lab-observe-and-troubleshoot
 id: m2bwgkxkyndg
-title: Prosimo Lab - Observe and Troubleshoot
+title: Prosimo Lab - Observe
 teaser: Learn to Observe and Troubleshoot Multi-Cloud Networking.
 description: |-
   In this lab you will:
@@ -20,4 +20,4 @@ lab_config:
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "10866847060953136473"
+checksum: "10267400985156920649"
