@@ -15,11 +15,11 @@ developers:
 - nathan@prosimo.io
 show_timer: true
 idle_timeout: 3600
-timelimit: 10800
+timelimit: 14400
 lab_config:
   overlay: false
   width: 33
   position: right
   feedback_recap_enabled: true
   loadingMessages: true
-checksum: "14559807577547350369"
+checksum: "12246649091448892786"

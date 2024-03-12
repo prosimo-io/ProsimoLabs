@@ -17,7 +17,6 @@ sudo apt-get install docker-ce -y
 sudo curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-
 ## Wallarm OSS API Firewall
 cd /home/linuxuser/
 git clone https://github.com/wallarm/api-firewall.git

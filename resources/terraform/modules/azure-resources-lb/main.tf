@@ -30,6 +30,7 @@ resource "azurerm_ssh_public_key" "example" {
     command = "echo '${tls_private_key.linux_vm_key.private_key_pem}' > ../${var.azure_server_key_pair_name}.pem && chmod 400 ../${var.azure_server_key_pair_name}.pem"
   }
 }
+
 # Create a VNet
 resource "azurerm_virtual_network" "vnet_1" {
   resource_group_name = azurerm_resource_group.rg_iac.name
@@ -88,7 +89,6 @@ resource "azurerm_linux_machine_scale_set" "api_fw" {
   name                = "${var.prefix}-vmss"
   location            = var.api_fw_pool.azure_location
   resource_group_name = module.azure_northeurope_api_fw_pool.azure_rg_name
-#  upgrade_policy_mode = "Manual"
   instances           = 1
   admin_username        = "linuxuser"
 
