@@ -84,49 +84,20 @@ locals {
   })
 }
 
-
-resource "azurerm_linux_machine_scale_set" "api_fw" {
+resource "azurerm_linux_virtual_machine_scale_set" "api_fw" {
   name                = "${var.prefix}-vmss"
   location            = var.api_fw_pool.azure_location
   resource_group_name = module.azure_northeurope_api_fw_pool.azure_rg_name
+  sku                 = "Standard_DC1s_v2"
   instances           = 1
-  admin_username        = "linuxuser"
+  admin_username      = "linuxuser"
 
   custom_data           = base64encode(local.custom_data)
+  
+  disable_password_authentication = true
   admin_ssh_key {
     username   = "linuxuser"
-    public_key = tls_private_key.linux_vm_key.public_key_openssh
-  }
-
-  sku {
-    name     = "Standard_D1_v2"
-    tier     = "Standard"
-    capacity = 2
-  }
-
-  os_profile {
-    computer_name_prefix = "${var.prefix}-vm"
-    admin_username       = "myadmin"
-    admin_password       = "Passwword1234"
-  }
-
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
-
-  network_profile {
-    name    = "web_ss_net_profile"
-    primary = true
-
-    ip_configuration {
-      name                                   = "internal"
-      subnet_id                              = azurerm_subnet.subnet_1.id
-      primary                                = true
-      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.api_fw.id}"]
-      public_ip_address = {
-        name = "api_fw_public"
-      }
-    }
+    public_key = file("~/.ssh/id_rsa.pub")
   }
 
   network_interface {
@@ -134,25 +105,26 @@ resource "azurerm_linux_machine_scale_set" "api_fw" {
     primary = true
 
     ip_configuration {
-      name      = "internal"
-      primary   = true
-      subnet_id = azurerm_subnet.subnet_1.id
+      name                                   = "internal"
+      subnet_id                              = azurerm_subnet.subnet_1.id
+      primary                                = true
       load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.api_fw.id}"]
+      public_ip_address {        
+        name = "api_fw_public"
+      }
     }
   }
 
-  storage_profile_os_disk {
-    name              = ""
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
   }
 
-  storage_profile_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
-    version   = "latest"
+  source_image_reference {
+    offer       = "0001-com-ubuntu-server-focal"
+    publisher   = "Canonical"
+    sku         = "20_04-lts-gen2"
+    version     = "latest"
   }
 
   depends_on = [

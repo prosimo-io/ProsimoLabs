@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "api_fw_lb" {
   name                = "${var.prefix}-publicip"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = var.api_fw_pool.azure_location
+  resource_group_name = module.azure_northeurope_api_fw_pool.azure_rg_name
   allocation_method   = "Static"
 }
 
@@ -23,7 +23,7 @@ resource "azurerm_lb_backend_address_pool" "api_fw" {
 }
 
 resource "azurerm_lb_backend_address_pool_address" "api_fw" {
-  name                    = "example"
+  name                    = "api_fw_lb_backend_pool"
   backend_address_pool_id = azurerm_lb_backend_address_pool.api_fw.id
   virtual_network_id      = module.azure_northeurope_api_fw_pool.azure_vnet_id
   ip_address              = "10.20.1.100"
@@ -36,7 +36,7 @@ resource "azurerm_lb_probe" "api_fw_lb" {
   port            = 8080
 }
 
-resource "azurerm_lb_rule" "example" {
+resource "azurerm_lb_rule" "api_fw_lb" {
   name                           = "http-lb-rule"
   loadbalancer_id                = azurerm_lb.api_fw_lb.id
   probe_id                       = azurerm_lb_probe.api_fw_lb.id
