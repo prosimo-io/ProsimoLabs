@@ -7,9 +7,17 @@ output "azure_vm_public_ip" {
 #  value = "${var.azure_instance_name} - ${azurerm_linux_virtual_machine_scale_set.api_fw.private_ip_address} =>  ssh -i './${var.azure_server_key_pair_name}.pem' linuxuser@${azurerm_public_ip.ip_1.ip_address}"
 #}
 
-#output "ssh_access" {
-#  value = "${var.azure_instance_name} =>  ssh -i './${var.azure_server_key_pair_name}.pem' linuxuser@${azurerm_public_ip.ip_1.ip_address}"
-#}
+output "ssh_access" {
+  value = "${var.azure_instance_name} =>  ssh -i './${var.azure_server_key_pair_name}.pem' linuxuser@${azurerm_public_ip.ip_1.ip_address}"
+}
+
+output "all_output" {
+    value = azurerm_linux_virtual_machine_scale_set.api_fw
+}
+
+output "instance_public_ip" {
+    value = azurerm_linux_virtual_machine_scale_set.api_fw
+}
 
 output "azure_vnet_id" {
   value = azurerm_virtual_network.vnet_1.id

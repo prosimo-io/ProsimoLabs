@@ -86,8 +86,8 @@ locals {
 
 resource "azurerm_linux_virtual_machine_scale_set" "api_fw" {
   name                = "${var.prefix}-vmss"
-  location            = var.api_fw_pool.azure_location
-  resource_group_name = module.azure_northeurope_api_fw_pool.azure_rg_name
+  location            = var.azure_location
+  resource_group_name = azurerm_resource_group.rg_iac.name
   sku                 = "Standard_DC1s_v2"
   instances           = 1
   admin_username      = "linuxuser"
@@ -97,7 +97,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "api_fw" {
   disable_password_authentication = true
   admin_ssh_key {
     username   = "linuxuser"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = tls_private_key.linux_vm_key.public_key_openssh
   }
 
   network_interface {
