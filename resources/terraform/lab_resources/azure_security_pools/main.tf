@@ -3,7 +3,7 @@
 ## Wallarm API Firewall
 
 module "azure_northeurope_api_fw_pool" {
-  source = "../../modules/azure-resources"
+  source = "../../modules/azure-resources-lb"
   lab_version                = var.lab_version
   azure_resource_group       = var.api_fw_pool.azure_resource_group
   azure_user_data_file       = var.api_fw_pool.azure_user_data_file
