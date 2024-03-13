@@ -136,12 +136,7 @@ NAMESPACE_US_EAST_1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosim
 NAMESPACE_APP_SVCS_NORTH_EUROPE_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "app_svcs_north_europe") | .id')
 NETWORK_NORTHERN_EUROPE1_ID=$(curl -s https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/network/assigned  -H "Content-Type: application/json"  -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" | jq -r '.data[] | select( .name == "northern_europe1") | .id')
 
-echo "NAMESPACE_EU_WEST_1_ID: $NAMESPACE_EU_WEST_1_ID"
-echo "NAMESPACE_US_EAST_1_ID: $NAMESPACE_US_EAST_1_ID"
-echo "NAMESPACE_APP_SVCS_NORTH_EUROPE_ID: $NAMESPACE_APP_SVCS_NORTH_EUROPE_ID"
-echo "NETWORK_NORTHERN_EUROPE1_ID: $NETWORK_NORTHERN_EUROPE1_ID"
-
-curl -X PUT \
+curl -s -X PUT \
   https://${INSTRUQT_PARTICIPANT_ID}.admin.prosimo.io/api/namespace/export/${NAMESPACE_APP_SVCS_NORTH_EUROPE_ID} \
   -H "Content-Type: application/json" \
   -H "Prosimo-ApiToken: ${TF_VAR_prosimo_token}" \

@@ -6,8 +6,7 @@ title: Review Architecture and Deploy Resources
 teaser: A short description of the challenge.
 notes:
 - type: text
-  contents: Welcome to this hands-on Prosimo Lab for "Observability and Troubleshooting
-    across Multi-Cloud Networks"
+  contents: Welcome to this hands-on Prosimo Lab for "Multi-Cloud Network Connectivity"
 tabs:
 - title: Shell
   type: terminal
