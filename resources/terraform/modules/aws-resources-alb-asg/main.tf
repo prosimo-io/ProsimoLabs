@@ -16,55 +16,77 @@ terraform {
 
 data "aws_availability_zones" "available" {}
 
+# Create VPC
+# https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/5.5.3
 
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+  version = "5.5.3"
 
-# Create a VPC
-resource "aws_vpc" "vpc1" {
-  cidr_block = var.aws_vpc_cidr
+  name = "api_fw"
+  cidr = "10.0.0.0/16"
+
+  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+  enable_nat_gateway = true
+  single_nat_gateway = true
+  enable_vpn_gateway = false
+
   tags = {
-    "Name" = var.aws_vpc_name
+    Terraform = "true"
+    Environment = "prod"
   }
 }
 
-# Create a Subnet
-resource "aws_subnet" "subnet1" {
-  vpc_id            = aws_vpc.vpc1.id
-  cidr_block        = var.aws_subnet_cidr
-  availability_zone = data.aws_availability_zones.available.names[0]
-  tags = {
-    "Name" = var.aws_subnet_name
-  }
-}
-
-# Create a IGW
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc1.id
-  tags = {
-    "Name" = "igw_vpc_1"
-  }
-}
-
-# Create a Route Table
-resource "aws_route_table" "rt_vpc1" {
-  vpc_id = aws_vpc.vpc1.id
-  tags = {
-    "Name" = "rt_vpc_1"
-  }
-}
-
-# Create a Route Table Association
-resource "aws_route_table_association" "rt_association_vpc1" {
-  route_table_id = aws_route_table.rt_vpc1.id
-  subnet_id      = aws_subnet.subnet1.id
-}
-
-# Create a Route Default Route
-resource "aws_route" "route_igw" {
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.igw.id
-  route_table_id         = aws_route_table.rt_vpc1.id
-}
-
+### Create a VPC
+##resource "aws_vpc" "vpc1" {
+##  cidr_block = var.aws_vpc_cidr
+##  tags = {
+##    "Name" = var.aws_vpc_name
+##  }
+##}
+##
+### Create a Subnet
+##resource "aws_subnet" "subnet1" {
+##  vpc_id            = aws_vpc.vpc1.id
+##  cidr_block        = var.aws_subnet_cidr
+##  availability_zone = data.aws_availability_zones.available.names[0]
+##  tags = {
+##    "Name" = var.aws_subnet_name
+##  }
+##}
+##
+### Create a IGW
+##resource "aws_internet_gateway" "igw" {
+##  vpc_id = aws_vpc.vpc1.id
+##  tags = {
+##    "Name" = "igw_vpc_1"
+##  }
+##}
+##
+### Create a Route Table
+##resource "aws_route_table" "rt_vpc1" {
+##  vpc_id = aws_vpc.vpc1.id
+##  tags = {
+##    "Name" = "rt_vpc_1"
+##  }
+##}
+##
+### Create a Route Table Association
+##resource "aws_route_table_association" "rt_association_vpc1" {
+##  route_table_id = aws_route_table.rt_vpc1.id
+##  subnet_id      = aws_subnet.subnet1.id
+##}
+##
+### Create a Route Default Route
+##resource "aws_route" "route_igw" {
+##  destination_cidr_block = "0.0.0.0/0"
+##  gateway_id             = aws_internet_gateway.igw.id
+##  route_table_id         = aws_route_table.rt_vpc1.id
+##}
+##
 ## #Create a Network Interface
 ## resource "aws_network_interface" "eth1" {
 ##   subnet_id       = aws_subnet.subnet1.id
@@ -88,7 +110,7 @@ resource "aws_route" "route_igw" {
 # Create Security Group
 resource "aws_security_group" "sg_allow_access_inbound" {
   name   = "frontnet_allow"
-  vpc_id = aws_vpc.vpc1.id
+  vpc_id = module.vpc.vpc_id
   ingress {
     description = "ssh"
     from_port   = 22
@@ -128,13 +150,13 @@ resource "aws_key_pair" "demo_key_pair" {
   }
 }
 
-locals {
-  user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
-    lab_version   = var.lab_version
-    upstream_host = var.upstream_host
-    upstream_port = var.upstream_port
-  })
-}
+## locals {
+##   user_data = templatefile("/root/prosimo-lab/assets/scripts/aws-user-data.sh", {
+##     lab_version   = var.lab_version
+##     upstream_host = var.upstream_host
+##     upstream_port = var.upstream_port
+##   })
+## }
 
 ## # Create EC2 Instance
 ## resource "aws_instance" "ec2_linux" {

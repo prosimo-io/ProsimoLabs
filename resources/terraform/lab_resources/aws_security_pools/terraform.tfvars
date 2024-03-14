@@ -7,7 +7,7 @@ VPC1 = {
   aws_ec2_name          = "WebServerEu1"
   upstream_host         = "10.100.1.100"
   upstream_port         = "3000"
-  aws_ec2_key_pair_name = "EU_WEST_WebSvcs1"
+  aws_ec2_key_pair_name = "EU_WEST_API_FW"
   aws_vpc_cidr          = "10.1.0.0/16"
   aws_subnet_cidr       = "10.1.1.0/24"
 }

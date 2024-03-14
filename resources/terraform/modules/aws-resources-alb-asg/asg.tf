@@ -29,7 +29,7 @@ resource "aws_launch_template" "application_lt" {
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [ aws_security_group.sg_allow_access_inbound.id ]
+    security_groups             = [ aws_security_group.sg_allow_access_inbound.id, aws_security_group.sg_allow_access_inbound.id ]
   }
 
   user_data = base64encode(local.user_data)
@@ -41,7 +41,7 @@ resource "aws_autoscaling_group" "application_asg" {
   max_size            = 2
   min_size            = 1
   desired_capacity    = 1
-  vpc_zone_identifier = [ aws_subnet.subnet1.id ]
+  vpc_zone_identifier = module.vpc.public_subnets
 
   launch_template {
     id      = aws_launch_template.application_lt.id
@@ -63,22 +63,6 @@ resource "aws_autoscaling_group" "application_asg" {
 
 
 }
-
-resource "aws_autoscaling_policy" "cpu_scaling_policy" {
-  name                   = "frontend-cpu-scaling-policy"
-  policy_type            = "TargetTrackingScaling"
-  estimated_instance_warmup = 30
-  autoscaling_group_name = aws_autoscaling_group.application_asg.name
-
-  target_tracking_configuration {
-    predefined_metric_specification {
-      predefined_metric_type = "ASGAverageCPUUtilization"
-    }
-
-    target_value = 50
-  }
-}
-
 
 resource "aws_autoscaling_attachment" "application_asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.application_asg.name
