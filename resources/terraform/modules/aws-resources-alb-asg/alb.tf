@@ -4,9 +4,7 @@ resource "aws_lb" "gw_load_balancer" {
   name               = "frontend-alb"
   internal           = false
   load_balancer_type = "gateway"
-
-  subnets         = module.vpc.public_subnets
-#  security_groups = [ module.vpc.default_security_group_id, aws_security_group.sg_allow_access_inbound.id ]
+  subnets            = module.vpc.public_subnets
 
   tags = merge(
     {
@@ -20,8 +18,6 @@ resource "aws_lb" "gw_load_balancer" {
 
 resource "aws_lb_listener" "application_listener" {
   load_balancer_arn = aws_lb.gw_load_balancer.arn
-#  port              = 80
-#  protocol          = "HTTP"
 
   default_action {
     target_group_arn = aws_lb_target_group.alb_tg.arn
