@@ -23,9 +23,9 @@ resource "aws_launch_template" "application_lt" {
   instance_type = "t3.micro"
   key_name      = aws_key_pair.demo_key_pair.key_name
 
-  iam_instance_profile {
-    name = "frontend-instance_profile"
-  }
+#  iam_instance_profile {
+#    name = "frontend-instance_profile"
+#  }
 
   network_interfaces {
     associate_public_ip_address = true
@@ -61,10 +61,4 @@ resource "aws_autoscaling_group" "application_asg" {
     }
   }
 
-
-}
-
-resource "aws_autoscaling_attachment" "application_asg_attachment" {
-  autoscaling_group_name = aws_autoscaling_group.application_asg.name
-  lb_target_group_arn    = aws_lb_target_group.alb_tg.arn
 }
